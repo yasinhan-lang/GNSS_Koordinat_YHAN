@@ -11,14 +11,27 @@ android {
         applicationId = "com.yhan.gnsskoordinat"
         minSdk = 24
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "2.0 RTK"
+    }
+
+    // Sabit imza: her derlenen APK bir öncekinin üzerine kurulabilir (veriler korunur).
+    signingConfigs {
+        create("yhan") {
+            storeFile = file("yhan.keystore")
+            storePassword = "yhan2026gnss"
+            keyAlias = "yhan"
+            keyPassword = "yhan2026gnss"
+        }
     }
 
     buildTypes {
         release {
             isMinifyEnabled = false
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = signingConfigs.getByName("yhan")
+        }
+        debug {
+            signingConfig = signingConfigs.getByName("yhan")
         }
     }
     compileOptions {

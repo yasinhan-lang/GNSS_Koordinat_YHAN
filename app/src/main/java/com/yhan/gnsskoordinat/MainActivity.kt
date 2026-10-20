@@ -1,6 +1,17 @@
 package com.yhan.gnsskoordinat
 
 import android.Manifest
+import android.bluetooth.BluetoothAdapter
+import android.bluetooth.BluetoothDevice
+import android.bluetooth.BluetoothManager
+import android.bluetooth.BluetoothSocket
+import android.util.Base64
+import java.io.InputStream
+import java.io.OutputStream
+import java.net.InetSocketAddress
+import java.net.Socket
+import java.util.UUID
+import kotlin.concurrent.thread
 import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -67,6 +78,15 @@ class MainActivity : AppCompatActivity() {
         ActivityResultContracts.RequestMultiplePermissions()
     ) { afterPermission() }
 
+    private var afterBtPerm: (() -> Unit)? = null
+    private val btPermLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) {
+        if (hasBtPerm()) afterBtPerm?.invoke()
+        else js("window.__btList && window.__btList({ok:false,msg:'Bluetooth izni verilmedi. Uygulama izinlerinden Yakındaki cihazlar iznini açın.'})")
+        afterBtPerm = null
+    }
+
     private val settingsLauncher = registerForActivityResult(
         ActivityResultContracts.StartIntentSenderForResult()
     ) { report(if (isLocationOn()) "ok" else "off") }
@@ -128,6 +148,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         stopUpdates()
+        btWanted = false; closeBt()
+        ntripWanted = false; closeNtrip()
         web.destroy()
         super.onDestroy()
     }
@@ -346,6 +368,284 @@ class MainActivity : AppCompatActivity() {
         catch (e: Exception) { Toast.makeText(this, "Bağlantı açılamadı", Toast.LENGTH_SHORT).show() }
     }
 
+    // ---------- RTK ALICI: Bluetooth (SPP) ----------
+    private val sppUuid: UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
+    @Volatile private var btWanted = false
+    @Volatile private var btGen = 0
+    @Volatile private var btSocket: BluetoothSocket? = null
+    @Volatile private var btOut: OutputStream? = null
+    @Volatile private var lastGga: String? = null
+    private val nmeaQueue = ArrayList<String>()
+    private val outLock = Any()
+
+    private fun hasBtPerm(): Boolean =
+        if (Build.VERSION.SDK_INT >= 31) has(Manifest.permission.BLUETOOTH_CONNECT) else true
+
+    private fun withBtPerm(action: () -> Unit) {
+        if (hasBtPerm()) { action(); return }
+        afterBtPerm = action
+        btPermLauncher.launch(arrayOf(Manifest.permission.BLUETOOTH_CONNECT))
+    }
+
+    private fun btAdapter(): BluetoothAdapter? =
+        (getSystemService(Context.BLUETOOTH_SERVICE) as? BluetoothManager)?.adapter
+
+    @SuppressLint("MissingPermission")
+    private fun btList() = withBtPerm {
+        val a = btAdapter()
+        val r = JSONObject()
+        when {
+            a == null -> { r.put("ok", false); r.put("msg", "Bu telefonda Bluetooth yok.") }
+            !a.isEnabled -> {
+                r.put("ok", false); r.put("msg", "Bluetooth kapalı. Açılması için izin istendi; açtıktan sonra tekrar deneyin.")
+                try { startActivity(Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)) } catch (_: Exception) {}
+            }
+            else -> {
+                val arr = JSONArray()
+                for (d in a.bondedDevices) {
+                    val o = JSONObject(); o.put("name", d.name ?: ""); o.put("addr", d.address); arr.put(o)
+                }
+                r.put("ok", true); r.put("list", arr)
+            }
+        }
+        js("window.__btList && window.__btList($r)")
+    }
+
+    private fun btState(state: String, name: String = "", msg: String = "") {
+        val o = JSONObject(); o.put("state", state); o.put("name", name); o.put("msg", msg)
+        js("window.__btState && window.__btState($o)")
+    }
+
+    private fun btConnect(addr: String, name: String) = withBtPerm {
+        val g = ++btGen          // eski bağlantı döngüsü bu numarayı görünce kendiliğinden biter
+        closeBt()
+        btWanted = true
+        thread(name = "yhan-bt") { btLoop(addr, name, g) }
+    }
+
+    private fun btDisconnect() {
+        btWanted = false; btGen++; closeBt()
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun openSocket(dev: BluetoothDevice): BluetoothSocket {
+        val tries = listOf<() -> BluetoothSocket>(
+            { dev.createRfcommSocketToServiceRecord(sppUuid) },
+            { dev.createInsecureRfcommSocketToServiceRecord(sppUuid) },
+            { dev.javaClass.getMethod("createRfcommSocket", Int::class.javaPrimitiveType).invoke(dev, 1) as BluetoothSocket }
+        )
+        var last: Exception? = null
+        for (mk in tries) {
+            try { val s = mk(); s.connect(); return s } catch (e: Exception) { last = e }
+        }
+        throw last ?: Exception("Bağlanılamadı")
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun btLoop(addr: String, name: String, g: Int) {
+        val alive = { btWanted && g == btGen }
+        var first = true
+        while (alive()) {
+            btState(if (first) "connecting" else "reconnect", name)
+            first = false
+            var s: BluetoothSocket? = null
+            try {
+                val a = btAdapter() ?: throw Exception("Bluetooth yok")
+                if (!a.isEnabled) throw Exception("Bluetooth kapalı")
+                try { a.cancelDiscovery() } catch (_: Exception) {}
+                s = openSocket(a.getRemoteDevice(addr))
+                if (!alive()) break
+                btSocket = s
+                btOut = s.outputStream
+                btState("on", name)
+                readNmea(s.inputStream, alive)
+            } catch (e: Exception) {
+                if (alive()) btState("reconnect", name, e.message ?: "")
+            } finally {
+                try { s?.close() } catch (_: Exception) {}
+                if (btSocket === s) { btSocket = null; btOut = null }
+            }
+            if (alive()) try { Thread.sleep(3000) } catch (_: InterruptedException) {}
+        }
+        if (g == btGen) btState("off", name)
+    }
+
+    private fun readNmea(inp: InputStream, alive: () -> Boolean) {
+        val buf = ByteArray(4096)
+        val line = StringBuilder()
+        var lastFlush = System.currentTimeMillis()
+        while (alive()) {
+            val n = inp.read(buf)
+            if (n < 0) throw Exception("Bağlantı kapandı")
+            for (i in 0 until n) {
+                val c = (buf[i].toInt() and 0xFF).toChar()
+                if (c == '\n' || c == '\r') {
+                    if (line.isNotEmpty()) {
+                        val s = line.toString()
+                        val k = s.indexOf('$')
+                        if (k >= 0) {
+                            val clean = s.substring(k)
+                            if (clean.length > 6 && clean.substring(3, 6) == "GGA") lastGga = clean
+                            synchronized(nmeaQueue) { if (nmeaQueue.size < 200) nmeaQueue.add(clean) }
+                        }
+                        line.setLength(0)
+                    }
+                } else if (line.length < 200) line.append(c)
+            }
+            val now = System.currentTimeMillis()
+            if (now - lastFlush > 200) { lastFlush = now; flushNmea() }
+        }
+    }
+
+    private fun flushNmea() {
+        val copy: List<String>
+        synchronized(nmeaQueue) { if (nmeaQueue.isEmpty()) return; copy = ArrayList(nmeaQueue); nmeaQueue.clear() }
+        js("window.__nmea && window.__nmea(${JSONArray(copy)})")
+    }
+
+    private fun closeBt() {
+        try { btSocket?.close() } catch (_: Exception) {}
+        btSocket = null; btOut = null
+    }
+
+    private fun btOpenSettings() {
+        try { startActivity(Intent(Settings.ACTION_BLUETOOTH_SETTINGS)) } catch (_: Exception) {}
+    }
+
+    // ---------- NTRIP istemcisi (TUSAGA-Aktif vb.) ----------
+    @Volatile private var ntripWanted = false
+    @Volatile private var ntripGen = 0
+    @Volatile private var ntripSock: Socket? = null
+    @Volatile private var ntripBytes = 0L
+
+    private fun ntState(state: String, msg: String = "") {
+        val o = JSONObject(); o.put("state", state); o.put("msg", msg); o.put("bytes", ntripBytes)
+        js("window.__ntripState && window.__ntripState($o)")
+    }
+
+    private fun readLine(inp: InputStream): String {
+        val sb = StringBuilder()
+        while (true) {
+            val b = inp.read()
+            if (b < 0) break
+            if (b == '\n'.code) break
+            if (b != '\r'.code) sb.append(b.toChar())
+            if (sb.length > 2000) break
+        }
+        return sb.toString()
+    }
+
+    private fun ntripTable(host: String, port: Int) {
+        thread(name = "yhan-ntrip-table") {
+            val r = JSONObject()
+            try {
+                Socket().use { s ->
+                    s.connect(InetSocketAddress(host, port), 10000)
+                    s.soTimeout = 15000
+                    val req = "GET / HTTP/1.0\r\nUser-Agent: NTRIP YHAN-GNSS/1.0\r\nAccept: */*\r\nConnection: close\r\n\r\n"
+                    s.getOutputStream().write(req.toByteArray(Charsets.ISO_8859_1))
+                    val inp = s.getInputStream()
+                    val arr = JSONArray()
+                    var lines = 0
+                    while (lines < 5000) {
+                        val l = readLine(inp)
+                        lines++
+                        if (l.startsWith("ENDSOURCETABLE")) break
+                        if (l.startsWith("STR;")) {
+                            val f = l.split(";")
+                            val o = JSONObject()
+                            o.put("mount", f.getOrElse(1) { "" }); o.put("id", f.getOrElse(2) { "" })
+                            o.put("fmt", f.getOrElse(3) { "" }); o.put("nav", f.getOrElse(6) { "" })
+                            o.put("lat", f.getOrElse(9) { "" }.toDoubleOrNull() ?: 0.0)
+                            o.put("lon", f.getOrElse(10) { "" }.toDoubleOrNull() ?: 0.0)
+                            o.put("nmea", f.getOrElse(11) { "0" } == "1")
+                            arr.put(o)
+                        }
+                        if (l.isEmpty() && inp.available() == 0 && lines > 50) { /* boş satırlar */ }
+                    }
+                    r.put("ok", arr.length() > 0); r.put("list", arr)
+                    if (arr.length() == 0) r.put("msg", "Sunucu bağlantı noktası listesi vermedi. Adresi ve portu kontrol edin.")
+                }
+            } catch (e: Exception) {
+                r.put("ok", false); r.put("list", JSONArray()); r.put("msg", "Sunucuya ulaşılamadı: " + (e.message ?: ""))
+            }
+            js("window.__ntripTable && window.__ntripTable($r)")
+        }
+    }
+
+    private fun ntripConnect(host: String, port: Int, mount: String, user: String, pass: String) {
+        val g = ++ntripGen
+        closeNtrip()
+        ntripWanted = true; ntripBytes = 0
+        thread(name = "yhan-ntrip") {
+            val alive = { ntripWanted && g == ntripGen }
+            var first = true
+            while (alive()) {
+                ntState(if (first) "connecting" else "reconnect")
+                first = false
+                var s: Socket? = null
+                try {
+                    s = Socket()
+                    s.connect(InetSocketAddress(host, port), 10000)
+                    s.soTimeout = 30000
+                    ntripSock = s
+                    val out = s.getOutputStream()
+                    val auth = Base64.encodeToString("$user:$pass".toByteArray(Charsets.UTF_8), Base64.NO_WRAP)
+                    val req = "GET /$mount HTTP/1.0\r\nUser-Agent: NTRIP YHAN-GNSS/1.0\r\nAccept: */*\r\nAuthorization: Basic $auth\r\nConnection: close\r\n\r\n"
+                    out.write(req.toByteArray(Charsets.ISO_8859_1))
+                    lastGga?.let { out.write((it + "\r\n").toByteArray(Charsets.ISO_8859_1)) }
+                    out.flush()
+                    val inp = s.getInputStream()
+                    val status = readLine(inp)
+                    when {
+                        status.contains("401") -> { ntripWanted = false; throw Exception("Kullanıcı adı veya şifre hatalı") }
+                        status.startsWith("SOURCETABLE") -> { ntripWanted = false; throw Exception("Bağlantı noktası bulunamadı: $mount") }
+                        status.startsWith("ICY 200") -> {}
+                        status.startsWith("HTTP/") && status.contains(" 200") -> {
+                            while (true) { val h = readLine(inp); if (h.isEmpty()) break }
+                        }
+                        else -> throw Exception("Sunucu yanıtı: ${status.take(60)}")
+                    }
+                    ntState("on")
+                    val buf = ByteArray(4096)
+                    var lastGgaSent = System.currentTimeMillis()
+                    var lastReport = 0L
+                    while (alive()) {
+                        val n = inp.read(buf)
+                        if (n < 0) throw Exception("Sunucu bağlantıyı kapattı")
+                        ntripBytes += n
+                        val o = btOut
+                        if (o != null) synchronized(outLock) { try { o.write(buf, 0, n); o.flush() } catch (_: Exception) {} }
+                        val now = System.currentTimeMillis()
+                        if (now - lastGgaSent > 10000) {
+                            lastGgaSent = now
+                            lastGga?.let { try { out.write((it + "\r\n").toByteArray(Charsets.ISO_8859_1)); out.flush() } catch (_: Exception) {} }
+                        }
+                        if (now - lastReport > 1000) { lastReport = now; ntState("on") }
+                    }
+                } catch (e: Exception) {
+                    if (alive()) ntState("reconnect", e.message ?: "")
+                    else if (g == ntripGen && e.message?.let { it.contains("hatalı") || it.contains("bulunamadı") } == true) ntState("error", e.message ?: "")
+                } finally {
+                    try { s?.close() } catch (_: Exception) {}
+                    if (ntripSock === s) ntripSock = null
+                }
+                if (alive()) try { Thread.sleep(5000) } catch (_: InterruptedException) {}
+            }
+        }
+    }
+
+    private fun ntripDisconnect() {
+        ntripWanted = false; ntripGen++
+        closeNtrip()
+        ntState("off")
+    }
+
+    private fun closeNtrip() {
+        try { ntripSock?.close() } catch (_: Exception) {}
+        ntripSock = null
+    }
+
     /** Sayfanın çağırdığı köprü: window.Android.* */
     inner class Bridge {
         @JavascriptInterface fun ensureLocation() { main.post { this@MainActivity.ensureLocation() } }
@@ -370,5 +670,14 @@ class MainActivity : AppCompatActivity() {
             }
         }
         @JavascriptInterface fun vibrate(ms: Int) { main.post { doVibrate(ms) } }
+        @JavascriptInterface fun btList() { main.post { this@MainActivity.btList() } }
+        @JavascriptInterface fun btConnect(addr: String, name: String) { main.post { this@MainActivity.btConnect(addr, name) } }
+        @JavascriptInterface fun btDisconnect() { this@MainActivity.btDisconnect() }
+        @JavascriptInterface fun btOpenSettings() { main.post { this@MainActivity.btOpenSettings() } }
+        @JavascriptInterface fun ntripTable(host: String, port: Int) { this@MainActivity.ntripTable(host, port) }
+        @JavascriptInterface fun ntripConnect(host: String, port: Int, mount: String, user: String, pass: String) {
+            this@MainActivity.ntripConnect(host, port, mount, user, pass)
+        }
+        @JavascriptInterface fun ntripDisconnect() { this@MainActivity.ntripDisconnect() }
     }
 }

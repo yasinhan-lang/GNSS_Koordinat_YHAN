@@ -44,10 +44,10 @@ main{flex:1;min-height:0;position:relative}
 .lbl{font:600 10.5px var(--f-disp);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 h3{margin:0 0 6px;font:700 13px var(--f-disp);letter-spacing:.08em;text-transform:uppercase}
 
-nav{flex:none;display:grid;grid-template-columns:repeat(4,1fr);background:var(--panel);border-top:1px solid var(--line);
+nav{flex:none;display:grid;grid-template-columns:repeat(5,1fr);background:var(--panel);border-top:1px solid var(--line);
   padding:0 env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)}
 nav button{all:unset;cursor:pointer;height:var(--tabh);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
-  font:600 11px var(--f-disp);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);position:relative}
+  font:600 10.5px var(--f-disp);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);position:relative}
 nav button svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8}
 nav button[aria-selected="true"]{color:var(--ink)}
 nav button[aria-selected="true"]::before{content:"";position:absolute;top:0;left:25%;right:25%;height:3px;background:var(--accent);border-radius:0 0 3px 3px}
@@ -66,6 +66,47 @@ nav .dot{position:absolute;top:8px;left:calc(50% + 8px);min-width:16px;height:16
 .jobbox .edit{display:flex;justify-content:flex-end;padding:4px 6px;border-top:1px solid var(--line);background:var(--soft)}
 .jobbox .edit button{all:unset;cursor:pointer;font:600 11px var(--f-disp);letter-spacing:.08em;text-transform:uppercase;color:var(--info);padding:2px 4px}
 
+/* RTK şeridi (ölçüm ekranı) */
+.rxstrip{all:unset;cursor:pointer;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:6px 8px}
+.rxstrip:focus-visible{outline:2px solid var(--accent)}
+.lt{display:flex;align-items:center;gap:6px;min-width:0}
+.lt i{flex:none;width:10px;height:10px;border-radius:50%;background:var(--line);box-shadow:0 0 0 2px var(--soft)}
+.lt i.good{background:var(--good)}.lt i.warn{background:var(--warn)}.lt i.bad{background:var(--bad)}.lt i.info{background:var(--info)}
+.lt i.blink{animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:.25}}
+.lt span{min-width:0;font:600 10.5px/1.2 var(--f-disp);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lt span small{display:block;font:500 10px var(--f-num);letter-spacing:0;text-transform:none;color:var(--muted)}
+.qbig{font:700 13px/1 var(--f-disp);letter-spacing:.08em}
+.demo-flag{background:repeating-linear-gradient(135deg,var(--warn) 0 8px,#000 8px 16px);color:#fff;text-align:center;font:700 11px/1 var(--f-disp);letter-spacing:.12em;padding:5px;border-radius:6px}
+/* Alıcı sekmesi */
+.srcseg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.srcseg button{all:unset;cursor:pointer;text-align:center;padding:10px 4px;border:2px solid var(--line);border-radius:8px;background:var(--panel);line-height:1.15}
+.srcseg button b{display:block;font:700 15px var(--f-disp);letter-spacing:.04em}
+.srcseg button span{font:10.5px var(--f-body);color:var(--muted)}
+.srcseg button[aria-pressed="true"]{border-color:var(--ink);background:var(--accent);color:var(--accent-ink)}
+.srcseg button[aria-pressed="true"] span{color:var(--accent-ink)}
+.srcseg button:focus-visible{outline:2px solid var(--accent)}
+.lights{display:grid;grid-template-columns:1fr;gap:8px}
+.lights .lt{padding:6px 0;border-bottom:1px dashed var(--line)}
+.lights .lt:last-child{border-bottom:none}
+.lights .lt i{width:14px;height:14px}
+.lights .lt span{font-size:13px}
+.lights .lt span small{font-size:11px;white-space:normal}
+.stepn{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--ink);color:var(--panel);font:700 11px var(--f-num);margin-right:6px;vertical-align:1px}
+.devlist{display:flex;flex-direction:column;gap:6px;margin:6px 0}
+.dev{display:grid;grid-template-columns:1fr auto;gap:6px;align-items:center;padding:8px 10px;border:1px solid var(--line);border-radius:7px;background:var(--soft)}
+.dev b{font:700 14px var(--f-disp);letter-spacing:.03em}
+.dev small{display:block;font:10.5px var(--f-num);color:var(--muted)}
+.dev.on{border-color:var(--good);box-shadow:inset 3px 0 0 var(--good);background:var(--panel)}
+.dev .btn{padding:8px 10px;font-size:12px}
+.nmea{font:10.5px/1.4 var(--f-num);color:var(--muted);background:var(--soft);border-radius:5px;padding:5px 7px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:6px}
+.mlist{display:flex;flex-direction:column;gap:4px;max-height:260px;overflow-y:auto;margin-top:6px}
+.mp{all:unset;cursor:pointer;display:grid;grid-template-columns:1fr auto;gap:4px;padding:7px 9px;border:1px solid var(--line);border-radius:6px;background:var(--soft)}
+.mp b{font:700 13px var(--f-num)}
+.mp small{font:10.5px var(--f-body);color:var(--muted)}
+.mp em{font:600 10px var(--f-disp);font-style:normal;letter-spacing:.06em;text-transform:uppercase;color:var(--good);align-self:center}
+.mp[aria-pressed="true"]{border-color:var(--ink);background:var(--panel);box-shadow:inset 3px 0 0 var(--accent)}
+.ntstat{font:12px/1.4 var(--f-num);margin-top:6px}
 /* Durum */
 .status{display:flex;align-items:center;gap:8px}
 .badge{flex:none;font:700 12px/1 var(--f-disp);letter-spacing:.06em;text-transform:uppercase;padding:5px 7px;border-radius:4px;color:#fff;background:var(--muted)}
@@ -242,6 +283,13 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
       <div class="edit"><button id="jbEdit" type="button">DOM / Sistemi Değiştir</button></div>
     </div>
 
+    <div class="demo-flag" id="demoFlag" hidden>DENEME MODU · GERÇEK ÖLÇÜM DEĞİL</div>
+    <button class="rxstrip" id="rxStrip" type="button" hidden aria-label="Alıcı durumu, ayrıntılar için dokunun">
+      <div class="lt"><i id="l1"></i><span>Alıcı<small id="l1t">—</small></span></div>
+      <div class="lt"><i id="l2"></i><span>Düzeltme<small id="l2t">—</small></span></div>
+      <div class="lt"><i id="l3"></i><span>Çözüm<small id="l3t">—</small></span></div>
+    </button>
+
     <div class="card">
       <div class="status" aria-live="polite">
         <span id="badge" class="badge">Bekliyor</span>
@@ -279,6 +327,79 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
       <div class="minirow head"><span>No</span><span>Y</span><span>X</span><span>±m</span></div>
       <div id="mini"></div>
       <div class="empty" id="miniEmpty">Kaydet'e bastığınız noktalar burada görünür.</div>
+    </div>
+  </section>
+
+  <!-- ALICI -->
+  <section class="tab" id="tabRx" hidden>
+    <div class="card">
+      <h3>Konum Kaynağı</h3>
+      <div class="srcseg" id="srcSeg" role="group" aria-label="Konum kaynağı">
+        <button type="button" data-src="phone"><b>Telefon</b><span>Dahili GPS · 1–5 m</span></button>
+        <button type="button" data-src="bt"><b>RTK Alıcı</b><span>Bluetooth · 1–2 cm</span></button>
+        <button type="button" data-src="demo"><b>Deneme</b><span>Alıcısız alıştırma</span></button>
+      </div>
+      <p class="note" id="srcNote"></p>
+    </div>
+
+    <div class="card lights" id="rxLights">
+      <div class="lt"><i id="r1"></i><span>Alıcı bağlantısı<small id="r1t">—</small></span></div>
+      <div class="lt"><i id="r2"></i><span>Düzeltme verisi<small id="r2t">—</small></span></div>
+      <div class="lt"><i id="r3"></i><span>Çözüm<small id="r3t">—</small></span></div>
+    </div>
+
+    <div class="card" id="btCard">
+      <h3><span class="stepn">1</span>Alıcıyı Bağla</h3>
+      <p class="note" style="margin:0 0 6px">Alıcıyı açın. Listede yoksa önce telefonun Bluetooth ayarlarından eşleştirin (PIN genelde 1234 veya 0000).</p>
+      <div class="fgrid">
+        <button class="btn sm primary" id="btList" type="button">Cihazları Göster</button>
+        <button class="btn sm" id="btPair" type="button">Bluetooth Ayarları</button>
+      </div>
+      <div class="devlist" id="devList"></div>
+      <div class="nmea" id="nmeaLine">Alıcıdan veri bekleniyor…</div>
+    </div>
+
+    <div class="card" id="ntCard">
+      <h3><span class="stepn">2</span>Düzeltme Verisi (NTRIP)</h3>
+      <p class="note" style="margin:0 0 8px">Alıcınız düzeltmeyi <b>kendi SIM kartıyla</b> alıyorsa bu adımı atlayın; Fix yine görünür.</p>
+      <div class="fgrid">
+        <div style="grid-column:span 2"><label for="ntHost">Sunucu</label><input id="ntHost" class="mono" autocomplete="off" placeholder="ör. www.tusaga-aktif.gov.tr"></div>
+        <div><label for="ntPort">Port</label><input id="ntPort" class="mono" inputmode="numeric" value="2101"></div>
+        <div><label for="ntMount">Bağlantı noktası</label><input id="ntMount" class="mono" autocomplete="off" placeholder="listeden seçin"></div>
+        <div><label for="ntUser">Kullanıcı adı</label><input id="ntUser" autocomplete="off" autocapitalize="off"></div>
+        <div><label for="ntPass">Şifre</label><input id="ntPass" type="password" autocomplete="off"></div>
+      </div>
+      <label class="sw" for="ntSave"><span>Bilgileri bu telefonda hatırla</span> <input id="ntSave" type="checkbox" checked></label>
+      <div class="fgrid c3" style="margin-top:4px">
+        <button class="btn sm" id="ntPreset" type="button">TUSAGA-Aktif</button>
+        <button class="btn sm" id="ntTable" type="button">Noktaları Getir</button>
+        <button class="btn sm primary" id="ntConn" type="button">Bağlan</button>
+      </div>
+      <div class="ntstat" id="ntStat"></div>
+      <div class="mlist" id="mList" hidden></div>
+      <p class="note">TUSAGA-Aktif hesabı kurumunuzun TUSAGA-Aktif sorumlusundan veya tusaga-aktif.gov.tr üzerinden alınır. RTK koordinatları <b>ITRF96 (2005.0)</b> sistemindedir; uygulama bu noktalara epok düzeltmesi uygulamaz.</p>
+    </div>
+
+    <div class="card">
+      <h3><span class="stepn">3</span>Kayıt Kuralları</h3>
+      <label class="sw" for="fixOnly"><span>Yalnız <b>RTK Fix</b> durumunda kaydet</span> <input id="fixOnly" type="checkbox" checked></label>
+      <div class="fgrid" style="margin-top:6px">
+        <div><label for="rtkN">Ortalama epok (Fix)</label><input id="rtkN" type="number" min="1" max="300" value="10"></div>
+        <div><label for="rtkMax">En büyük hata (cm)</label><input id="rtkMax" type="number" step="0.1" min="0.5" value="3"></div>
+      </div>
+      <p class="note">Ortalama yalnız Fix epoklarından ve hatası sınırın altında kalanlardan alınır.</p>
+    </div>
+
+    <div class="card">
+      <h3>Sahada Adım Adım</h3>
+      <ol class="steps">
+        <li>Alıcıyı jalona takın, açın; gökyüzü açık yerde kurun.</li>
+        <li>Alıcının kendi ayarında <b>Bluetooth NMEA çıkışını</b> açın: GGA ve GST, 1 Hz.</li>
+        <li>Bu sekmede <b>RTK Alıcı</b>'yı seçin, <b>Cihazları Göster</b> › alıcınıza <b>Bağlan</b>.</li>
+        <li>NTRIP bilgilerini girip <b>Bağlan</b>'a basın (alıcı kendi SIM'iyle bağlanıyorsa atlayın).</li>
+        <li>Çözüm ışığı yeşil <b>RTK FIX</b> olunca Ölçüm sekmesine geçip <b>Kaydet</b> veya <b>Ortalama</b>'ya basın.</li>
+      </ol>
+      <p class="note">Jalon yüksekliği uygulamada düşülmez; alıcının kendi ayarına girin (alıcı NMEA'da anten referansını değil nokta yüksekliğini verir).</p>
     </div>
   </section>
 
@@ -345,7 +466,7 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
     <div class="card">
       <h3>Çıktı</h3>
       <div class="fgrid">
-        <div><label for="zMode">Z değeri</label><select id="zMode"><option value="h">Elipsoit yüksekliği</option><option value="0">0 yaz</option></select></div>
+        <div><label for="zMode">Z değeri</label><select id="zMode"><option value="h">Elipsoit yüksekliği</option><option value="H">Ortometrik (alıcıdan)</option><option value="0">0 yaz</option></select></div>
         <div><label for="dec">Ondalık</label><select id="dec"><option>2</option><option selected>3</option><option>4</option></select></div>
       </div>
     </div>
@@ -390,6 +511,7 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
 
 <nav role="tablist">
   <button role="tab" data-t="tabMeasure" aria-selected="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>Ölçüm</button>
+  <button role="tab" data-t="tabRx" aria-selected="false"><svg viewBox="0 0 24 24"><path d="M12 13v8M8 21h8"/><circle cx="12" cy="10" r="3"/><path d="M6.3 15.7a8 8 0 0 1 0-11.4M17.7 4.3a8 8 0 0 1 0 11.4"/></svg>Alıcı</button>
   <button role="tab" data-t="tabMap" aria-selected="false"><svg viewBox="0 0 24 24"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14"/></svg>Harita</button>
   <button role="tab" data-t="tabPoints" aria-selected="false"><svg viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13"/><circle cx="4" cy="6" r="1.3"/><circle cx="4" cy="12" r="1.3"/><circle cx="4" cy="18" r="1.3"/></svg>İşler<span class="dot" id="cnt" hidden>0</span></button>
   <button role="tab" data-t="tabSet" aria-selected="false"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>Ayarlar</button>
@@ -471,7 +593,7 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
   <div class="sheetbox">
     <h2 id="shH">Noktayı Kaydet</h2>
     <div class="prev"><table>
-      <tr><th>Y</th><th>X</th><th>Z</th><th style="width:16%">±m</th></tr>
+      <tr><th>Y</th><th>X</th><th>Z</th><th style="width:18%">Hata</th></tr>
       <tr><td id="shY">—</td><td id="shX">—</td><td id="shZ">—</td><td id="shA">—</td></tr>
     </table></div>
     <div class="note" id="shInfo" style="margin:0"></div>
@@ -565,18 +687,87 @@ const NATIVE = !!(window.Android && window.Android.ensureLocation);
 const Geo = {
   _ok: null, _err: null, _probe: null,
   watch(ok, err) {
+    if (RX.src === 'demo') { Geo._ok = ok; Geo._err = err; Demo.start(); return 'demo'; }
+    if (RX.src === 'bt') { Geo._ok = ok; Geo._err = err; return 'bt'; }
     if (NATIVE) { Geo._ok = ok; Geo._err = err; Android.startUpdates(); return 'native'; }
     return navigator.geolocation.watchPosition(ok, err, { enableHighAccuracy: true, maximumAge: 0, timeout: 60000 });
   },
-  clear(id) { if (NATIVE) { Geo._ok = null; Geo._err = null; Android.stopUpdates(); } else navigator.geolocation.clearWatch(id); }
+  clear(id) {
+    Geo._ok = null; Geo._err = null;
+    if (id === 'demo') Demo.stop();
+    else if (id === 'bt') {}
+    else if (id === 'native') Android.stopUpdates();
+    else if (id != null) navigator.geolocation.clearWatch(id);
+  }
 };
 let gnss = null;
 window.__fix = f => {
+  if (RX.src !== 'phone') return; // RTK modunda telefon GPS'i kullanılmaz
   const pos = { coords: { latitude: f.lat, longitude: f.lon, altitude: f.alt, accuracy: f.acc, altitudeAccuracy: f.vacc }, timestamp: f.t, prov: f.prov, mock: f.mock };
   if (Geo._ok) Geo._ok(pos); else if (Geo._probe) Geo._probe(pos);
 };
 window.__locErr = c => { if (Geo._err) Geo._err({ code: c, message: '' }); };
 window.__gnss = g => { gnss = g; renderSats(); };
+// ===== RTK ALICI: NMEA, NTRIP, DENEME =====
+const RX = Object.assign({ src: 'phone', fixOnly: true, rtkN: 10, rtkMaxCm: 3, bt: null,
+  ntrip: { host: '', port: '2101', mount: '', user: '', pass: '', save: true } }, store.get('rtk', {}));
+function saveRX() { const c = JSON.parse(JSON.stringify(RX)); if (!c.ntrip.save) { c.ntrip.pass = ''; c.ntrip.user = ''; } store.set('rtk', c); }
+const rx = { bt: 'off', btMsg: '', lines: 0, last: '', q: null, sats: 0, hdop: null, age: null, gst: null, lastFixT: 0,
+  nt: 'off', ntMsg: '', ntBytes: 0, devs: null, table: null };
+const QN = { 0: ['KONUM YOK', 'bad'], 1: ['TEKİL', 'bad'], 2: ['DGPS', 'info'], 4: ['RTK FIX', 'good'], 5: ['FLOAT', 'warn'], 6: ['TAHMİNİ', 'bad'] };
+const isRtk = pt => pt && (pt.src === 'bt' || pt.src === 'demo');
+function nmeaSum(body) { let c = 0; for (let i = 0; i < body.length; i++) c ^= body.charCodeAt(i); return c.toString(16).toUpperCase().padStart(2, '0'); }
+function nmeaOk(s) { const m = s.match(/^\$([^*]+)\*([0-9A-Fa-f]{2})/); return !!m && nmeaSum(m[1]) === m[2].toUpperCase(); }
+function dm2deg(v, hemi) { if (!v) return NaN; const x = parseFloat(v), d = Math.floor(x / 100); let r = d + (x - d * 100) / 60; if (hemi === 'S' || hemi === 'W') r = -r; return r; }
+const QACC = { 1: 3, 2: 0.8, 4: 0.015, 5: 0.3, 6: 5 };
+function parseNmea(line) {
+  line = String(line).trim(); if (line[0] !== '$') return;
+  if (line.includes('*') && !nmeaOk(line)) return;
+  rx.lines++; rx.last = line;
+  const f = line.split('*')[0].split(','), typ = f[0].slice(3);
+  if (typ === 'GST') { rx.gst = { lat: parseFloat(f[6]), lon: parseFloat(f[7]), alt: parseFloat(f[8]), at: Date.now() }; return; }
+  if (typ !== 'GGA') return;
+  const q = parseInt(f[6] || '0', 10);
+  rx.q = q; rx.sats = parseInt(f[7] || '0', 10); rx.hdop = parseFloat(f[8]);
+  rx.age = f[13] !== undefined && f[13] !== '' ? parseFloat(f[13]) : null;
+  const lat = dm2deg(f[2], f[3]), lon = dm2deg(f[4], f[5]);
+  if (!q || !isFinite(lat) || !isFinite(lon)) { renderRx(); return; }
+  const H = parseFloat(f[9]), N = parseFloat(f[11]);
+  const g = rx.gst && Date.now() - rx.gst.at < 2500 ? rx.gst : null;
+  const acc = g && isFinite(g.lat) && isFinite(g.lon) ? Math.hypot(g.lat, g.lon) : (QACC[q] || 5);
+  const vacc = g && isFinite(g.alt) ? g.alt : null;
+  const pos = { coords: { latitude: lat, longitude: lon, altitude: isFinite(H) ? H + (isFinite(N) ? N : 0) : null, accuracy: acc, altitudeAccuracy: vacc },
+    timestamp: Date.now(), prov: RX.src, q, sats: rx.sats, hdop: rx.hdop, age: rx.age, H: isFinite(H) ? H : null };
+  rx.lastFixT = Date.now();
+  if (RX.src !== 'phone') { if (Geo._ok) Geo._ok(pos); else if (Geo._probe) Geo._probe(pos); }
+  renderRx();
+}
+window.__nmea = arr => { (arr || []).forEach(parseNmea); };
+window.__btList = r => { rx.devs = r; renderDevs(); };
+window.__btState = s => { rx.bt = s.state; rx.btMsg = s.msg || ''; if (s.name) rx.btName = s.name; if (s.state !== 'on') rx.q = null; renderRx(); renderDevs();
+  if (s.state === 'on') toast('Alıcı bağlandı: ' + (s.name || '')); };
+window.__ntripState = s => { rx.nt = s.state; rx.ntMsg = s.msg || ''; if (s.bytes != null) rx.ntBytes = s.bytes; renderRx(); };
+window.__ntripTable = r => { rx.table = r; renderTable(); };
+
+// Alıcısız alıştırma: Tekil → Float → Fix geçişini gerçek NMEA cümleleriyle taklit eder
+function nmeaLine(body) { return '$' + body + '*' + nmeaSum(body); }
+function fmtDM(deg, isLat) { const a = Math.abs(deg), d = Math.floor(a), m = (a - d) * 60;
+  return (isLat ? String(d).padStart(2, '0') : String(d).padStart(3, '0')) + m.toFixed(8).padStart(11, '0'); }
+function utcT() { const d = new Date(), p = v => String(v).padStart(2, '0'); return p(d.getUTCHours()) + p(d.getUTCMinutes()) + p(d.getUTCSeconds()) + '.00'; }
+const Demo = { t0: 0, timer: null, base: null,
+  start() { if (this.timer) return; this.t0 = Date.now(); this.base = last ? { lat: last.lat, lon: last.lon, h: last.h || 1000 } : { lat: 39.0912345, lon: 33.0781234, h: 1012.4 };
+    rx.bt = 'demo'; rx.nt = 'demo'; rx.ntBytes = 0; this.timer = setInterval(() => this.tick(), 1000); this.tick(); },
+  stop() { clearInterval(this.timer); this.timer = null; if (rx.bt === 'demo') { rx.bt = 'off'; rx.nt = 'off'; rx.q = null; } renderRx(); },
+  tick() {
+    const s = (Date.now() - this.t0) / 1000, q = s < 6 ? 1 : s < 16 ? 5 : 4, sig = q === 1 ? 1.8 : q === 5 ? 0.22 : 0.006;
+    const n = () => (Math.random() * 2 - 1) * sig, N = 36.21;
+    const lat = this.base.lat + n() / 111320, lon = this.base.lon + n() / (111320 * Math.cos(this.base.lat * D2R)), H = this.base.h - N + n() * 1.6;
+    const sats = q === 4 ? 26 : q === 5 ? 23 : 14, age = q > 1 ? '1.0' : '';
+    parseNmea(nmeaLine('GNGST,' + utcT() + ',' + (sig * 1.4).toFixed(3) + ',,,,' + (sig * 0.9).toFixed(3) + ',' + (sig * 0.8).toFixed(3) + ',' + (sig * 1.7).toFixed(3)));
+    parseNmea(nmeaLine('GNGGA,' + utcT() + ',' + fmtDM(lat, true) + ',N,' + fmtDM(lon, false) + ',E,' + q + ',' + sats + ',' + (q === 4 ? '0.6' : '1.2') + ',' + H.toFixed(4) + ',M,' + N.toFixed(3) + ',M,' + age + ',0001'));
+    if (q > 1) rx.ntBytes += 860;
+  } };
+
 const SYSN = { itrf3: 'ITRF96 · TM3', ed3: 'ED50 · TM3', ed6: 'ED50 · UTM6' };
 let jobs = store.get('jobs', null);
 if (!jobs) { // önceki sürümden aktarım
@@ -610,7 +801,7 @@ function project(pt, raw, jb) {
   let lat = pt.lat, lon = pt.lon, h = pt.h || 0, out;
   if (sys === 'itrf3') {
     const vN = num('vN') / 1000, vE = num('vE') / 1000, dt = num('ep0') - decYear(pt.t || Date.now());
-    if (vN || vE) { lat += (vN * dt) / R0 / D2R; lon += (vE * dt) / (R0 * Math.cos(lat * D2R)) / D2R; }
+    if ((vN || vE) && !isRtk(pt)) { lat += (vN * dt) / R0 / D2R; lon += (vE * dt) / (R0 * Math.cos(lat * D2R)) / D2R; }
     const cm = jj.dom, p = tmForward(lat, lon, cm, 1, 500000, ELL.GRS80);
     out = { Y: p.Y, X: p.X, Z: h, cm, lonC: lon, label: 'ITRF96 · TM3 · DOM ' + cm };
   } else {
@@ -625,7 +816,8 @@ function project(pt, raw, jb) {
     }
   }
   out.calKey = sys + ':' + out.cm;
-  if (!raw && cal && cal.key === out.calKey) { out.Y += cal.dY; out.X += cal.dX; out.cal = true; }
+  out.H = pt.H != null ? pt.H : null;
+  if (!raw && cal && cal.key === out.calKey && !isRtk(pt)) { out.Y += cal.dY; out.X += cal.dX; out.cal = true; }
   return out;
 }
 const fmt = (v, d) => v.toFixed(d).replace('.', ',');
@@ -674,7 +866,20 @@ function render() {
   }
   renderList(); saveSettings();
 }
+const fmtAcc = a => a == null ? '—' : a < 1 ? fmt(a * 100, 1) + ' cm' : fmt(a, 1) + ' m';
+function rtkStatus() {
+  const q = last.q, qn = QN[q] || ['—', ''];
+  $('badge').textContent = qn[0]; $('badge').className = 'badge ' + qn[1];
+  $('acc').innerHTML = '±' + (last.acc < 1 ? fmt(last.acc * 100, 1) + ' <small>cm</small>' : fmt(last.acc, 2) + ' <small>m</small>');
+  $('vacc').textContent = last.vacc != null ? 'Düşey ±' + fmtAcc(last.vacc) : 'Düşey: GST yok';
+  $('best').previousElementSibling.textContent = 'Düzeltme';
+  $('best').textContent = last.age != null ? fmt(last.age, 1) + ' sn' : '—';
+  $('rateL').textContent = 'Uydu · HDOP';
+  $('rate').textContent = (last.sats || 0) + ' · ' + (isFinite(last.hdop) ? fmt(last.hdop, 1) : '—');
+  $('satLine').hidden = true;
+}
 function renderStatus() {
+  if (RX.src === 'phone') { $('best').previousElementSibling.textContent = 'En iyi'; $('rateL').textContent = NATIVE ? 'Uydu' : 'Okuma/sn'; }
   if (!last) return;
   const [txt, cls] = grade(last.acc);
   $('badge').textContent = txt; $('badge').className = 'badge ' + cls;
@@ -683,11 +888,12 @@ function renderStatus() {
   if (recent.length >= 3) {
     const c = { lat: median(recent.map(r => r.lat)), lon: median(recent.map(r => r.lon)) };
     const ds = recent.map(r => Math.hypot(...enu(c, r))), s = Math.sqrt(ds.reduce((a, v) => a + v * v, 0) / (ds.length - 1));
-    $('stab').textContent = '±' + fmt(s, s < 1 ? 2 : 1) + ' m';
+    $('stab').textContent = '±' + (RX.src !== 'phone' ? fmtAcc(s) : fmt(s, s < 1 ? 2 : 1) + ' m');
   }
   $('best').textContent = '±' + fmt(Math.min(...recent.map(r => r.acc)), 1) + ' m';
   if (!NATIVE && recent.length >= 2) { const span = (recent[recent.length - 1].recv - recent[0].recv) / 1000; if (span > 0) $('rate').textContent = fmt((recent.length - 1) / span, 1); }
-  if (NATIVE) renderSats();
+  if (NATIVE && RX.src === 'phone') renderSats();
+  if (RX.src !== 'phone') rtkStatus();
   $('mapInfo').textContent = '±' + fmt(last.acc, 1) + ' m · ' + last.lat.toFixed(7) + ', ' + last.lon.toFixed(7);
 }
 setInterval(() => { if (!last) return; const s = (Date.now() - last.recv) / 1000;
@@ -699,7 +905,7 @@ function renderMini() {
   P.slice(-50).reverse().forEach((pt, i) => {
     const p = project(pt), row = document.createElement('div');
     row.className = 'minirow' + (i === 0 && justAdded ? ' new' : '');
-    [pt.name, fmt(p.Y, d), fmt(p.X, d), fmt(pt.acc, pt.acc < 1 ? 2 : 1)].forEach(v => { const s = document.createElement('span'); s.textContent = v; row.appendChild(s); });
+    [pt.name, fmt(p.Y, d), fmt(p.X, d), pt.acc < 1 ? fmt(pt.acc * 100, 1) + 'cm' : fmt(pt.acc, 1)].forEach(v => { const s = document.createElement('span'); s.textContent = v; row.appendChild(s); });
     box.appendChild(row);
   });
 }
@@ -733,7 +939,7 @@ function renderList() {
     const em = document.createElement('em'); em.textContent = (pt.code ? pt.code + ' · ' : '') + new Date(pt.t).toLocaleString('tr-TR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }); nm.appendChild(em);
     const yx = document.createElement('div'); yx.className = 'yx'; yx.textContent = 'Y ' + fmt(p.Y, d) + '  X ' + fmt(p.X, d) + '  Z ' + fmt(zOut(p), 2);
     const q = document.createElement('div'); q.className = 'q';
-    q.textContent = '±' + fmt(pt.acc, 2) + ' m · ' + (pt.n > 1 ? pt.n + ' okuma ort. · dağılım ' + fmt(pt.sd || 0, 2) + ' m' : 'tek okuma') + (p.cal ? ' · düzeltmeli' : '');
+    q.textContent = (pt.src === 'demo' ? 'DENEME · ' : '') + (pt.q != null ? (QN[pt.q] || ['—'])[0] + ' · ' : '') + '±' + fmtAcc(pt.acc) + ' · ' + (pt.n > 1 ? pt.n + ' okuma ort. · dağılım ' + fmt(pt.sd || 0, 2) + ' m' : 'tek okuma') + (p.cal ? ' · düzeltmeli' : '');
     const b = document.createElement('button'); b.className = 'btn sm del'; b.textContent = 'Sil';
     b.onclick = () => armed(b, () => { P.splice(i, 1); saveJobs(); render(); toast('Nokta silindi'); });
     el.append(nm, b, yx, q); box.appendChild(el);
@@ -745,7 +951,7 @@ function armed(b, fn, txt) {
   const orig = b.textContent; b.dataset.armed = 1; b.textContent = txt || 'Emin?'; b.classList.add('stop');
   setTimeout(() => { if (b.isConnected && b.dataset.armed) { delete b.dataset.armed; b.textContent = orig; b.classList.remove('stop'); } }, 3000);
 }
-const zOut = p => $('zMode').value === '0' ? 0 : p.Z;
+const zOut = p => { const m = $('zMode').value; return m === '0' ? 0 : m === 'H' && p.H != null ? p.H : p.Z; };
 let toastT;
 function toast(m) { const t = $('toast'); t.textContent = m; t.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('on'), 2400); }
 function msg(h) { $('msg').innerHTML = h; }
@@ -943,11 +1149,21 @@ function restartRun() { if (watchId != null) { Geo.clear(watchId); watchId = nul
 // ===== KONUM OKUMA =====
 function onPos(pos) {
   const c = pos.coords;
-  last = { lat: c.latitude, lon: c.longitude, h: c.altitude, acc: c.accuracy, vacc: c.altitudeAccuracy, t: pos.timestamp || Date.now(), recv: Date.now(), prov: pos.prov, mock: pos.mock };
+  last = { lat: c.latitude, lon: c.longitude, h: c.altitude, acc: c.accuracy, vacc: c.altitudeAccuracy, t: pos.timestamp || Date.now(), recv: Date.now(), prov: pos.prov, mock: pos.mock,
+    src: RX.src, q: pos.q != null ? pos.q : null, sats: pos.sats, hdop: pos.hdop, age: pos.age, H: pos.H != null ? pos.H : null };
+  if (recent.length && recent[recent.length - 1].q !== last.q) recent.length = 0; // çözüm türü değişti: kararlılığı baştan hesapla
   if (!recent.length || recent[recent.length - 1].t !== last.t) { recent.push(last); if (recent.length > 15) recent.shift(); }
-  if (watchId != null) $('btnSave').disabled = false;
+  updSaveBtn();
   renderStatus(); render(); updateMap();
   if (collecting) feed(last);
+}
+// RTK modunda "yalnız Fix'te kaydet" kuralı
+function fixBlocked() { return RX.src !== 'phone' && RX.fixOnly && (!last || last.q !== 4 || Date.now() - last.recv > 5000); }
+function updSaveBtn() {
+  const b = $('btnSave'), fresh = last && Date.now() - last.recv < 15000;
+  if (watchId == null || !fresh) { b.disabled = true; b.textContent = 'Kaydet'; return; }
+  if (fixBlocked()) { b.disabled = true; b.textContent = 'FIX BEKLENİYOR'; return; }
+  b.disabled = false; b.textContent = 'Kaydet';
 }
 function onErr(e) {
   if (e.code !== 1 && last && Date.now() - last.recv < 30000) return;
@@ -959,8 +1175,8 @@ async function startRun() {
   watchId = Geo.watch(onPos, onErr); if (NATIVE) Android.keepScreen(true);
   startT = Date.now(); recent.length = 0;
   $('btnRun').textContent = 'Durdur'; $('btnRun').className = 'btn stop'; $('btnMeasure').disabled = false;
-  if (last && Date.now() - last.recv < 15000) $('btnSave').disabled = false;
-  msg('Koordinatlar <b>' + SYSN[J().sys] + ' · DOM ' + J().dom + '</b> sisteminde okunuyor. Kararlılık düşünce <b>Kaydet</b>\'e basın.');
+  updSaveBtn();
+  msg('Koordinatlar <b>' + SYSN[J().sys] + ' · DOM ' + J().dom + '</b> sisteminde okunuyor' + (RX.src === 'bt' ? ' (RTK alıcı). <b>RTK Fix</b> olunca kaydedin.' : RX.src === 'demo' ? ' (DENEME).' : '. Kararlılık düşünce <b>Kaydet</b>\'e basın.'));
   try { if ('wakeLock' in navigator) wakeLock = await navigator.wakeLock.request('screen'); } catch (e) {}
 }
 function stopRun() {
@@ -973,20 +1189,23 @@ function stopRun() {
 
 // ===== ORTALAMA ÖLÇÜM =====
 function beginCollect() {
-  const n = Math.max(3, Math.min(900, Math.round(num('nEpoch')))), warm = Math.max(0, num('warm')) * 1000;
-  collecting = { n, max: num('maxAcc') || 10, list: [], lastT: 0, start: Date.now(), warmUntil: Math.max(Date.now(), startT + warm) };
+  const rtk = RX.src !== 'phone';
+  const n = rtk ? Math.max(1, Math.min(300, RX.rtkN)) : Math.max(3, Math.min(900, Math.round(num('nEpoch')))), warm = rtk ? 0 : Math.max(0, num('warm')) * 1000;
+  collecting = { n, rtk, max: rtk ? RX.rtkMaxCm / 100 : (num('maxAcc') || 10), list: [], lastT: 0, start: Date.now(), warmUntil: Math.max(Date.now(), startT + warm) };
   $('btnMeasure').textContent = 'İptal'; $('prog').style.width = '0%'; msg('Ortalama başladı… telefonu sabit tutun.');
   collecting.timer = setInterval(() => {
     const c = collecting; if (!c) return;
     if (Date.now() < c.warmUntil) { msg('Isınma: ' + Math.ceil((c.warmUntil - Date.now()) / 1000) + ' sn… telefonu kıpırdatmayın.'); return; }
-    if (Date.now() - c.start > Math.max(60, n * 2.5) * 1000) { if (c.list.length) finishCollect(true); else { cancelCollect(); msg('Okuma gelmedi. Konumun açık olduğunu kontrol edin.'); } }
+    if (Date.now() - c.start > Math.max(c.rtk ? 120 : 60, n * 2.5) * 1000) { if (c.list.length) finishCollect(true); else { cancelCollect(); msg('Okuma gelmedi. Konumun açık olduğunu kontrol edin.'); } }
   }, 1000);
 }
 function feed(r) {
   const c = collecting; if (r.t === c.lastT) return; c.lastT = r.t;
   if (Date.now() < c.warmUntil) return;
+  if (c.rtk && RX.fixOnly && r.q !== 4) { msg('Ortalama <b>' + c.list.length + '/' + c.n + '</b> · <b>Fix bekleniyor</b> (şu an ' + (QN[r.q] || ['—'])[0] + ')'); return; }
+  if (c.rtk && r.acc > c.max) { msg('Ortalama <b>' + c.list.length + '/' + c.n + '</b> · epok atlandı: hata ' + fmtAcc(r.acc) + ' > ' + fmt(RX.rtkMaxCm, 1) + ' cm'); return; }
   c.list.push(r); $('prog').style.width = (100 * c.list.length / c.n) + '%';
-  msg('Ortalama <b>' + c.list.length + '/' + c.n + '</b> · anlık ±' + fmt(r.acc, 1) + ' m · telefonu kıpırdatmayın');
+  msg('Ortalama <b>' + c.list.length + '/' + c.n + '</b> · anlık ±' + fmtAcc(r.acc) + (c.rtk ? ' · jalonu sabit tutun' : ' · telefonu kıpırdatmayın'));
   if (c.list.length >= c.n) finishCollect(false);
 }
 function robustMean(L, k) {
@@ -1002,15 +1221,17 @@ function robustMean(L, k) {
     if (r.h != null) { const wv = 1 / Math.max(r.vacc || r.acc * 1.5, 0.01) ** 2; hs += wv * r.h; hw += wv; } });
   const g = ecef2geo(Sx[0] / W, Sx[1] / W, Sx[2] / W, ELL.WGS84), m = { lat: g[0], lon: g[1] };
   const sd = keep.length > 1 ? Math.sqrt(keep.reduce((a, r) => { const e = enu(m, r); return a + e[0] ** 2 + e[1] ** 2; }, 0) / (keep.length - 1)) : 0;
-  return { lat: g[0], lon: g[1], h: hw ? hs / hw : 0, sd, se: sd / Math.sqrt(keep.length), n: keep.length, rej: L.length - keep.length, acc: keep.reduce((a, r) => a + r.acc, 0) / keep.length };
+  const Hs = keep.filter(r => r.H != null), qs = keep.map(r => r.q).filter(q => q != null);
+  return { H: Hs.length ? Hs.reduce((a, r) => a + r.H, 0) / Hs.length : null, q: qs.length ? (qs.every(q => q === 4) ? 4 : Math.max(...qs)) : null,
+    lat: g[0], lon: g[1], h: hw ? hs / hw : 0, sd, se: sd / Math.sqrt(keep.length), n: keep.length, rej: L.length - keep.length, acc: keep.reduce((a, r) => a + r.acc, 0) / keep.length };
 }
 function finishCollect(partial) {
   const c = collecting; clearInterval(c.timer); collecting = null;
-  let use = c.list.filter(r => r.acc <= c.max);
+  let use = c.rtk ? c.list.slice() : c.list.filter(r => r.acc <= c.max);
   if (use.length < Math.min(3, c.list.length)) use = c.list.slice().sort((a, b) => a.acc - b.acc).slice(0, Math.max(1, Math.ceil(c.list.length / 2)));
   const R = robustMean(use, num('sigK') || 2.5); R.rej += c.list.length - use.length;
   $('btnMeasure').textContent = 'Ortalama'; $('prog').style.width = '100%';
-  openSheet(R, (partial ? 'Süre doldu. ' : '') + R.n + ' okuma ortalaması · dağılım ±' + fmt(R.sd, 2) + ' m · ortalamanın hatası ±' + fmt(R.se, 2) + ' m');
+  openSheet(R, (partial ? 'Süre doldu. ' : '') + R.n + (c.rtk ? ' Fix epoğu' : ' okuma') + ' ortalaması · dağılım ±' + fmtAcc(R.sd) + ' · ortalamanın hatası ±' + fmtAcc(R.se));
 }
 function cancelCollect() { if (!collecting) return; clearInterval(collecting.timer); collecting = null; $('btnMeasure').textContent = 'Ortalama'; $('prog').style.width = '0%'; msg('Ortalama iptal edildi.'); }
 function nextName(n) { const m = String(n).match(/^(.*?)(\d+)$/); return m ? m[1] + String(+m[2] + 1).padStart(m[2].length, '0') : n + '1'; }
@@ -1020,13 +1241,14 @@ let pending = null;
 function saveNow() {
   if (!last) { toast('Henüz konum yok'); return; }
   if (Date.now() - last.recv > 15000) { toast('Son okuma eski, yeni okuma bekleniyor'); return; }
+  if (fixBlocked()) { toast('RTK Fix bekleniyor'); return; }
   if (collecting) cancelCollect();
-  openSheet({ lat: last.lat, lon: last.lon, h: last.h || 0, acc: last.acc, sd: 0, se: 0, n: 1, rej: 0, t: Date.now() }, 'Tek okuma · ' + new Date().toLocaleTimeString('tr-TR'));
+  openSheet({ lat: last.lat, lon: last.lon, h: last.h || 0, H: last.H, q: last.q, acc: last.acc, sd: 0, se: 0, n: 1, rej: 0, t: Date.now() }, (last.q != null ? (QN[last.q] || ['—'])[0] + ' · ' : '') + 'tek epok · ' + new Date().toLocaleTimeString('tr-TR'));
 }
 function openSheet(R, info) {
-  pending = R; R.t = R.t || Date.now();
+  pending = R; R.t = R.t || Date.now(); R.src = RX.src;
   const p = project(R), d = +$('dec').value;
-  $('shY').textContent = fmt(p.Y, d); $('shX').textContent = fmt(p.X, d); $('shZ').textContent = fmt(zOut(p), 2); $('shA').textContent = fmt(R.acc, R.acc < 1 ? 2 : 1);
+  $('shY').textContent = fmt(p.Y, d); $('shX').textContent = fmt(p.X, d); $('shZ').textContent = fmt(zOut(p), 2); $('shA').textContent = R.acc < 1 ? fmt(R.acc * 100, 1) + ' cm' : fmt(R.acc, 1);
   $('shInfo').textContent = J().name + ' · ' + p.label + ' · ' + info;
   $('shNo').value = J().next || String(pts().length + 1); $('shCode').value = J().lastCode || '';
   $('shDup').hidden = true; $('shOk').textContent = 'Kaydet'; delete $('shOk').dataset.force;
@@ -1046,11 +1268,11 @@ $('shOk').onclick = () => {
     $('shOk').textContent = 'Yine de Kaydet'; $('shOk').dataset.force = 1; return;
   }
   const R = pending, code = $('shCode').value.trim(), j = job();
-  j.points.push({ name: no, code, lat: R.lat, lon: R.lon, h: R.h, acc: R.acc, sd: R.sd, se: R.se, n: R.n, rej: R.rej, t: R.t });
+  j.points.push({ name: no, code: code || (R.src === 'demo' ? 'DENEME' : ''), lat: R.lat, lon: R.lon, h: R.h, H: R.H != null ? R.H : null, q: R.q != null ? R.q : null, src: R.src || 'phone', acc: R.acc, sd: R.sd, se: R.se, n: R.n, rej: R.rej, t: R.t });
   j.next = nextName(no); j.lastCode = code;
   saveJobs(); closeSheet();
   justAdded = true; render(); justAdded = false;
-  msg('<b>“' + no + '” kaydedildi</b> · ±' + fmt(R.acc, R.acc < 1 ? 2 : 1) + ' m · sıradaki numara <b>' + j.next + '</b>');
+  msg('<b>“' + no + '” kaydedildi</b> · ±' + fmtAcc(R.acc) + ' · sıradaki numara <b>' + j.next + '</b>');
   toast('Nokta ' + no + ' kaydedildi'); if (NATIVE) Android.vibrate(120); else if (navigator.vibrate) navigator.vibrate([80, 60, 80]);
 };
 
@@ -1075,12 +1297,12 @@ function makeNcn() { const d = +$('dec').value;
   return pts().map(pt => { const p = project(pt); return [pt.name.replace(/\s+/g, '_'), fmtDot(p.Y, d), fmtDot(p.X, d), fmtDot(zOut(p), 3)].join(' ') + (pt.code ? ' ' + pt.code.replace(/\s+/g, '_') : ''); }).join('\r\n') + '\r\n'; }
 function makeTxt() {
   const d = +$('dec').value, j = J(), p0 = pts()[0] ? project(pts()[0]) : { label: SYSN[j.sys] };
-  const head = ['# GNSS Koordinat Okuyucu - YHAN', '# İş: ' + j.name, '# Sistem: ' + p0.label + ' (Y=Sağa, X=Yukarı)',
+  const head = ['# GNSS Koordinat Okuyucu - YHAN', '# İş: ' + j.name, '# Sistem: ' + p0.label + ' (Y=Sağa, X=Yukarı)', '# RTK noktaları TUSAGA-Aktif/ITRF96 (2005.0) olarak alınır; epok düzeltmesi uygulanmaz.',
     '# Bilinen nokta düzeltmesi: ' + (cal && p0.cal ? 'dY=' + cal.dY.toFixed(3) + ' dX=' + cal.dX.toFixed(3) + ' (' + cal.pt + ')' : 'yok'),
     '# ED50 parametreleri: ' + Object.entries(params()).map(([k, v]) => k + '=' + v).join(' '), '# Oluşturma: ' + new Date().toLocaleString('tr-TR'),
-    ['Nokta', 'Y', 'X', 'Z', 'WGS84_Enlem', 'WGS84_Boylam', 'Elip_h', 'Dogruluk_m', 'Dagilim_m', 'Okuma', 'Kod', 'Tarih'].join('\t')];
+    ['Nokta', 'Y', 'X', 'Z', 'Enlem', 'Boylam', 'Elip_h', 'Ort_H', 'Kaynak', 'Cozum', 'Dogruluk_m', 'Dagilim_m', 'Epok', 'Kod', 'Tarih'].join('\t')];
   const rows = pts().map(pt => { const p = project(pt);
-    return [pt.name, fmtDot(p.Y, d), fmtDot(p.X, d), fmtDot(zOut(p), 3), fmtDot(pt.lat, 9), fmtDot(pt.lon, 9), fmtDot(pt.h || 0, 3), fmtDot(pt.acc, 2), fmtDot(pt.sd || 0, 2), pt.n, pt.code || '', new Date(pt.t).toLocaleString('tr-TR')].join('\t'); });
+    return [pt.name, fmtDot(p.Y, d), fmtDot(p.X, d), fmtDot(zOut(p), 3), fmtDot(pt.lat, 10), fmtDot(pt.lon, 10), fmtDot(pt.h || 0, 3), pt.H != null ? fmtDot(pt.H, 3) : '', { phone: 'Telefon', bt: 'RTK alici', demo: 'DENEME' }[pt.src || 'phone'], pt.q != null ? (QN[pt.q] || ['?'])[0] : '', fmtDot(pt.acc, 3), fmtDot(pt.sd || 0, 3), pt.n, pt.code || '', new Date(pt.t).toLocaleString('tr-TR')].join('\t'); });
   return head.concat(rows).join('\r\n') + '\r\n';
 }
 function makeKml() {
@@ -1151,6 +1373,115 @@ function flag(cv) {
   })();
 }
 
+// ===== ALICI SEKMESİ =====
+const kb = b => b < 1024 ? b + ' B' : b < 1048576 ? fmt(b / 1024, 0) + ' KB' : fmt(b / 1048576, 1) + ' MB';
+function setLight(pfx, n, st) {
+  [[pfx + n, pfx + n + 't']].forEach(([i, tx]) => { if (!$(i)) return; $(i).className = st[0] + (st[2] ? ' blink' : ''); $(tx).textContent = st[1]; });
+}
+function renderRx() {
+  const src = RX.src, demo = src === 'demo';
+  let a, b, c;
+  if (src === 'phone') a = ['good', 'Telefonun kendi GPS\'i'];
+  else if (demo) a = ['warn', 'Deneme alıcısı (simülasyon)'];
+  else a = ({ on: ['good', (rx.btName || (RX.bt && RX.bt.name) || 'Bağlı') + ' · ' + rx.lines + ' cümle'], connecting: ['warn', 'Bağlanıyor…', 1], reconnect: ['warn', 'Bağlantı koptu, yeniden deneniyor…', 1], error: ['bad', rx.btMsg || 'Bağlanamadı'] })[rx.bt] || ['bad', NATIVE ? 'Bağlı değil' : 'Yalnız Android uygulamasında'];
+  if (src === 'phone') b = ['', 'Kullanılmıyor'];
+  else if (demo) b = ['good', 'Deneme verisi · ' + kb(rx.ntBytes)];
+  else if (rx.nt === 'on') b = ['good', 'NTRIP bağlı · ' + kb(rx.ntBytes) + (rx.age != null ? ' · yaş ' + fmt(rx.age, 1) + ' sn' : '')];
+  else if (rx.nt === 'connecting') b = ['warn', 'NTRIP bağlanıyor…', 1];
+  else if (rx.nt === 'reconnect') b = ['warn', 'NTRIP koptu, yeniden deneniyor…', 1];
+  else if (rx.nt === 'error') b = ['bad', rx.ntMsg || 'NTRIP hatası'];
+  else if (rx.age != null && rx.q > 1) b = ['good', 'Alıcı kendisi alıyor · yaş ' + fmt(rx.age, 1) + ' sn'];
+  else b = ['', 'Bağlı değil'];
+  const fresh = Date.now() - rx.lastFixT < 4000;
+  if (src === 'phone') c = last ? [grade(last.acc)[1], '±' + fmt(last.acc, 1) + ' m'] : ['', 'Bekleniyor'];
+  else if (!fresh || rx.q == null) c = ['bad', rx.bt === 'on' || demo ? 'Konum çözümü yok' : 'Veri yok'];
+  else { const qn = QN[rx.q] || ['?', 'bad']; c = [qn[1], qn[0] + (last && last.src === src && last.q === rx.q ? ' · ±' + fmtAcc(last.acc) : '') + ' · ' + rx.sats + ' uydu']; }
+  const sh = (s, k) => [s[0], String(s[1]).split(' (')[0].split(' · ').slice(0, k || 1).join(' · '), s[2]];
+  [['l', 1, sh(a)], ['l', 2, sh(b)], ['l', 3, sh(c, 2)], ['r', 1, a], ['r', 2, b], ['r', 3, c]].forEach(([p, n, s]) => setLight(p, n, s));
+  $('rxStrip').hidden = src === 'phone'; $('demoFlag').hidden = !demo;
+  $('btCard').hidden = src !== 'bt'; $('ntCard').hidden = src !== 'bt';
+  document.querySelectorAll('#srcSeg button').forEach(x => x.setAttribute('aria-pressed', x.dataset.src === src));
+  $('srcNote').innerHTML = src === 'phone' ? 'Telefonun GPS\'i kullanılıyor. Tipik doğruluk 1–5 m; kadastro hassasiyeti için <b>RTK Alıcı</b> seçin.'
+    : demo ? 'Alıcı olmadan arayüzü öğrenmek için. Tekil → Float → <b>RTK Fix</b> geçişi taklit edilir; kaydedilen noktalara <b>DENEME</b> kodu yazılır.'
+    : NATIVE ? 'Bluetooth RTK alıcısından NMEA okunur. Yatayda 1–2 cm (RTK Fix).' : '<b>Bluetooth alıcı yalnız Android uygulamasında çalışır.</b> Tarayıcıda Deneme modunu kullanabilirsiniz.';
+  if (rx.last) $('nmeaLine').textContent = rx.last;
+  $('ntConn').textContent = rx.nt === 'on' || rx.nt === 'connecting' || rx.nt === 'reconnect' ? 'Kes' : 'Bağlan';
+  $('ntConn').className = 'btn sm ' + (rx.nt === 'on' ? 'stop' : 'primary');
+  $('ntStat').textContent = rx.nt === 'error' ? 'Hata: ' + rx.ntMsg : rx.nt === 'on' ? 'Bağlı: ' + RX.ntrip.mount + ' · alınan ' + kb(rx.ntBytes) : '';
+  if (typeof updSaveBtn === 'function') updSaveBtn();
+}
+setInterval(renderRx, 1000);
+function renderDevs() {
+  const box = $('devList'); box.innerHTML = ''; const r = rx.devs;
+  if (!r) return;
+  if (!r.ok) { const p = document.createElement('p'); p.className = 'note'; p.style.color = 'var(--bad)'; p.textContent = r.msg || 'Cihazlar alınamadı'; box.appendChild(p); return; }
+  if (!r.list.length) { const p = document.createElement('p'); p.className = 'note'; p.textContent = 'Eşleşmiş cihaz yok. Bluetooth Ayarları\'ndan alıcıyı eşleştirin.'; box.appendChild(p); return; }
+  r.list.forEach(d => {
+    const on = RX.bt && RX.bt.addr === d.addr && (rx.bt === 'on' || rx.bt === 'connecting' || rx.bt === 'reconnect');
+    const el = document.createElement('div'); el.className = 'dev' + (on ? ' on' : '');
+    const l = document.createElement('div'); const b = document.createElement('b'); b.textContent = d.name || 'Adsız cihaz';
+    const s = document.createElement('small'); s.textContent = d.addr; l.append(b, s);
+    const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'btn ' + (on ? 'stop' : 'primary'); btn.textContent = on ? 'Kes' : 'Bağlan';
+    btn.onclick = () => {
+      if (on) { Android.btDisconnect(); return; }
+      RX.bt = { addr: d.addr, name: d.name }; saveRX(); rx.bt = 'connecting'; rx.btName = d.name; rx.lines = 0; renderRx(); renderDevs();
+      Android.btConnect(d.addr, d.name || '');
+    };
+    el.append(l, btn); box.appendChild(el);
+  });
+}
+function renderTable() {
+  const box = $('mList'), r = rx.table; box.innerHTML = '';
+  if (!r) { box.hidden = true; return; }
+  box.hidden = false;
+  if (!r.ok) { const p = document.createElement('p'); p.className = 'note'; p.style.color = 'var(--bad)'; p.textContent = r.msg || 'Liste alınamadı'; box.appendChild(p); return; }
+  const here = last ? { lat: last.lat, lon: last.lon } : null;
+  const L = r.list.map(m => Object.assign({ d: here && isFinite(m.lat) && isFinite(m.lon) && (m.lat || m.lon) ? Math.hypot(...enu(here, { lat: m.lat, lon: m.lon })) / 1000 : null }, m))
+    .sort((a, b) => (b.nmea - a.nmea) || ((a.d ?? 1e9) - (b.d ?? 1e9)));
+  L.slice(0, 40).forEach(m => {
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'mp'; b.setAttribute('aria-pressed', m.mount === RX.ntrip.mount);
+    const l = document.createElement('div'); const n = document.createElement('b'); n.textContent = m.mount;
+    const s = document.createElement('small'); s.style.display = 'block'; s.textContent = [m.fmt, m.nav, m.id, m.d != null ? fmt(m.d, 0) + ' km' : ''].filter(Boolean).join(' · ');
+    l.append(n, s); const e = document.createElement('em'); e.textContent = m.nmea ? 'VRS · önerilen' : '';
+    b.append(l, e); b.onclick = () => { RX.ntrip.mount = m.mount; $('ntMount').value = m.mount; saveRX(); renderTable(); toast('Bağlantı noktası: ' + m.mount); };
+    box.appendChild(b);
+  });
+}
+function readNt() { RX.ntrip = { host: $('ntHost').value.trim(), port: $('ntPort').value.trim() || '2101', mount: $('ntMount').value.trim(), user: $('ntUser').value.trim(), pass: $('ntPass').value, save: $('ntSave').checked }; saveRX(); }
+['ntHost', 'ntPort', 'ntMount', 'ntUser', 'ntPass', 'ntSave'].forEach(id => $(id).addEventListener('change', readNt));
+$('ntHost').value = RX.ntrip.host || ''; $('ntPort').value = RX.ntrip.port || '2101'; $('ntMount').value = RX.ntrip.mount || '';
+$('ntUser').value = RX.ntrip.user || ''; $('ntPass').value = RX.ntrip.pass || ''; $('ntSave').checked = RX.ntrip.save !== false;
+$('fixOnly').checked = RX.fixOnly; $('rtkN').value = RX.rtkN; $('rtkMax').value = RX.rtkMaxCm;
+$('fixOnly').onchange = () => { RX.fixOnly = $('fixOnly').checked; saveRX(); updSaveBtn(); };
+$('rtkN').onchange = () => { RX.rtkN = Math.max(1, Math.min(300, Math.round(num('rtkN')) || 10)); $('rtkN').value = RX.rtkN; saveRX(); };
+$('rtkMax').onchange = () => { RX.rtkMaxCm = Math.max(0.5, num('rtkMax') || 3); $('rtkMax').value = RX.rtkMaxCm; saveRX(); };
+const needApp = () => { if (NATIVE) return false; toast('Bluetooth ve NTRIP yalnız Android uygulamasında çalışır'); return true; };
+$('ntPreset').onclick = () => { $('ntHost').value = 'www.tusaga-aktif.gov.tr'; $('ntPort').value = '2101'; readNt(); toast('Sunucu ve port yazıldı; hesap bilgileriyle doğrulayın'); };
+$('ntTable').onclick = () => { if (needApp()) return; readNt(); if (!RX.ntrip.host) { toast('Sunucu adresini yazın'); return; } rx.table = { ok: true, list: [] }; $('mList').hidden = false; $('mList').innerHTML = '<p class="note">Liste alınıyor…</p>'; Android.ntripTable(RX.ntrip.host, parseInt(RX.ntrip.port, 10) || 2101); };
+$('ntConn').onclick = () => {
+  if (needApp()) return;
+  if (rx.nt === 'on' || rx.nt === 'connecting' || rx.nt === 'reconnect') { Android.ntripDisconnect(); return; }
+  readNt(); const n = RX.ntrip;
+  if (!n.host || !n.mount) { toast('Sunucu ve bağlantı noktası gerekli'); return; }
+  if (rx.bt !== 'on') toast('Uyarı: alıcı bağlı değil; düzeltme alıcıya iletilemez');
+  rx.nt = 'connecting'; rx.ntBytes = 0; renderRx();
+  Android.ntripConnect(n.host, parseInt(n.port, 10) || 2101, n.mount, n.user, n.pass);
+};
+$('btList').onclick = () => { if (needApp()) return; rx.devs = { ok: true, list: [] }; $('devList').innerHTML = '<p class="note">Cihazlar alınıyor…</p>'; Android.btList(); };
+$('btPair').onclick = () => { if (needApp()) return; Android.btOpenSettings(); };
+$('rxStrip').onclick = () => goTab('tabRx');
+document.querySelectorAll('#srcSeg button').forEach(b => b.onclick = () => {
+  const s = b.dataset.src; if (s === RX.src) return;
+  const running = watchId != null;
+  if (running) { Geo.clear(watchId); watchId = null; }
+  RX.src = s; saveRX(); last = null; recent.length = 0; rx.q = null; rx.lastFixT = 0;
+  if (collecting) cancelCollect();
+  ['vY', 'vX', 'vZ'].forEach(i => $(i).textContent = '—'); $('badge').textContent = 'Bekliyor'; $('badge').className = 'badge'; $('acc').innerHTML = '— <small>m</small>';
+  if (running) startRun();
+  renderRx(); updSaveBtn();
+  toast({ phone: 'Kaynak: telefon GPS\'i', bt: 'Kaynak: RTK alıcı', demo: 'Deneme modu açıldı' }[s]);
+});
+
 // Android geri tuşu
 window.__back = () => {
   if (!$('sheet').hidden) { closeSheet(); return 'handled'; }
@@ -1184,6 +1515,8 @@ flag($('flag')); flag($('flag2')); initMap(); render();
 if (NATIVE) $('permApp').textContent = 'GNSS Koordinat';
 
 // Açılış: her zaman önce tam konum iznini doğrula
+renderRx();
+if (NATIVE && RX.src === 'bt' && RX.bt && RX.bt.addr) { rx.bt = 'connecting'; rx.btName = RX.bt.name; Android.btConnect(RX.bt.addr, RX.bt.name || ''); }
 if (NATIVE) {
   document.documentElement.classList.add('native');
   const st = Android.checkState();

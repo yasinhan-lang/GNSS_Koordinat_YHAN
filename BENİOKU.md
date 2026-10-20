@@ -31,6 +31,35 @@ Telefondan ITRF96 ve ED50 koordinatı okuyup iş adı altında kaydeden, NetCAD 
 2. Dosyaya dokunun. "Bilinmeyen uygulamalar" uyarısı çıkarsa **Ayarlar › Bu kaynağa izin ver** deyin.
 3. **Yükle**'ye basın. Play Koruma uyarısı çıkarsa **Yine de yükle** seçin (uygulama Play Store'dan gelmediği için çıkar).
 
+## Sürüm 2.0 — RTK alıcı desteği
+
+**Alıcı** sekmesinden üç konum kaynağı seçilir:
+
+| Kaynak | Hassasiyet | Ne zaman |
+| --- | --- | --- |
+| Telefon | 1–5 m | Keşif, yer bulma |
+| RTK Alıcı (Bluetooth) | Yatay 1–2 cm, düşey 2–3 cm (RTK Fix) | Kadastro hassasiyeti gereken ölçü |
+| Deneme | — | Alıcı yanınızda yokken arayüzü öğrenmek |
+
+Sahada kullanım:
+
+1. Alıcıyı açın, telefonun Bluetooth ayarlarından bir kez eşleştirin (PIN genelde 1234 veya 0000).
+2. Alıcının kendi ayarında Bluetooth NMEA çıkışını açın: **GGA ve GST, 1 Hz**.
+3. Alıcı sekmesinde **RTK Alıcı** › **Cihazları Göster** › alıcınıza **Bağlan**.
+4. Düzeltme verisi: alıcı kendi SIM kartıyla alıyorsa atlayın. Yoksa NTRIP bilgilerini girin (TUSAGA-Aktif: kurumunuzun hesabı), **Noktaları Getir** ile en yakın VRS noktasını seçip **Bağlan**.
+5. Çözüm ışığı yeşil **RTK FIX** olunca Ölçüm sekmesinde **Kaydet** veya **Ortalama**.
+
+Notlar:
+
+- "Yalnız RTK Fix'te kaydet" açıkken Float veya Tekil çözümde Kaydet düğmesi kilitlidir.
+- RTK koordinatları TUSAGA-Aktif'in sistemi olan ITRF96 (2005.0) ile gelir; uygulama bu noktalara epok düzeltmesi ve bilinen nokta düzeltmesi uygulamaz.
+- Z değeri olarak elipsoit yüksekliği veya alıcının verdiği ortometrik yükseklik (Ayarlar › Çıktı) seçilebilir. Jalon yüksekliğini alıcının kendi ayarına girin.
+- Bluetooth Low Energy (BLE) kullanan alıcılar bu sürümde desteklenmez; çoğu ölçme alıcısı klasik Bluetooth (SPP) kullanır.
+
+## Güncelleme (sürüm 1'den 2'ye)
+
+Sürüm 2'den itibaren APK sabit bir anahtarla (`app/yhan.keystore`) imzalanır; sonraki güncellemeler eskisinin üzerine kurulur ve kayıtlar korunur. Sürüm 1 farklı anahtarla imzalandığı için **bir kerelik** eski uygulamayı kaldırmak gerekir. Kaldırmadan önce İşler sekmesinden noktalarınızı NCN/TXT olarak dışa aktarın.
+
 ## Uygulamanın tarayıcı sürümünden farkları
 
 - **Konumu tek dokunuşla açma:** Konum kapalıysa Android'in "Konum açılsın mı?" penceresi çıkar, **Tamam** yeterli.
@@ -43,7 +72,7 @@ Telefondan ITRF96 ve ED50 koordinatı okuyup iş adı altında kaydeden, NetCAD 
 
 ## Teknik bilgiler
 
-- Paket adı: `com.yhan.gnsskoordinat` · En düşük Android 7.0 (API 24) · Hedef API 34
+- Paket adı: `com.yhan.gnsskoordinat` · Sürüm 2.0 RTK · En düşük Android 7.0 (API 24) · Hedef API 34
 - Arayüz: `app/src/main/assets/index.html`. Arayüzde değişiklik yapmak için bu dosyayı düzenleyip APK'yı yeniden derlemeniz yeterli.
 - Yerel kod: `app/src/main/java/com/yhan/gnsskoordinat/MainActivity.kt`
-- APK, kişisel kullanım için hata ayıklama anahtarıyla imzalanır. Play Store'a yüklemek isterseniz kendi imza anahtarınızı oluşturmanız gerekir.
+- APK, `app/yhan.keystore` anahtarıyla imzalanır (kişisel kullanım). Bu dosyayı silmeyin; silinirse güncellemeler eskisinin üzerine kurulamaz. Play Store için ayrı ve gizli bir anahtar gerekir.
