@@ -24,7 +24,7 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 [hidden]{display:none!important}
 html,body{margin:0;height:100%;overflow:hidden}
-body{background:var(--bg);color:var(--ink);font:14px/1.35 var(--f-body);display:flex;flex-direction:column}
+body{background:var(--bg);color:var(--ink);font:13px/1.35 var(--f-body);display:flex;flex-direction:column}
 
 /* Başlık — üstte telefon durum çubuğundan boşluk */
 .hdr{flex:none;display:grid;grid-template-columns:40px 1fr 42px;align-items:center;gap:8px;background:var(--panel);border-bottom:1px solid var(--line);
@@ -39,9 +39,9 @@ body{background:var(--bg);color:var(--ink);font:14px/1.35 var(--f-body);display:
 
 main{flex:1;min-height:0;position:relative}
 .tab{position:absolute;inset:0;overflow-y:auto;-webkit-overflow-scrolling:touch;
-  padding:10px max(10px,env(safe-area-inset-right,0px)) 14px max(10px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:8px}
+  padding:8px max(10px,env(safe-area-inset-right,0px)) 14px max(10px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:7px}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:7px 9px}
-.lbl{font:600 10px var(--f-disp);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.lbl{font:600 9.5px var(--f-disp);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 h3{margin:0 0 6px;font:700 13px var(--f-disp);letter-spacing:.08em;text-transform:uppercase}
 
 nav{flex:none;display:grid;grid-template-columns:repeat(6,1fr);background:var(--panel);border-top:1px solid var(--line);
@@ -60,21 +60,22 @@ nav .dot{position:absolute;top:8px;left:calc(50% + 8px);min-width:16px;height:16
 .jobbox th,.jobbox td{border:1px solid var(--line);padding:5px 6px;text-align:center}
 .jobbox tr:first-child th{border-top:none}.jobbox tr:last-child td{border-bottom:none}
 .jobbox th:first-child,.jobbox td:first-child{border-left:none}.jobbox th:last-child,.jobbox td:last-child{border-right:none}
-.jobbox th{font:600 10px var(--f-disp);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:var(--soft)}
-.jobbox td{font:700 13px/1.2 var(--f-disp);letter-spacing:.02em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.jobbox td.num{font:600 13px var(--f-num)}
+.jobbox th{font:600 9.5px var(--f-disp);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:var(--soft)}
+.jobbox td{font:700 12px/1.2 var(--f-disp);letter-spacing:.02em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.jobbox td.num{font:600 12px var(--f-num)}
 .jobbox .edit{display:flex;justify-content:center;padding:4px 6px;border-top:1px solid var(--line);background:var(--soft)}
 .jobbox .edit button{all:unset;cursor:pointer;font:600 11px var(--f-disp);letter-spacing:.08em;text-transform:uppercase;color:var(--info);padding:2px 4px}
 
 /* RTK şeridi (ölçüm ekranı) */
-.rxstrip{all:unset;cursor:pointer;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:6px 8px}
+.rxstrip{all:unset;cursor:pointer;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;text-align:center;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:6px 8px}
 .rxstrip:focus-visible{outline:2px solid var(--accent)}
 .lt{display:flex;align-items:center;gap:6px;min-width:0}
+.rxstrip .lt{justify-content:center}
 .lt i{flex:none;width:10px;height:10px;border-radius:50%;background:var(--line);box-shadow:0 0 0 2px var(--soft)}
 .lt i.good{background:var(--good)}.lt i.warn{background:var(--warn)}.lt i.bad{background:var(--bad)}.lt i.info{background:var(--info)}
 .lt i.blink{animation:blink 1s steps(2) infinite}
 @keyframes blink{50%{opacity:.25}}
-.lt span{min-width:0;font:600 10.5px/1.2 var(--f-disp);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lt span{min-width:0;font:600 10px/1.2 var(--f-disp);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .lt span small{display:block;font:500 10px var(--f-num);letter-spacing:0;text-transform:none;color:var(--muted)}
 .qbig{font:700 13px/1 var(--f-disp);letter-spacing:.08em}
 .demo-flag{background:repeating-linear-gradient(135deg,var(--warn) 0 8px,#000 8px 16px);color:#fff;text-align:center;font:700 11px/1 var(--f-disp);letter-spacing:.12em;padding:5px;border-radius:6px}
@@ -110,8 +111,8 @@ nav .dot{position:absolute;top:8px;left:calc(50% + 8px);min-width:16px;height:16
 /* Ölçüm: sistem seçimi, anlık koordinat, seçenekler */
 .sysseg{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
 .sysseg button{all:unset;cursor:pointer;text-align:center;padding:5px 2px;border:1px solid var(--line);border-radius:6px;background:var(--panel);line-height:1.1}
-.sysseg b{display:block;font:700 13px var(--f-disp);letter-spacing:.04em}
-.sysseg span{font:10px var(--f-num);color:var(--muted)}
+.sysseg b{display:block;font:700 12px var(--f-disp);letter-spacing:.04em}
+.sysseg span{font:9.5px var(--f-num);color:var(--muted)}
 .sysseg button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--panel)}
 .sysseg button[aria-pressed="true"] span{color:var(--panel);opacity:.8}
 .sysseg button:focus-visible,.gfmt button:focus-visible,.step button:focus-visible{outline:2px solid var(--accent)}
@@ -125,8 +126,8 @@ nav .dot{position:absolute;top:8px;left:calc(50% + 8px);min-width:16px;height:16
 .k{font:700 10px var(--f-disp);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .cyx .v{font:600 clamp(16px,5.2vw,21px)/1.25 var(--f-num);font-variant-numeric:tabular-nums;white-space:nowrap}
 .eb .v2{font:500 12px/1.35 var(--f-num);font-variant-numeric:tabular-nums;white-space:nowrap}
-.gfmt{display:inline-grid;grid-template-columns:1fr 1fr;margin-top:7px;border:1px solid var(--line);border-radius:6px;overflow:hidden}
-.gfmt button{all:unset;cursor:pointer;padding:4px 12px;font:600 10.5px var(--f-disp);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gfmt{display:inline-grid;grid-template-columns:1fr 1fr;margin-top:6px;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.gfmt button{all:unset;cursor:pointer;padding:4px 10px;font:600 10px var(--f-disp);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .gfmt button[aria-pressed="true"]{background:var(--ink);color:var(--panel)}
 .opts{display:grid;grid-template-columns:1fr 1fr;gap:6px}
 .opt{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:6px 4px;cursor:pointer}
@@ -137,12 +138,35 @@ nav .dot{position:absolute;top:8px;left:calc(50% + 8px);min-width:16px;height:16
 .autorow{display:flex;align-items:center;gap:6px;font:12px var(--f-body);color:var(--muted)}
 .autorow input[type=checkbox]{width:22px;height:22px;margin:0;accent-color:var(--good)}
 .autorow input#autoInt{width:44px;text-align:center;padding:4px;font:600 13px var(--f-num)}
-/* Liste sekmesi */
+/* Anlık koordinat tablosu */
+.ctab{width:100%;border-collapse:collapse;table-layout:fixed;border:1px solid var(--ink);border-radius:6px}
+.ctab caption{caption-side:top;padding:0 0 5px;font:700 10.5px var(--f-disp);letter-spacing:.16em;text-transform:uppercase}
+.ctab caption small{display:block;font:500 9.5px var(--f-num);letter-spacing:0;text-transform:none;color:var(--muted);margin-top:1px}
+.ctab th{background:var(--soft);font:700 9.5px var(--f-disp);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:3px 4px;border:1px solid var(--line);border-bottom-color:var(--ink)}
+.ctab th.nt{text-transform:none;letter-spacing:.04em;font-size:10px}
+.ctab td{padding:4px 4px 5px;border:1px solid var(--line);font:500 11.5px/1.25 var(--f-num);font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:clip}
+.ctab td.big{font:600 clamp(14px,4.4vw,17px)/1.2 var(--f-num);padding:5px 4px 6px}
+.autobar{display:flex;align-items:center;justify-content:center;gap:7px;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:6px 8px;font-size:12px;color:var(--muted);cursor:pointer}
+.autobar b{color:var(--ink)}
+.autobar.on{border-color:var(--good);box-shadow:inset 0 0 0 1px var(--good)}
+.autobar input[type=checkbox]{width:20px;height:20px;margin:0;accent-color:var(--good)}
+.autobar #autoInt{width:42px;text-align:center;padding:3px;font:600 12px var(--f-num)}
+/* Liste sekmesi: küçük puntolu tablo */
+.ltab{width:100%;border-collapse:collapse;table-layout:auto;background:var(--panel);border:1px solid var(--ink);font:500 10.5px/1.3 var(--f-num);font-variant-numeric:tabular-nums}
+.ltab th{position:sticky;top:-8px;background:var(--ink);color:var(--panel);font:700 9.5px var(--f-disp);letter-spacing:.06em;text-transform:uppercase;padding:4px 3px;text-align:center}
+.ltab td{padding:4px 3px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+.ltab td:nth-child(1){text-align:center;color:var(--muted);font-size:9.5px}
+.ltab td:nth-child(2){text-align:center;font-weight:700}
+.ltab td:nth-child(7){text-align:center;color:var(--muted)}
+.ltab tbody tr:nth-child(even) td{background:var(--soft)}
+.ltab tr.new td{animation:flash 1.6s ease-out}
+.ltab td.q-good{color:var(--good)}.ltab td.q-warn{color:var(--warn)}.ltab td.q-bad{color:var(--bad)}.ltab td.q-info{color:var(--info)}
+@media (max-width:360px){.ltab{font-size:9.5px}.ltab td{padding:3px 2px}}
 .loglist{display:flex;flex-direction:column;gap:6px}
 .lg{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:7px 9px}
 .lg.new{animation:flash 1.6s ease-out}
 .lgh{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
-.lgh b{font:700 15px var(--f-disp);letter-spacing:.03em}
+.lgh b{font:700 14px var(--f-disp);letter-spacing:.03em}
 .lgh .q{font:600 10px/1 var(--f-disp);letter-spacing:.06em;text-transform:uppercase;padding:3px 5px;border-radius:3px;color:#fff;background:var(--muted)}
 .lgh .q.good{background:var(--good)}.lgh .q.warn{background:var(--warn)}.lgh .q.bad{background:var(--bad)}.lgh .q.info{background:var(--info)}
 .lgh time{margin-left:auto;font:10.5px var(--f-num);color:var(--muted)}
@@ -150,7 +174,7 @@ nav .dot{position:absolute;top:8px;left:calc(50% + 8px);min-width:16px;height:16
 .lgg div{display:flex;gap:6px;align-items:baseline;min-width:0}
 .lgg .k{flex:none;min-width:12px;text-transform:none;font-size:11.5px}
 .k.nt{text-transform:none;letter-spacing:.04em;font-size:10.5px}
-.lgg .v{font:500 12.5px var(--f-num);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.lgg .v{font:500 12px var(--f-num);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
 .lgf{margin-top:4px;font:10.5px var(--f-num);color:var(--muted)}
 /* Harita paneli */
 .mappanel{position:absolute;left:max(8px,env(safe-area-inset-left,0px));right:max(8px,env(safe-area-inset-right,0px));bottom:8px;z-index:500;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px;display:grid;grid-template-columns:repeat(3,1fr);gap:5px 6px;box-shadow:0 4px 14px rgba(0,0,0,.3)}
@@ -160,18 +184,22 @@ nav .dot{position:absolute;top:8px;left:calc(50% + 8px);min-width:16px;height:16
 .herepulse{animation:hp 1.6s ease-out infinite}
 @keyframes hp{0%{stroke-width:2;stroke-opacity:1}100%{stroke-width:14;stroke-opacity:0}}
 /* Durum */
-.status{display:flex;align-items:center;gap:8px}
-.badge{flex:none;font:700 11px/1 var(--f-disp);letter-spacing:.06em;text-transform:uppercase;padding:5px 7px;border-radius:4px;color:#fff;background:var(--muted)}
+.status{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}
+.srow{display:flex;align-items:center;justify-content:center;gap:8px}
+.status .sep{margin:0 6px;color:var(--line)}
+.badge{flex:none;font:700 10.5px/1 var(--f-disp);letter-spacing:.06em;text-transform:uppercase;padding:5px 7px;border-radius:4px;color:#fff;background:var(--muted)}
 .badge.good{background:var(--good)}.badge.warn{background:var(--warn)}.badge.bad{background:var(--bad)}.badge.info{background:var(--info)}
-.acc{font:600 17px/1 var(--f-num);white-space:nowrap}
+.acc{font:600 15px/1 var(--f-num);white-space:nowrap}
 .acc small{font-size:10.5px;color:var(--muted);font-weight:500}
-.status .meta{margin-left:auto;text-align:right;font:10.5px/1.35 var(--f-num);color:var(--muted)}
-.bar{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
-.bar div{text-align:center}.bar .v{display:block;font:600 12px var(--f-num)}
-.satline{margin-top:6px;padding-top:6px;border-top:1px dashed var(--line);font:11px/1.5 var(--f-num);color:var(--muted);display:flex;flex-wrap:wrap;gap:2px 10px}
+.status .meta{font:10px/1.3 var(--f-num);color:var(--muted)}
+.bar{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:6px;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.bar>div{padding:4px 2px}
+.bar>div+div{border-left:1px solid var(--line)}
+.bar div{text-align:center}.bar .v{display:block;font:600 11.5px var(--f-num)}
+.satline{margin-top:6px;font:10.5px/1.5 var(--f-num);color:var(--muted);display:flex;flex-wrap:wrap;justify-content:center;gap:2px 10px}
 .satline b{color:var(--ink);font-weight:600}
 .satline .l5{color:var(--good);font-weight:600}
-.warnline{margin-top:6px;font-size:12px;color:var(--bad);font-weight:600}
+.warnline{margin-top:6px;text-align:center;font-size:11.5px;color:var(--bad);font-weight:600}
 
 .rows{display:grid;grid-template-columns:18px 1fr;gap:1px 8px;align-items:baseline}
 .rows dt{font:700 14px var(--f-disp);color:var(--muted)}
@@ -181,17 +209,17 @@ nav .dot{position:absolute;top:8px;left:calc(50% + 8px);min-width:16px;height:16
 .cal{color:var(--good);font-weight:600}
 
 .ctrl{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
-.btn{font:700 13px/1 var(--f-disp);letter-spacing:.06em;text-transform:uppercase;border-radius:7px;border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:13px 8px;cursor:pointer;touch-action:manipulation;text-align:center}
+.btn{font:700 12.5px/1 var(--f-disp);letter-spacing:.06em;text-transform:uppercase;border-radius:7px;border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:13px 8px;cursor:pointer;touch-action:manipulation;text-align:center}
 .btn.primary{background:var(--accent);color:var(--accent-ink);border-color:transparent}
 .btn.stop{background:var(--bad);color:#fff;border-color:transparent}
-.btn.save{background:var(--good);color:#fff;border-color:transparent;font-size:15px}
+.btn.save{background:var(--good);color:#fff;border-color:transparent;font-size:14px}
 .btn.save:disabled{background:var(--line);color:var(--muted);opacity:1}
 .btn.sm{font-size:12px;padding:9px 6px}
 .btn:disabled{opacity:.4}
 .btn:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
 .prog{height:6px;background:var(--line);border-radius:3px;overflow:hidden}
 .prog i{display:block;height:100%;width:0;background:var(--accent);transition:width .2s}
-.msg{font-size:12px;color:var(--muted);min-height:2.6em;text-align:center}
+.msg{font-size:11.5px;color:var(--muted);min-height:2.5em;text-align:center}
 .msg b{color:var(--ink)}
 
 .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px 8px}
@@ -355,9 +383,8 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
 
     <div class="card">
       <div class="status" aria-live="polite">
-        <span id="badge" class="badge">Bekliyor</span>
-        <span class="acc" id="acc">— <small>m</small></span>
-        <div class="meta"><div id="fixAge">Konum yok</div><div id="vacc">&nbsp;</div></div>
+        <div class="srow"><span id="badge" class="badge">Bekliyor</span><span class="acc" id="acc">— <small>m</small></span></div>
+        <div class="meta"><span id="fixAge">Konum yok</span><span class="sep">·</span><span id="vacc">—</span></div>
       </div>
       <div class="bar">
         <div><span class="lbl">Kararlılık</span><span class="v" id="stab">—</span></div>
@@ -369,19 +396,15 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
     </div>
 
     <div class="card coord">
-      <div class="ctitle">Anlık Koordinat<small id="gInfo">—</small></div>
-      <div class="cyx">
-        <div><span class="k">Y</span><span class="v" id="vY">—</span></div>
-        <div><span class="k">X</span><span class="v" id="vX">—</span></div>
-      </div>
-      <div class="eb">
-        <div><span class="k">Enlem</span><span class="v2" id="gLat">E: —</span></div>
-        <div><span class="k">Boylam</span><span class="v2" id="gLon">B: —</span></div>
-      </div>
-      <div class="eb">
-        <div><span class="k nt">h · elipsoit</span><span class="v2" id="vZ">—</span></div>
-        <div><span class="k nt">H · ortometrik</span><span class="v2" id="vH">—</span></div>
-      </div>
+      <table class="ctab">
+        <caption>Anlık Koordinat<small id="gInfo">—</small></caption>
+        <tr><th>Y</th><th>X</th></tr>
+        <tr><td class="big" id="vY">—</td><td class="big" id="vX">—</td></tr>
+        <tr><th>Enlem</th><th>Boylam</th></tr>
+        <tr><td id="gLat">—</td><td id="gLon">—</td></tr>
+        <tr><th class="nt">h · elipsoit</th><th class="nt">H · ortometrik</th></tr>
+        <tr><td id="vZ">—</td><td id="vH">—</td></tr>
+      </table>
       <div class="gfmt" id="gfmt" role="group" aria-label="Coğrafi koordinat biçimi">
         <button type="button" data-g="dec">Ondalık</button><button type="button" data-g="dms">Derece-Dakika-Saniye</button>
       </div>
@@ -392,25 +415,13 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
       <button class="btn save" id="btnSave" disabled>Kaydet</button>
       <button class="btn" id="btnMeasure" disabled>Ortalama</button>
     </div>
-    <div class="opts">
-      <div class="opt">
-        <span class="k">Ortalama okuma</span>
-        <div class="step"><button type="button" id="avgMinus" aria-label="Azalt">−</button><input id="avgN" inputmode="numeric" aria-label="Ortalama okuma sayısı"><button type="button" id="avgPlus" aria-label="Artır">+</button></div>
-      </div>
-      <label class="opt" id="autoBox" for="autoSave">
-        <span class="k">Otomatik kayıt</span>
-        <span class="autorow"><input type="checkbox" id="autoSave"> her <input id="autoInt" inputmode="numeric" value="5" aria-label="Kayıt aralığı (saniye)"> sn</span>
-      </label>
-    </div>
+    <label class="autobar" id="autoBox" for="autoSave">
+      <input type="checkbox" id="autoSave"><span><b>Otomatik kayıt</b> · her</span>
+      <input id="autoInt" inputmode="numeric" value="5" aria-label="Kayıt aralığı (saniye)"><span>sn</span>
+    </label>
     <div class="prog"><i id="prog"></i></div>
     <div class="msg" id="msg">Hazırlanıyor…</div>
 
-    <div class="card">
-      <div class="minihd"><h3>Kayıtlı Noktalar · <span id="miniCnt">0</span></h3><button class="btn sm" id="miniAll" type="button">Tümü / Dışa Aktar ›</button></div>
-      <div class="minirow head"><span>No</span><span>Y</span><span>X</span><span>Hata</span></div>
-      <div id="mini"></div>
-      <div class="empty" id="miniEmpty">Kaydet'e bastığınız noktalar burada görünür.</div>
-    </div>
   </section>
 
   <!-- LİSTE -->
@@ -418,6 +429,18 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
     <div class="card" style="text-align:center">
       <h3 style="margin:0" id="logTitle">Okuma Listesi</h3>
       <p class="note" style="margin:2px 0 0" id="logSub">Kaydedilen koordinatlar okunuş sırasıyla.</p>
+    </div>
+    <div class="card">
+      <h3 id="ptTitle" style="text-align:center">Dışa Aktar</h3>
+      <div class="exp">
+        <button class="btn primary sm" id="exNcn">NCN İndir</button>
+        <button class="btn primary sm" id="exTxt">TXT İndir</button>
+        <button class="btn sm" id="exKml">KML (Earth)</button>
+        <button class="btn sm" id="exShare">Paylaş</button>
+        <button class="btn sm" id="exCopy">Kopyala</button>
+        <button class="btn sm" id="exClear">Noktaları Sil</button>
+      </div>
+      <div class="note" id="exSys" style="text-align:center"></div>
     </div>
     <div class="loglist" id="logList"></div>
     <div class="empty" id="logEmpty">Henüz kayıt yok. Ölçüm sekmesinde Kaydet'e basın veya otomatik kaydı açın.</div>
@@ -477,7 +500,7 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
       <h3><span class="stepn">3</span>Kayıt Kuralları</h3>
       <label class="sw" for="fixOnly"><span>Yalnız <b>RTK Fix</b> durumunda kaydet</span> <input id="fixOnly" type="checkbox" checked></label>
       <div class="fgrid" style="margin-top:6px">
-        <div><label for="rtkN">Ortalama epok (Fix)</label><input id="rtkN" type="number" min="1" max="300" value="10"></div>
+        <div><label for="rtkN">Ortalama epok (Fix)</label><input id="rtkN" type="number" value="10" readonly title="Sabit 10"></div>
         <div><label for="rtkMax">En büyük hata (cm)</label><input id="rtkMax" type="number" step="0.1" min="0.5" value="3"></div>
       </div>
       <p class="note">Ortalama yalnız Fix epoklarından ve hatası sınırın altında kalanlardan alınır.</p>
@@ -518,20 +541,9 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
       <div class="minihd"><h3>İşler</h3><button class="btn sm primary" id="btnNewJob" type="button">+ Yeni İş</button></div>
       <div class="joblist" id="joblist"></div>
     </div>
-    <div class="card">
-      <h3 id="ptTitle">Noktalar</h3>
-      <div class="exp">
-        <button class="btn primary sm" id="exNcn">NCN İndir</button>
-        <button class="btn primary sm" id="exTxt">TXT İndir</button>
-        <button class="btn sm" id="exKml">KML (Earth)</button>
-        <button class="btn sm" id="exShare">Paylaş</button>
-        <button class="btn sm" id="exCopy">Kopyala</button>
-        <button class="btn sm" id="exClear">Noktaları Sil</button>
-      </div>
-      <div class="note" id="exSys"></div>
-    </div>
     <div class="plist" id="plist"></div>
     <div class="empty" id="empty">Bu işte henüz nokta yok.</div>
+    <p class="note" style="text-align:center">Noktaları dışa aktarmak için <b>Liste</b> sekmesini kullanın.</p>
   </section>
 
   <!-- AYARLAR -->
@@ -539,7 +551,7 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
     <div class="card">
       <h3>Ortalama Ölçüm</h3>
       <div class="fgrid">
-        <div><label for="nEpoch">Okuma sayısı</label><input id="nEpoch" type="number" min="3" max="900" value="30"></div>
+        <div><label for="nEpoch">Okuma sayısı</label><input id="nEpoch" type="number" value="10" readonly title="Sabit 10"></div>
         <div><label for="maxAcc">Kabul sınırı (±m)</label><input id="maxAcc" type="number" step="0.01" min="0.01" value="10"></div>
         <div><label for="warm">Isınma (sn)</label><input id="warm" type="number" min="0" max="120" value="8"></div>
         <div><label for="sigK">Aykırı eşiği (σ)</label><input id="sigK" type="number" step="0.1" min="1.5" max="5" value="2.5"></div>
@@ -886,6 +898,7 @@ let justAdded = false, last = null, watchId = null, wakeLock = null, collecting 
 const recent = [];
 const DEF_P = { tx: -84.1, ty: -101.8, tz: -129.7, rx: 0, ry: 0, rz: 0.468, ds: 1.05 };
 const DOMS = [27, 30, 33, 36, 39, 42, 45];
+const AVG_N = 10; // ortalama okuma sayısı sabit
 const SET_IDS = ['nEpoch','maxAcc','warm','sigK','zMode','dec','tx','ty','tz','rx','ry','rz','ds','vN','vE','ep0','kY','kX'];
 function loadSettings() { const s = store.get('settings', {}); SET_IDS.forEach(id => { if (s[id] != null && $(id)) $(id).value = s[id]; }); }
 function saveSettings() { const s = store.get('settings', {}); SET_IDS.forEach(id => s[id] = $(id).value); store.set('settings', s); }
@@ -968,7 +981,7 @@ function render() {
     const p = project(last);
     $('vY').textContent = fmt(p.Y, d); $('vX').textContent = fmt(p.X, d);
     $('vZ').textContent = last.h != null ? fmt(p.Z, 3) + ' m' : '—'; $('vH').textContent = last.H != null ? fmt(last.H, 3) + ' m' : '—';
-    $('gLat').textContent = 'E: ' + geoTxt(last.lat); $('gLon').textContent = 'B: ' + geoTxt(last.lon);
+    $('gLat').textContent = geoTxt(last.lat); $('gLon').textContent = geoTxt(last.lon);
     $('gInfo').innerHTML = p.label + (p.cal ? ' · <span class="cal">düzeltmeli</span>' : '');
     const off = Math.abs(p.lonC - p.cm), lim = J().sys === 'ed6' ? 3 : 1.5, w = $('zoneWarn');
     if (off > lim + 0.01) { w.hidden = false; w.textContent = 'Dikkat: Konum seçili dilim dışında. Bulunduğunuz yerin DOM\'u ' + dom3(last.lon) + '°.'; } else w.hidden = true;
@@ -1011,27 +1024,30 @@ setInterval(() => { if (!last) return; const s = (Date.now() - last.recv) / 1000
 function renderLog() {
   const box = $('logList'), d = +$('dec').value, P = pts(), j = J();
   $('logTitle').textContent = 'Okuma Listesi · ' + j.name;
-  $('logSub').textContent = SYSN[j.sys] + ' · DOM ' + j.dom + ' · ' + P.length + ' nokta · okunuş sırasıyla';
+  $('logSub').textContent = SYSN[j.sys] + ' · DOM ' + j.dom + ' · ' + P.length + ' nokta · kaydediliş sırasıyla';
   $('logEmpty').hidden = P.length > 0; box.innerHTML = '';
-  P.forEach((pt, i) => {
-    const p = project(pt), el = document.createElement('div');
-    el.className = 'lg' + (i === P.length - 1 && justAdded ? ' new' : '');
-    const h = document.createElement('div'); h.className = 'lgh';
-    const b = document.createElement('b'); b.textContent = 'No ' + pt.name; h.appendChild(b);
-    const qn = pt.q != null ? QN[pt.q] : [pt.src === 'phone' || !pt.src ? 'TELEFON' : '—', ''];
-    const q = document.createElement('span'); q.className = 'q ' + (qn ? qn[1] : ''); q.textContent = (pt.src === 'demo' ? 'DENEME · ' : '') + (qn ? qn[0] : '—'); h.appendChild(q);
-    const tm = document.createElement('time'); tm.textContent = new Date(pt.t).toLocaleString('tr-TR'); h.appendChild(tm);
-    const g = document.createElement('div'); g.className = 'lgg';
-    [['Y', fmt(p.Y, d)], ['X', fmt(p.X, d)], ['h', pt.h != null ? fmt(p.Z, 3) + ' m' : '—'], ['H', pt.H != null ? fmt(pt.H, 3) + ' m' : '—']]
-      .forEach(([k, v]) => { const c = document.createElement('div'); const kk = document.createElement('span'); kk.className = 'k'; kk.textContent = k;
-        const vv = document.createElement('span'); vv.className = 'v'; vv.textContent = v; c.append(kk, vv); g.appendChild(c); });
-    const f = document.createElement('div'); f.className = 'lgf';
-    f.textContent = '±' + fmtAcc(pt.acc) + ' · ' + (pt.n > 1 ? pt.n + ' okuma ortalaması · dağılım ±' + fmtAcc(pt.sd || 0) : 'tek okuma') + (pt.auto ? ' · otomatik' : '') + (pt.code ? ' · kod ' + pt.code : '') + (p.cal ? ' · düzeltmeli' : '');
-    el.append(h, g, f); box.appendChild(el);
+  if (!P.length) return;
+  const tb = document.createElement('table'); tb.className = 'ltab';
+  tb.innerHTML = '<thead><tr><th>Sıra</th><th>No</th><th>Y</th><th>X</th><th>Z</th><th>Hata</th><th>Saat</th></tr></thead>';
+  const body = document.createElement('tbody');
+  P.forEach((pt, i) => {   // kaydediliş sırası: ilk kaydedilen en üstte
+    const p = project(pt), tr = document.createElement('tr');
+    const qn = pt.q != null ? QN[pt.q] : null;
+    if (i === P.length - 1 && justAdded) tr.className = 'new';
+    const cells = [String(i + 1), pt.name, fmt(p.Y, d), fmt(p.X, d), pt.h != null || zOut(p) === 0 ? fmt(zOut(p), 2) : '—',
+      pt.acc < 1 ? fmt(pt.acc * 100, 1) + 'cm' : fmt(pt.acc, 1) + 'm',
+      new Date(pt.t).toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit', second: '2-digit' })];
+    cells.forEach((v, c) => { const td = document.createElement('td'); td.textContent = v; if (c === 1 && qn) { td.className = 'q-' + qn[1]; td.title = qn[0]; } tr.appendChild(td); });
+    body.appendChild(tr);
   });
+  tb.appendChild(body); box.appendChild(tb);
+  const n = document.createElement('p'); n.className = 'note'; n.style.textAlign = 'center';
+  n.textContent = 'Nokta numarasının rengi çözümü gösterir: yeşil RTK Fix, turuncu Float. Z: Ayarlar › Çıktı seçimine göre.';
+  if (P.some(p => p.q != null)) box.appendChild(n);
   if (justAdded && !$('tabLog').hidden) $('tabLog').scrollTop = $('tabLog').scrollHeight;
 }
 function renderMini() {
+  if (!$('mini')) return;
   const box = $('mini'), d = +$('dec').value, P = pts();
   $('miniCnt').textContent = P.length; $('miniEmpty').hidden = P.length > 0; box.innerHTML = '';
   P.slice(-50).reverse().forEach((pt, i) => {
@@ -1061,11 +1077,11 @@ function renderList() {
   renderMini(); renderLog(); renderJobs();
   const box = $('plist'), d = +$('dec').value, P = pts(), j = J();
   $('cnt').hidden = !P.length; $('cnt').textContent = P.length; $('empty').hidden = P.length > 0;
-  $('ptTitle').textContent = 'Noktalar · ' + j.name;
+  $('ptTitle').textContent = 'Dışa Aktar · ' + j.name;
   $('exSys').textContent = 'Dışa aktarım: ' + SYSN[j.sys] + ' · DOM ' + j.dom + (P.length ? ' · ' + P.length + ' nokta' : '');
   box.innerHTML = '';
-  P.slice().reverse().forEach((pt, ri) => {
-    const i = P.length - 1 - ri, p = project(pt);
+  P.forEach((pt, i) => {
+    const p = project(pt);
     const el = document.createElement('div'); el.className = 'pt';
     const nm = document.createElement('div'); nm.className = 'nm'; nm.textContent = pt.name;
     const em = document.createElement('em'); em.textContent = (pt.code ? pt.code + ' · ' : '') + new Date(pt.t).toLocaleString('tr-TR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }); nm.appendChild(em);
@@ -1100,11 +1116,12 @@ function deleteJob(id) {
   jobs = jobs.filter(j => j.id !== id);
   if (curId === id) curId = jobs.length ? jobs[jobs.length - 1].id : null;
   saveJobs(); render(); toast('İş silindi');
-  if (!curId) openWizard('name');
+  if (!curId) openWizard(permOk ? 'dom' : 'perm', 'first');
 }
 
 // ===== KURULUM SİHİRBAZI =====
 const WZ = ['perm', 'name', 'dom', 'sys'];
+const stepsOf = () => wz.mode === 'first' ? ['perm', 'dom', 'sys'] : WZ;
 let wz = { step: 'perm', mode: 'new', name: '', dom: null, sys: null };
 function openWizard(step, mode) {
   const j = job();
@@ -1112,9 +1129,10 @@ function openWizard(step, mode) {
   $('wz').hidden = false; $('wzName').value = wz.name; showStep(step);
 }
 function showStep(s) {
-  wz.step = s; const k = WZ.indexOf(s);
+  wz.step = s; const ST = stepsOf(), k = ST.indexOf(s);
   document.querySelectorAll('[data-step]').forEach(el => el.hidden = el.dataset.step !== s);
-  document.querySelectorAll('#wzSteps div').forEach((el, i) => { el.className = i < k ? 'done' : i === k ? 'on' : ''; });
+  document.querySelectorAll('#wzSteps div').forEach(el => { const i = ST.indexOf(el.dataset.s); el.hidden = i < 0; el.dataset.n = i + 1; el.className = i < 0 ? '' : i < k ? 'done' : i === k ? 'on' : ''; });
+  $('wzSteps').style.gridTemplateColumns = 'repeat(' + ST.length + ',1fr)';
   $('wzBack').disabled = k === 0 || (wz.mode === 'edit' && s === 'dom');
   $('wzBack').textContent = wz.mode === 'edit' && s === 'dom' ? 'Geri' : 'Geri';
   if (s === 'perm') { updPermCard(); }
@@ -1130,10 +1148,10 @@ function updNext() {
 }
 $('wzName').addEventListener('input', () => { $('wzNameErr').hidden = true; updNext(); });
 $('wzName').addEventListener('keydown', e => { if (e.key === 'Enter' && !$('wzNext').disabled) $('wzNext').click(); });
-$('wzBack').onclick = () => { const k = WZ.indexOf(wz.step); if (k > 0) showStep(WZ[k - 1]); };
+$('wzBack').onclick = () => { const ST = stepsOf(), k = ST.indexOf(wz.step); if (k > 0) showStep(ST[k - 1]); };
 $('wzNext').onclick = () => {
   const s = wz.step;
-  if (s === 'perm') return showStep('name');
+  if (s === 'perm') return showStep(stepsOf()[1]);
   if (s === 'name') {
     const nm = $('wzName').value.trim().replace(/\s+/g, ' ');
     if (jobs.some(j => j.name.toLocaleLowerCase('tr') === nm.toLocaleLowerCase('tr'))) { $('wzNameErr').hidden = false; $('wzNameErr').textContent = 'Bu adla bir iş zaten var. Listeden seçin veya başka bir ad yazın.'; return; }
@@ -1173,7 +1191,14 @@ function syncSys() {
 document.querySelectorAll('.syscard').forEach(b => b.onclick = () => { wz.sys = b.dataset.s; syncSys(); updNext(); });
 function finishWizard() {
   if (wz.mode === 'edit' && job()) { const j = job(); j.dom = wz.dom; j.sys = wz.sys; toast('DOM ve sistem güncellendi'); }
-  else { const j = { id: 'j' + Date.now(), name: wz.name, dom: wz.dom, sys: wz.sys, t: Date.now(), next: '1', points: [] }; jobs.push(j); curId = j.id; toast('“' + j.name + '” işi oluşturuldu'); }
+  else {
+    if (wz.mode === 'first' || !wz.name) { // ilk açılış: iş adı sorulmaz, tarihli ad verilir
+      const base = 'Ölçüm ' + new Date().toLocaleDateString('tr-TR'); let nm = base, i = 2;
+      while (jobs.some(x => x.name === nm)) nm = base + ' (' + i++ + ')';
+      wz.name = nm;
+    }
+    const j = { id: 'j' + Date.now(), name: wz.name, dom: wz.dom, sys: wz.sys, t: Date.now(), next: '1', points: [] }; jobs.push(j); curId = j.id; toast('“' + j.name + '” işi oluşturuldu');
+  }
   saveJobs(); closeWizard();
 }
 function closeWizard() { $('wz').hidden = true; goTab('tabMeasure'); render(); if (permOk && watchId == null) startRun(); }
@@ -1323,7 +1348,7 @@ function stopRun() {
 // ===== ORTALAMA ÖLÇÜM =====
 function beginCollect() {
   const rtk = RX.src !== 'phone';
-  const n = rtk ? Math.max(1, Math.min(300, RX.rtkN)) : Math.max(3, Math.min(900, Math.round(num('nEpoch')))), warm = rtk ? 0 : Math.max(0, num('warm')) * 1000;
+  const n = AVG_N, warm = rtk ? 0 : Math.max(0, num('warm')) * 1000;
   collecting = { n, rtk, max: rtk ? RX.rtkMaxCm / 100 : (num('maxAcc') || 10), list: [], lastT: 0, start: Date.now(), warmUntil: Math.max(Date.now(), startT + warm) };
   $('btnMeasure').textContent = 'İptal'; $('prog').style.width = '0%'; msg('Ortalama başladı… telefonu sabit tutun.');
   collecting.timer = setInterval(() => {
@@ -1611,7 +1636,7 @@ $('ntHost').value = RX.ntrip.host || ''; $('ntPort').value = RX.ntrip.port || '2
 $('ntUser').value = RX.ntrip.user || ''; $('ntPass').value = RX.ntrip.pass || ''; $('ntSave').checked = RX.ntrip.save !== false;
 $('fixOnly').checked = RX.fixOnly; $('rtkN').value = RX.rtkN; $('rtkMax').value = RX.rtkMaxCm;
 $('fixOnly').onchange = () => { RX.fixOnly = $('fixOnly').checked; saveRX(); updSaveBtn(); };
-$('rtkN').onchange = () => { RX.rtkN = Math.max(1, Math.min(300, Math.round(num('rtkN')) || 10)); $('rtkN').value = RX.rtkN; saveRX(); };
+
 $('rtkMax').onchange = () => { RX.rtkMaxCm = Math.max(0.5, num('rtkMax') || 3); $('rtkMax').value = RX.rtkMaxCm; saveRX(); };
 const needApp = () => { if (NATIVE) return false; toast('Bluetooth ve NTRIP yalnız Android uygulamasında çalışır'); return true; };
 $('ntPreset').onclick = () => { $('ntHost').value = 'www.tusaga-aktif.gov.tr'; $('ntPort').value = '2101'; readNt(); toast('Sunucu ve port yazıldı; hesap bilgileriyle doğrulayın'); };
@@ -1644,9 +1669,9 @@ document.querySelectorAll('#srcSeg button').forEach(b => b.onclick = () => {
 window.__back = () => {
   if (!$('sheet').hidden) { closeSheet(); return 'handled'; }
   if (!$('wz').hidden) {
-    const k = WZ.indexOf(wz.step);
+    const ST = stepsOf(), k = ST.indexOf(wz.step);
     if (wz.mode === 'edit' || (k <= 1 && job())) { $('wz').hidden = true; return 'handled'; }
-    if (k > 0) { showStep(WZ[k - 1]); return 'handled'; }
+    if (k > 0) { showStep(ST[k - 1]); return 'handled'; }
     return '';
   }
   if ($('tabMeasure').hidden) { goTab('tabMeasure'); return 'handled'; }
@@ -1654,25 +1679,13 @@ window.__back = () => {
 };
 
 // Ölçüm sekmesi kontrolleri
+$('nEpoch').value = AVG_N; $('rtkN').value = AVG_N;
 document.querySelectorAll('#sysSeg button').forEach(b => b.onclick = () => {
   const j = job(); if (!j) { toast('Önce bir iş oluşturun'); return; }
   if (j.sys === b.dataset.s) return;
   j.sys = b.dataset.s; saveJobs(); render(); updateMap(); toast('Sistem: ' + SYSN[j.sys] + ' · DOM ' + j.dom);
 });
 document.querySelectorAll('#gfmt button').forEach(b => b.onclick = () => { UI.geo = b.dataset.g; store.set('ui', UI); render(); });
-function avgGet() { return RX.src === 'phone' ? Math.round(num('nEpoch')) || 30 : RX.rtkN; }
-function avgSet(v) {
-  v = Math.max(1, Math.min(900, Math.round(v) || 1));
-  if (RX.src === 'phone') { v = Math.max(3, v); $('nEpoch').value = v; saveSettings(); } else { v = Math.min(300, v); RX.rtkN = v; $('rtkN').value = v; saveRX(); }
-  $('avgN').value = v;
-}
-$('avgN').value = avgGet();
-$('avgN').addEventListener('change', () => avgSet(parseInt($('avgN').value, 10)));
-$('avgMinus').onclick = () => avgSet(avgGet() - (avgGet() > 20 ? 5 : 1));
-$('avgPlus').onclick = () => avgSet(avgGet() + (avgGet() >= 20 ? 5 : 1));
-$('nEpoch').addEventListener('change', () => { if (RX.src === 'phone') $('avgN').value = avgGet(); });
-$('rtkN').addEventListener('change', () => { if (RX.src !== 'phone') $('avgN').value = avgGet(); });
-document.querySelectorAll('#srcSeg button').forEach(b => b.addEventListener('click', () => setTimeout(() => { $('avgN').value = avgGet(); }, 0)));
 $('autoInt').value = UI.autoInt;
 $('autoInt').addEventListener('change', () => { UI.autoInt = Math.max(1, Math.min(3600, parseInt($('autoInt').value, 10) || 5)); $('autoInt').value = UI.autoInt; store.set('ui', UI); });
 $('autoSave').addEventListener('change', () => {
@@ -1687,7 +1700,7 @@ loadSettings(); calText();
 $('btnRun').onclick = () => watchId == null ? enableLocation(false) : stopRun();
 $('btnSave').onclick = saveNow;
 $('btnMeasure').onclick = () => collecting ? cancelCollect() : (last ? beginCollect() : msg('Henüz konum yok, bekleyin.'));
-$('miniAll').onclick = () => goTab('tabPoints');
+
 $('btnFollow').onclick = () => { follow = true; if (map && last) map.setView([last.lat, last.lon], Math.max(map.getZoom(), 18)); else toast('Önce konumu başlatın'); };
 $('btnLayer').onclick = () => { if (!map) return; map.removeLayer(layers[layerIdx][1]); layerIdx = (layerIdx + 1) % layers.length; layers[layerIdx][1].addTo(map); $('btnLayer').textContent = layers[(layerIdx + 1) % layers.length][0]; };
 $('btnEarth').onclick = openEarth;
@@ -1708,11 +1721,11 @@ if (NATIVE) {
   document.documentElement.classList.add('native');
   const st = Android.checkState();
   if (st === 'ok' && job()) { permOk = true; restartRun(); }
-  else { openWizard('perm'); window.__locState(st, true); }
+  else { openWizard('perm', job() ? 'new' : 'first'); window.__locState(st, true); }
 } else (async () => {
   let st = null; try { st = (await navigator.permissions.query({ name: 'geolocation' })).state; } catch (e) {}
   if (st === 'granted' && job()) { permOk = true; permInfo = { st: 'ok', acc: null }; enableLocation(true); return; }
-  openWizard('perm');
+  openWizard('perm', job() ? 'new' : 'first');
   if (st === 'granted') askPrecise(true); // izin önceden verilmişse doğruluğu kontrol et
 })();
 </script>

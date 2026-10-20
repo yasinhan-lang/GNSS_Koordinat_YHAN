@@ -31,11 +31,17 @@ Telefondan ITRF96 ve ED50 koordinatı okuyup iş adı altında kaydeden, NetCAD 
 2. Dosyaya dokunun. "Bilinmeyen uygulamalar" uyarısı çıkarsa **Ayarlar › Bu kaynağa izin ver** deyin.
 3. **Yükle**'ye basın. Play Koruma uyarısı çıkarsa **Yine de yükle** seçin (uygulama Play Store'dan gelmediği için çıkar).
 
+## Sürüm 2.3
+
+- İlk açılışta iş adı sorulmaz; iş "Ölçüm GG.AA.YYYY" adıyla oluşur. Yeni iş açarken ad sorulur.
+- Ortalama okuma sayısı sabit 10.
+- Anlık koordinat çizgili tabloda: Y/X, enlem/boylam, h/H. Durum bilgileri ortalı.
+- Kayıtlı noktalar ve dışa aktarma (NCN, TXT, KML, paylaş, kopyala) Liste sekmesinde; liste kaydediliş sırasıyla, ekrana sığan küçük puntolu tablo.
+
 ## Sürüm 2.1 — yeni ölçüm ekranı
 
 - **Ölçüm:** "Anlık Koordinat" başlığı altında Y ve X yan yana ortalı; Enlem (E) ve Boylam (B) ondalık veya derece-dakika-saniye; h (elipsoit) ve H (ortometrik).
 - **Sistem seçimi ölçüm ekranında:** ITRF96 TM3 / ED50 TM3 / ED50 UTM6.
-- **Ortalama okuma sayısı** ölçüm ekranından − / + ile değiştirilir.
 - **Otomatik kayıt:** kutu işaretliyken belirlenen aralıkla (sn) sıradaki numarayla kendiliğinden kaydeder; işaret kaldırılınca durur. RTK'da "yalnız Fix" kuralına uyar.
 - **Liste sekmesi:** kaydedilen koordinatlar okunuş sırasıyla, eksiksiz (Y, X, h, H, hata, saat). Enlem/boylam yalnız ölçüm ekranında gösterilir.
 - **Harita:** canlı mavi nokta, hata dairesi, yürünen iz, anlık Y/X paneli ve **Koordinatı Kaydet** düğmesi.
@@ -81,7 +87,7 @@ Sürüm 2'den itibaren APK sabit bir anahtarla (`app/yhan.keystore`) imzalanır;
 
 ## Teknik bilgiler
 
-- Paket adı: `com.yhan.gnsskoordinat` · Sürüm 2.2 · En düşük Android 7.0 (API 24) · Hedef API 34
+- Paket adı: `com.yhan.gnsskoordinat` · Sürüm 2.3 · En düşük Android 7.0 (API 24) · Hedef API 34
 - Arayüz: `app/src/main/assets/index.html`. Arayüzde değişiklik yapmak için bu dosyayı düzenleyip APK'yı yeniden derlemeniz yeterli.
 - Yerel kod: `app/src/main/java/com/yhan/gnsskoordinat/MainActivity.kt`
 - APK, `app/yhan.keystore` anahtarıyla imzalanır (kişisel kullanım). Bu dosyayı silmeyin; silinirse güncellemeler eskisinin üzerine kurulamaz. Play Store için ayrı ve gizli bir anahtar gerekir.
