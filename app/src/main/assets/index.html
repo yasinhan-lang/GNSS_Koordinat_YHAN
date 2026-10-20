@@ -1022,7 +1022,7 @@ function renderLog() {
     const q = document.createElement('span'); q.className = 'q ' + (qn ? qn[1] : ''); q.textContent = (pt.src === 'demo' ? 'DENEME · ' : '') + (qn ? qn[0] : '—'); h.appendChild(q);
     const tm = document.createElement('time'); tm.textContent = new Date(pt.t).toLocaleString('tr-TR'); h.appendChild(tm);
     const g = document.createElement('div'); g.className = 'lgg';
-    [['Y', fmt(p.Y, d)], ['X', fmt(p.X, d)], ['E', geoTxt(pt.lat)], ['B', geoTxt(pt.lon)], ['h', pt.h != null ? fmt(p.Z, 3) + ' m' : '—'], ['H', pt.H != null ? fmt(pt.H, 3) + ' m' : '—']]
+    [['Y', fmt(p.Y, d)], ['X', fmt(p.X, d)], ['h', pt.h != null ? fmt(p.Z, 3) + ' m' : '—'], ['H', pt.H != null ? fmt(pt.H, 3) + ' m' : '—']]
       .forEach(([k, v]) => { const c = document.createElement('div'); const kk = document.createElement('span'); kk.className = 'k'; kk.textContent = k;
         const vv = document.createElement('span'); vv.className = 'v'; vv.textContent = v; c.append(kk, vv); g.appendChild(c); });
     const f = document.createElement('div'); f.className = 'lgf';

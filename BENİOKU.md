@@ -37,7 +37,7 @@ Telefondan ITRF96 ve ED50 koordinatı okuyup iş adı altında kaydeden, NetCAD 
 - **Sistem seçimi ölçüm ekranında:** ITRF96 TM3 / ED50 TM3 / ED50 UTM6.
 - **Ortalama okuma sayısı** ölçüm ekranından − / + ile değiştirilir.
 - **Otomatik kayıt:** kutu işaretliyken belirlenen aralıkla (sn) sıradaki numarayla kendiliğinden kaydeder; işaret kaldırılınca durur. RTK'da "yalnız Fix" kuralına uyar.
-- **Liste sekmesi:** kaydedilen koordinatlar okunuş sırasıyla, eksiksiz (Y, X, E, B, h, H, hata, saat).
+- **Liste sekmesi:** kaydedilen koordinatlar okunuş sırasıyla, eksiksiz (Y, X, h, H, hata, saat). Enlem/boylam yalnız ölçüm ekranında gösterilir.
 - **Harita:** canlı mavi nokta, hata dairesi, yürünen iz, anlık Y/X paneli ve **Koordinatı Kaydet** düğmesi.
 
 ## Sürüm 2.0 — RTK alıcı desteği
@@ -81,7 +81,7 @@ Sürüm 2'den itibaren APK sabit bir anahtarla (`app/yhan.keystore`) imzalanır;
 
 ## Teknik bilgiler
 
-- Paket adı: `com.yhan.gnsskoordinat` · Sürüm 2.1 · En düşük Android 7.0 (API 24) · Hedef API 34
+- Paket adı: `com.yhan.gnsskoordinat` · Sürüm 2.2 · En düşük Android 7.0 (API 24) · Hedef API 34
 - Arayüz: `app/src/main/assets/index.html`. Arayüzde değişiklik yapmak için bu dosyayı düzenleyip APK'yı yeniden derlemeniz yeterli.
 - Yerel kod: `app/src/main/java/com/yhan/gnsskoordinat/MainActivity.kt`
 - APK, `app/yhan.keystore` anahtarıyla imzalanır (kişisel kullanım). Bu dosyayı silmeyin; silinirse güncellemeler eskisinin üzerine kurulamaz. Play Store için ayrı ve gizli bir anahtar gerekir.
