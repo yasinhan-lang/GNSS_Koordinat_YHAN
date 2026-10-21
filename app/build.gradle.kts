@@ -4,43 +4,37 @@ plugins {
 }
 
 android {
-    namespace = "com.yhan.gnsskoordinat"
+    namespace = "com.yhan.bzklisans"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.yhan.gnsskoordinat"
+        applicationId = "com.yhan.bzklisans"
         minSdk = 24
         targetSdk = 34
-        versionCode = 9
-        versionName = "3.2"
+        versionCode = 1
+        versionName = "1.0"
     }
 
-    // Sabit imza: her derlenen APK bir öncekinin üzerine kurulabilir (veriler korunur).
     signingConfigs {
         create("yhan") {
-            storeFile = file("yhan.keystore")
-            storePassword = "yhan2026gnss"
-            keyAlias = "yhan"
-            keyPassword = "yhan2026gnss"
+            storeFile = file("lisans.keystore")
+            storePassword = "bzkLisans2026"
+            keyAlias = "bzklisans"
+            keyPassword = "bzkLisans2026"
         }
     }
-
     buildTypes {
         release {
             isMinifyEnabled = false
             signingConfig = signingConfigs.getByName("yhan")
         }
-        debug {
-            signingConfig = signingConfigs.getByName("yhan")
-        }
+        debug { signingConfig = signingConfigs.getByName("yhan") }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = "17"
-    }
+    kotlinOptions { jvmTarget = "17" }
     lint {
         checkReleaseBuilds = false
         abortOnError = false
@@ -52,5 +46,4 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("androidx.activity:activity-ktx:1.9.2")
     implementation("androidx.webkit:webkit:1.11.0")
-    implementation("com.google.android.gms:play-services-location:21.3.0")
 }
