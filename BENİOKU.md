@@ -31,6 +31,16 @@ Telefondan ITRF96 ve ED50 koordinatı okuyup iş adı altında kaydeden, NetCAD 
 2. Dosyaya dokunun. "Bilinmeyen uygulamalar" uyarısı çıkarsa **Ayarlar › Bu kaynağa izin ver** deyin.
 3. **Yükle**'ye basın. Play Koruma uyarısı çıkarsa **Yine de yükle** seçin (uygulama Play Store'dan gelmediği için çıkar).
 
+## Sürüm 2.4
+
+- Ölçüm ekranı daha ince: koordinat tablosu, düğmeler ve kararlılık satırı daraltıldı; kayıt penceresi sadeleştirildi.
+- Liste: başlıkta iş adı ve "Dışa Aktar"; sütunlar N.NO, Y, X ve isteğe bağlı **Z, Hata, Saat** (tik). Tiklenmeyen sütunlar ekranda gösterilmez ve NCN/TXT/KML'e aktarılmaz.
+- KML · Earth: dosyayı İndirilenler'e kaydeder ve Google Earth uygulamasında açar.
+- Harita: "Google Earth'te Göster" kayıtlı noktaları Google Earth'te açar; alt bilgi satırı kaldırıldı; otomatik kayıt tiki eklendi.
+- Alıcı: "Deneme" adı "Simülasyon" oldu ve açıklaması eklendi; bu modda kaydedilen noktalara SIM kodu yazılır.
+- İşler: noktalar N.NO / Y / X / h tablosunda, etiketsiz.
+- Ayarlar: TKGM ölçü standartları kartı ve "TKGM Varsayılanlarını Yükle" düğmesi; simetrik düzen.
+
 ## Sürüm 2.3
 
 - İlk açılışta iş adı sorulmaz; iş "Ölçüm GG.AA.YYYY" adıyla oluşur. Yeni iş açarken ad sorulur.
@@ -87,7 +97,7 @@ Sürüm 2'den itibaren APK sabit bir anahtarla (`app/yhan.keystore`) imzalanır;
 
 ## Teknik bilgiler
 
-- Paket adı: `com.yhan.gnsskoordinat` · Sürüm 2.3 · En düşük Android 7.0 (API 24) · Hedef API 34
+- Paket adı: `com.yhan.gnsskoordinat` · Sürüm 2.4 · En düşük Android 7.0 (API 24) · Hedef API 34
 - Arayüz: `app/src/main/assets/index.html`. Arayüzde değişiklik yapmak için bu dosyayı düzenleyip APK'yı yeniden derlemeniz yeterli.
 - Yerel kod: `app/src/main/java/com/yhan/gnsskoordinat/MainActivity.kt`
 - APK, `app/yhan.keystore` anahtarıyla imzalanır (kişisel kullanım). Bu dosyayı silmeyin; silinirse güncellemeler eskisinin üzerine kurulamaz. Play Store için ayrı ve gizli bir anahtar gerekir.

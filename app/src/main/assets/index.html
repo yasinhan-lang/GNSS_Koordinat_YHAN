@@ -81,6 +81,9 @@ nav .dot{position:absolute;top:8px;left:calc(50% + 8px);min-width:16px;height:16
 .demo-flag{background:repeating-linear-gradient(135deg,var(--warn) 0 8px,#000 8px 16px);color:#fff;text-align:center;font:700 11px/1 var(--f-disp);letter-spacing:.12em;padding:5px;border-radius:6px}
 /* Alıcı sekmesi */
 .srcseg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.srchelp{margin-top:6px;font-size:12px;color:var(--muted)}
+.srchelp summary{cursor:pointer;text-align:center;font-weight:600;color:var(--info)}
+.srchelp p{margin:5px 0 0}
 .srcseg button{all:unset;cursor:pointer;text-align:center;padding:10px 4px;border:2px solid var(--line);border-radius:8px;background:var(--panel);line-height:1.15}
 .srcseg button b{display:block;font:700 15px var(--f-disp);letter-spacing:.04em}
 .srcseg button span{font:10.5px var(--f-body);color:var(--muted)}
@@ -140,26 +143,34 @@ nav .dot{position:absolute;top:8px;left:calc(50% + 8px);min-width:16px;height:16
 .autorow input#autoInt{width:44px;text-align:center;padding:4px;font:600 13px var(--f-num)}
 /* Anlık koordinat tablosu */
 .ctab{width:100%;border-collapse:collapse;table-layout:fixed;border:1px solid var(--ink);border-radius:6px}
-.ctab caption{caption-side:top;padding:0 0 5px;font:700 10.5px var(--f-disp);letter-spacing:.16em;text-transform:uppercase}
+.ctab caption{caption-side:top;padding:0 0 3px;font:700 10.5px var(--f-disp);letter-spacing:.16em;text-transform:uppercase}
 .ctab caption small{display:block;font:500 9.5px var(--f-num);letter-spacing:0;text-transform:none;color:var(--muted);margin-top:1px}
-.ctab th{background:var(--soft);font:700 9.5px var(--f-disp);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:3px 4px;border:1px solid var(--line);border-bottom-color:var(--ink)}
+.ctab th{background:var(--soft);font:700 9px var(--f-disp);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:1px 4px;border:1px solid var(--line);border-bottom-color:var(--ink)}
 .ctab th.nt{text-transform:none;letter-spacing:.04em;font-size:10px}
-.ctab td{padding:4px 4px 5px;border:1px solid var(--line);font:500 11.5px/1.25 var(--f-num);font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:clip}
-.ctab td.big{font:600 clamp(14px,4.4vw,17px)/1.2 var(--f-num);padding:5px 4px 6px}
+.ctab td{padding:2px 4px 3px;border:1px solid var(--line);font:500 11.5px/1.25 var(--f-num);font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:clip}
+.ctab td.big{font:600 clamp(13px,4vw,15.5px)/1.2 var(--f-num);padding:3px 4px 4px}
 .autobar{display:flex;align-items:center;justify-content:center;gap:7px;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:6px 8px;font-size:12px;color:var(--muted);cursor:pointer}
 .autobar b{color:var(--ink)}
 .autobar.on{border-color:var(--good);box-shadow:inset 0 0 0 1px var(--good)}
 .autobar input[type=checkbox]{width:20px;height:20px;margin:0;accent-color:var(--good)}
 .autobar #autoInt{width:42px;text-align:center;padding:3px;font:600 12px var(--f-num)}
 /* Liste sekmesi: küçük puntolu tablo */
+.exhd{display:flex;flex-direction:column;align-items:center;gap:1px;margin-bottom:6px}
+.exhd b{font:700 14px var(--f-disp);letter-spacing:.03em;text-align:center}
+.exhd span{font:600 9.5px var(--f-disp);letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.colsel{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:7px;font:12px var(--f-body);color:var(--muted)}
+.colsel label{display:flex;align-items:center;gap:4px;color:var(--ink);font-weight:600}
+.colsel input{width:17px;height:17px;margin:0;accent-color:var(--ink)}
 .ltab{width:100%;border-collapse:collapse;table-layout:auto;background:var(--panel);border:1px solid var(--ink);font:500 10.5px/1.3 var(--f-num);font-variant-numeric:tabular-nums}
 .ltab th{position:sticky;top:-8px;background:var(--ink);color:var(--panel);font:700 9.5px var(--f-disp);letter-spacing:.06em;text-transform:uppercase;padding:4px 3px;text-align:center}
 .ltab td{padding:4px 3px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
-.ltab td:nth-child(1){text-align:center;color:var(--muted);font-size:9.5px}
-.ltab td:nth-child(2){text-align:center;font-weight:700}
-.ltab td:nth-child(7){text-align:center;color:var(--muted)}
+.ltab td:nth-child(1){text-align:center;font-weight:700}
 .ltab tbody tr:nth-child(even) td{background:var(--soft)}
 .ltab tr.new td{animation:flash 1.6s ease-out}
+.ptab td:last-child{width:34px;text-align:center;padding:2px}
+.ptab th:nth-child(4){text-transform:none;font-size:11px}
+.xdel{all:unset;cursor:pointer;display:inline-grid;place-items:center;min-width:24px;height:22px;padding:0 4px;border-radius:5px;color:var(--bad);font:600 11px var(--f-disp)}
+.xdel.stop{background:var(--bad);color:#fff}
 .ltab td.q-good{color:var(--good)}.ltab td.q-warn{color:var(--warn)}.ltab td.q-bad{color:var(--bad)}.ltab td.q-info{color:var(--info)}
 @media (max-width:360px){.ltab{font-size:9.5px}.ltab td{padding:3px 2px}}
 .loglist{display:flex;flex-direction:column;gap:6px}
@@ -180,7 +191,10 @@ nav .dot{position:absolute;top:8px;left:calc(50% + 8px);min-width:16px;height:16
 .mappanel{position:absolute;left:max(8px,env(safe-area-inset-left,0px));right:max(8px,env(safe-area-inset-right,0px));bottom:8px;z-index:500;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px;display:grid;grid-template-columns:repeat(3,1fr);gap:5px 6px;box-shadow:0 4px 14px rgba(0,0,0,.3)}
 .mappanel .mpc{display:flex;flex-direction:column;align-items:center;min-width:0}
 .mappanel .mpc b{font:600 12.5px var(--f-num);white-space:nowrap}
-.mappanel .btn{grid-column:1/-1}
+.mappanel .btn{grid-column:2/-1;padding:11px 6px}
+.mapauto{display:flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--line);border-radius:8px;font:600 10.5px/1.15 var(--f-disp);letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+.mapauto input{width:18px;height:18px;margin:0;accent-color:var(--good)}
+.mapauto.on{border-color:var(--good);box-shadow:inset 0 0 0 1px var(--good)}
 .herepulse{animation:hp 1.6s ease-out infinite}
 @keyframes hp{0%{stroke-width:2;stroke-opacity:1}100%{stroke-width:14;stroke-opacity:0}}
 /* Durum */
@@ -193,9 +207,10 @@ nav .dot{position:absolute;top:8px;left:calc(50% + 8px);min-width:16px;height:16
 .acc small{font-size:10.5px;color:var(--muted);font-weight:500}
 .status .meta{font:10px/1.3 var(--f-num);color:var(--muted)}
 .bar{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:6px;border:1px solid var(--line);border-radius:6px;overflow:hidden}
-.bar>div{padding:4px 2px}
+.bar>div{padding:2px 2px 3px}
 .bar>div+div{border-left:1px solid var(--line)}
-.bar div{text-align:center}.bar .v{display:block;font:600 11.5px var(--f-num)}
+.bar div{text-align:center}.bar .v{display:block;font:600 11px/1.2 var(--f-num)}
+.bar .lbl{font-size:8.5px}
 .satline{margin-top:6px;font:10.5px/1.5 var(--f-num);color:var(--muted);display:flex;flex-wrap:wrap;justify-content:center;gap:2px 10px}
 .satline b{color:var(--ink);font-weight:600}
 .satline .l5{color:var(--good);font-weight:600}
@@ -209,6 +224,8 @@ nav .dot{position:absolute;top:8px;left:calc(50% + 8px);min-width:16px;height:16
 .cal{color:var(--good);font-weight:600}
 
 .ctrl{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.ctrl .btn{padding:9px 4px;font-size:12px;border-radius:8px}
+.ctrl .btn.save{font-size:13px}
 .btn{font:700 12.5px/1 var(--f-disp);letter-spacing:.06em;text-transform:uppercase;border-radius:7px;border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:13px 8px;cursor:pointer;touch-action:manipulation;text-align:center}
 .btn.primary{background:var(--accent);color:var(--accent-ink);border-color:transparent}
 .btn.stop{background:var(--bad);color:#fff;border-color:transparent}
@@ -326,20 +343,36 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
 .summary th{width:38%;font:600 11px var(--f-disp);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:var(--soft)}
 .summary td{font:700 15px var(--f-disp)}
 
+/* Ayarlar: simetrik */
+#tabSet h3{text-align:center;letter-spacing:.12em}
+#tabSet .fgrid label{text-align:center}
+#tabSet .fgrid input,#tabSet .fgrid select{text-align:center;text-align-last:center;height:36px}
+#tabSet .note{text-align:center}
+#tabSet .sw{justify-content:center;gap:10px}
+.stab{width:100%;border-collapse:collapse;font-size:12px}
+.stab th,.stab td{padding:5px 6px;border-bottom:1px solid var(--line)}
+.stab th{width:50%;text-align:right;font:600 10px var(--f-disp);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.stab td{text-align:left;font:600 12px var(--f-num)}
+.stab tr:last-child th,.stab tr:last-child td{border-bottom:none}
 /* Kayıt penceresi */
 .sheet{position:fixed;inset:0;z-index:5000;background:rgba(0,0,0,.45);display:flex;align-items:flex-end}
-.sheetbox{width:100%;background:var(--panel);border-radius:14px 14px 0 0;padding:14px max(16px,env(safe-area-inset-right,0px)) calc(14px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:10px;max-width:640px;margin:0 auto}
-.sheetbox h2{margin:0;font:700 18px var(--f-disp);letter-spacing:.06em;text-transform:uppercase}
-.prev{border:2px solid var(--ink);border-radius:8px;overflow:hidden}
+.sheetbox{width:100%;background:var(--panel);border-radius:18px 18px 0 0;padding:8px max(18px,env(safe-area-inset-right,0px)) calc(14px + env(safe-area-inset-bottom,0px)) max(18px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:9px;max-width:560px;margin:0 auto;box-shadow:0 -6px 24px rgba(0,0,0,.18)}
+.sheetbox::before{content:"";align-self:center;width:38px;height:4px;border-radius:2px;background:var(--line);margin-bottom:2px}
+.sheetbox h2{margin:0;text-align:center;font:600 13px var(--f-disp);letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.prev{border:1px solid var(--line);border-radius:10px;overflow:hidden}
 .prev table{width:100%;border-collapse:collapse;table-layout:fixed}
 .prev th,.prev td{padding:5px 6px;border:1px solid var(--line);text-align:center}
 .prev tr:first-child th{border-top:none}.prev tr:last-child td{border-bottom:none}
 .prev th:first-child,.prev td:first-child{border-left:none}.prev th:last-child,.prev td:last-child{border-right:none}
-.prev th{font:600 10px var(--f-disp);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:var(--soft)}
-.prev td{font:600 13px var(--f-num);font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.noin{font:700 28px var(--f-num)!important;text-align:center;padding:10px!important}
+.prev th{font:600 9px var(--f-disp);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:var(--soft)}
+.prev td{font:500 12px var(--f-num);padding:6px 4px;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.noin{font:600 20px var(--f-num)!important;text-align:center;padding:7px!important;border-radius:10px!important}
+#shCode{text-align:center;border-radius:10px;padding:11px 9px!important}
+.sheetbox .fgrid label{text-align:center}
 .dup{color:var(--bad);font-size:12.5px;font-weight:600}
-.sheetbtn{display:grid;grid-template-columns:1fr 2fr;gap:8px}
+.sheetbtn{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:2px}
+.sheetbtn .btn{padding:12px 8px;font-size:12.5px;letter-spacing:.1em;border-radius:12px}
+.sheetbtn #shCancel{background:var(--soft);border-color:transparent;color:var(--muted)}
 @media (max-width:350px){.rows dd{font-size:20px}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
@@ -374,7 +407,7 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
       <button type="button" data-s="ed6"><b>ED50</b><span>UTM 6°</span></button>
     </div>
 
-    <div class="demo-flag" id="demoFlag" hidden>DENEME MODU · GERÇEK ÖLÇÜM DEĞİL</div>
+    <div class="demo-flag" id="demoFlag" hidden>SİMÜLASYON · GERÇEK ÖLÇÜM DEĞİL</div>
     <button class="rxstrip" id="rxStrip" type="button" hidden aria-label="Alıcı durumu, ayrıntılar için dokunun">
       <div class="lt"><i id="l1"></i><span>Alıcı<small id="l1t">—</small></span></div>
       <div class="lt"><i id="l2"></i><span>Düzeltme<small id="l2t">—</small></span></div>
@@ -426,16 +459,18 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
 
   <!-- LİSTE -->
   <section class="tab" id="tabLog" hidden>
-    <div class="card" style="text-align:center">
-      <h3 style="margin:0" id="logTitle">Okuma Listesi</h3>
-      <p class="note" style="margin:2px 0 0" id="logSub">Kaydedilen koordinatlar okunuş sırasıyla.</p>
-    </div>
     <div class="card">
-      <h3 id="ptTitle" style="text-align:center">Dışa Aktar</h3>
+      <div class="exhd"><b id="ptTitle">—</b><span>Dışa Aktar</span></div>
+      <div class="colsel" role="group" aria-label="Gösterilecek ve aktarılacak sütunlar">
+        <span>Sütunlar:</span>
+        <label for="colZ"><input type="checkbox" id="colZ"> Z</label>
+        <label for="colA"><input type="checkbox" id="colA"> Hata</label>
+        <label for="colT"><input type="checkbox" id="colT"> Saat</label>
+      </div>
       <div class="exp">
         <button class="btn primary sm" id="exNcn">NCN İndir</button>
         <button class="btn primary sm" id="exTxt">TXT İndir</button>
-        <button class="btn sm" id="exKml">KML (Earth)</button>
+        <button class="btn sm" id="exKml">KML · Earth</button>
         <button class="btn sm" id="exShare">Paylaş</button>
         <button class="btn sm" id="exCopy">Kopyala</button>
         <button class="btn sm" id="exClear">Noktaları Sil</button>
@@ -453,9 +488,14 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
       <div class="srcseg" id="srcSeg" role="group" aria-label="Konum kaynağı">
         <button type="button" data-src="phone"><b>Telefon</b><span>Dahili GPS · 1–5 m</span></button>
         <button type="button" data-src="bt"><b>RTK Alıcı</b><span>Bluetooth · 1–2 cm</span></button>
-        <button type="button" data-src="demo"><b>Deneme</b><span>Alıcısız alıştırma</span></button>
+        <button type="button" data-src="demo"><b>Simülasyon</b><span>Eğitim · sahte veri</span></button>
       </div>
       <p class="note" id="srcNote"></p>
+      <details class="srchelp"><summary>Bu üç seçenek nedir?</summary>
+        <p><b>Telefon:</b> Telefonun kendi GPS'i. Keşif ve yer bulma için; 1–5 m.</p>
+        <p><b>RTK Alıcı:</b> Bluetooth ile bağlanan ölçme alıcısı. Kadastro ölçüsü için; RTK Fix'te 1–2 cm.</p>
+        <p><b>Simülasyon:</b> Gerçek konum okumaz. Alıcı yanınızda yokken RTK ekranlarını (Tekil → Float → Fix), kaydetmeyi ve dışa aktarmayı denemeniz için sahte veri üretir. Bu modda kaydedilen noktalara <b>SIM</b> kodu yazılır; gerçek ölçüde kullanmayın.</p>
+      </details>
     </div>
 
     <div class="card lights" id="rxLights">
@@ -525,12 +565,13 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
     <div class="mapfab">
       <button class="btn" id="btnFollow" type="button">Konuma Git</button>
       <button class="btn" id="btnLayer" type="button">Sokak</button>
-      <button class="btn primary" id="btnEarth" type="button">Google Earth</button>
+      <button class="btn primary" id="btnEarth" type="button">Google Earth'te Göster</button>
     </div>
     <div class="mappanel">
       <div class="mpc"><span class="k">Y</span><b id="mY">—</b></div>
       <div class="mpc"><span class="k">X</span><b id="mX">—</b></div>
       <div class="mpc"><span class="k">Hata</span><b id="mA">—</b></div>
+      <label class="mapauto" for="mapAuto"><input type="checkbox" id="mapAuto"><span>Otomatik<br>kayıt</span></label>
       <button class="btn save" id="mapSave" type="button" disabled>Koordinatı Kaydet</button>
     </div>
   </section>
@@ -548,6 +589,18 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
 
   <!-- AYARLAR -->
   <section class="tab" id="tabSet" hidden>
+    <div class="card">
+      <h3>TKGM Ölçü Standartları</h3>
+      <table class="stab">
+        <tr><th>Datum</th><td>ITRF96 · GRS80</td></tr>
+        <tr><th>Projeksiyon</th><td>TM 3° · k = 1</td></tr>
+        <tr><th>Sağa değer (FE)</th><td>500 000 m</td></tr>
+        <tr><th>Epok</th><td>2005.0</td></tr>
+        <tr><th>Koordinat hassasiyeti</th><td>mm (3 ondalık)</td></tr>
+      </table>
+      <button class="btn sm primary" id="btnTkgm" type="button" style="width:100%;margin-top:8px">TKGM Varsayılanlarını Yükle</button>
+      <p class="note">ED50 ↔ ITRF96 dönüşümü için TKGM ülke geneli parametre yayımlamaz; parametre iş alanını kapsayan ortak noktalardan hesaplanır ve yalnız o alanda geçerlidir. Aşağıdaki ED50 değerleri yaklaşıktır (EPSG:1784).</p>
+    </div>
     <div class="card">
       <h3>Ortalama Ölçüm</h3>
       <div class="fgrid">
@@ -707,15 +760,15 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
       <tr><th>Y</th><th>X</th><th>Z</th><th style="width:18%">Hata</th></tr>
       <tr><td id="shY">—</td><td id="shX">—</td><td id="shZ">—</td><td id="shA">—</td></tr>
     </table></div>
-    <div class="note" id="shInfo" style="margin:0"></div>
+    <div class="note" id="shInfo" style="margin:0;text-align:center;font-size:11px"></div>
     <div class="fgrid">
       <div><label for="shNo">Nokta numarası</label><input id="shNo" class="noin" inputmode="numeric" autocomplete="off"></div>
-      <div><label for="shCode">Kod (isteğe bağlı)</label><input id="shCode" placeholder="PK, BN…" autocomplete="off" style="padding:16px 9px"></div>
+      <div><label for="shCode">Kod (isteğe bağlı)</label><input id="shCode" placeholder="PK, BN…" autocomplete="off"></div>
     </div>
     <div class="dup" id="shDup" hidden></div>
     <div class="sheetbtn">
       <button class="btn" id="shCancel" type="button">İptal</button>
-      <button class="btn save big" id="shOk" type="button">Kaydet</button>
+      <button class="btn save" id="shOk" type="button">Kaydet</button>
     </div>
   </div>
 </div>
@@ -1021,29 +1074,27 @@ setInterval(() => { if (!last) return; const s = (Date.now() - last.recv) / 1000
   $('fixAge').textContent = s < 2.5 ? 'Canlı ' + new Date(last.t).toLocaleTimeString('tr-TR') : 'Son okuma ' + Math.round(s) + ' sn önce'; }, 1000);
 
 // Liste sekmesi: kayıtlar okunuş sırasıyla, koordinatlar eksiksiz
+const COLS = Object.assign({ z: true, acc: true, time: true }, store.get('cols', {}));
 function renderLog() {
-  const box = $('logList'), d = +$('dec').value, P = pts(), j = J();
-  $('logTitle').textContent = 'Okuma Listesi · ' + j.name;
-  $('logSub').textContent = SYSN[j.sys] + ' · DOM ' + j.dom + ' · ' + P.length + ' nokta · kaydediliş sırasıyla';
+  const box = $('logList'), d = +$('dec').value, P = pts();
   $('logEmpty').hidden = P.length > 0; box.innerHTML = '';
   if (!P.length) return;
+  const head = ['N.NO', 'Y', 'X'].concat(COLS.z ? ['Z'] : [], COLS.acc ? ['Hata'] : [], COLS.time ? ['Saat'] : []);
   const tb = document.createElement('table'); tb.className = 'ltab';
-  tb.innerHTML = '<thead><tr><th>Sıra</th><th>No</th><th>Y</th><th>X</th><th>Z</th><th>Hata</th><th>Saat</th></tr></thead>';
+  tb.innerHTML = '<thead><tr>' + head.map(h => '<th>' + h + '</th>').join('') + '</tr></thead>';
   const body = document.createElement('tbody');
   P.forEach((pt, i) => {   // kaydediliş sırası: ilk kaydedilen en üstte
-    const p = project(pt), tr = document.createElement('tr');
-    const qn = pt.q != null ? QN[pt.q] : null;
+    const p = project(pt), tr = document.createElement('tr'), qn = pt.q != null ? QN[pt.q] : null;
     if (i === P.length - 1 && justAdded) tr.className = 'new';
-    const cells = [String(i + 1), pt.name, fmt(p.Y, d), fmt(p.X, d), pt.h != null || zOut(p) === 0 ? fmt(zOut(p), 2) : '—',
-      pt.acc < 1 ? fmt(pt.acc * 100, 1) + 'cm' : fmt(pt.acc, 1) + 'm',
-      new Date(pt.t).toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit', second: '2-digit' })];
-    cells.forEach((v, c) => { const td = document.createElement('td'); td.textContent = v; if (c === 1 && qn) { td.className = 'q-' + qn[1]; td.title = qn[0]; } tr.appendChild(td); });
+    const cells = [pt.name, fmt(p.Y, d), fmt(p.X, d)];
+    if (COLS.z) cells.push(pt.h != null || zOut(p) === 0 ? fmt(zOut(p), 2) : '—');
+    if (COLS.acc) cells.push(pt.acc < 1 ? fmt(pt.acc * 100, 1) + 'cm' : fmt(pt.acc, 1) + 'm');
+    if (COLS.time) cells.push(new Date(pt.t).toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
+    cells.forEach((v, c) => { const td = document.createElement('td'); td.textContent = v; if (c === 0 && qn) { td.className = 'q-' + qn[1]; td.title = qn[0]; } tr.appendChild(td); });
     body.appendChild(tr);
   });
   tb.appendChild(body); box.appendChild(tb);
-  const n = document.createElement('p'); n.className = 'note'; n.style.textAlign = 'center';
-  n.textContent = 'Nokta numarasının rengi çözümü gösterir: yeşil RTK Fix, turuncu Float. Z: Ayarlar › Çıktı seçimine göre.';
-  if (P.some(p => p.q != null)) box.appendChild(n);
+  if (P.some(p => p.q != null)) { const n = document.createElement('p'); n.className = 'note'; n.style.textAlign = 'center'; n.textContent = 'Nokta numarasının rengi: yeşil RTK Fix, turuncu Float.'; box.appendChild(n); }
   if (justAdded && !$('tabLog').hidden) $('tabLog').scrollTop = $('tabLog').scrollHeight;
 }
 function renderMini() {
@@ -1077,9 +1128,25 @@ function renderList() {
   renderMini(); renderLog(); renderJobs();
   const box = $('plist'), d = +$('dec').value, P = pts(), j = J();
   $('cnt').hidden = !P.length; $('cnt').textContent = P.length; $('empty').hidden = P.length > 0;
-  $('ptTitle').textContent = 'Dışa Aktar · ' + j.name;
-  $('exSys').textContent = 'Dışa aktarım: ' + SYSN[j.sys] + ' · DOM ' + j.dom + (P.length ? ' · ' + P.length + ' nokta' : '');
+  $('ptTitle').textContent = j.name;
+  $('exSys').textContent = SYSN[j.sys] + ' · DOM ' + j.dom + ' · ' + P.length + ' nokta · kaydediliş sırasıyla · aktarılan: N.NO, Y, X' + (COLS.z ? ', Z' : '') + (COLS.acc ? ', Hata' : '') + (COLS.time ? ', Saat' : '');
   box.innerHTML = '';
+  if (P.length) {
+    const tb = document.createElement('table'); tb.className = 'ltab ptab';
+    tb.innerHTML = '<thead><tr><th>N.NO</th><th>Y</th><th>X</th><th>h</th><th></th></tr></thead>';
+    const body = document.createElement('tbody');
+    P.forEach((pt, i) => {
+      const p = project(pt), tr = document.createElement('tr'), qn = pt.q != null ? QN[pt.q] : null;
+      [pt.name, fmt(p.Y, d), fmt(p.X, d), pt.h != null ? fmt(p.Z, 2) : '—'].forEach((v, c) => { const td = document.createElement('td'); td.textContent = v; if (c === 0 && qn) td.className = 'q-' + qn[1]; tr.appendChild(td); });
+      const td = document.createElement('td'), b = document.createElement('button'); b.className = 'xdel'; b.type = 'button'; b.textContent = '✕'; b.setAttribute('aria-label', 'Nokta ' + pt.name + ' sil');
+      b.onclick = () => armed(b, () => { P.splice(i, 1); saveJobs(); render(); toast('Nokta silindi'); }, 'Sil?');
+      td.appendChild(b); tr.appendChild(td); body.appendChild(tr);
+    });
+    tb.appendChild(body); box.appendChild(tb);
+  }
+  drawPoints();
+}
+function _oldPointCards(P, box, d) {
   P.forEach((pt, i) => {
     const p = project(pt);
     const el = document.createElement('div'); el.className = 'pt';
@@ -1334,7 +1401,7 @@ async function startRun() {
   startT = Date.now(); recent.length = 0;
   $('btnRun').textContent = 'Durdur'; $('btnRun').className = 'btn stop'; $('btnMeasure').disabled = false;
   updSaveBtn();
-  msg('Koordinatlar <b>' + SYSN[J().sys] + ' · DOM ' + J().dom + '</b> sisteminde okunuyor' + (RX.src === 'bt' ? ' (RTK alıcı). <b>RTK Fix</b> olunca kaydedin.' : RX.src === 'demo' ? ' (DENEME).' : '. Kararlılık düşünce <b>Kaydet</b>\'e basın.'));
+  msg('Koordinatlar <b>' + SYSN[J().sys] + ' · DOM ' + J().dom + '</b> sisteminde okunuyor' + (RX.src === 'bt' ? ' (RTK alıcı). <b>RTK Fix</b> olunca kaydedin.' : RX.src === 'demo' ? ' (SİMÜLASYON — gerçek ölçüm değil).' : '. Kararlılık düşünce <b>Kaydet</b>\'e basın.'));
   try { if ('wakeLock' in navigator) wakeLock = await navigator.wakeLock.request('screen'); } catch (e) {}
 }
 function stopRun() {
@@ -1430,7 +1497,7 @@ $('shOk').onclick = () => {
 };
 function commitPoint(R, no, code, auto) {
   const j = job(); if (!j) return;
-  j.points.push({ name: no, code: code || (R.src === 'demo' ? 'DENEME' : ''), lat: R.lat, lon: R.lon, h: R.h, H: R.H != null ? R.H : null, q: R.q != null ? R.q : null, src: R.src || RX.src, acc: R.acc, sd: R.sd, se: R.se, n: R.n, rej: R.rej, t: R.t || Date.now(), auto: auto || undefined });
+  j.points.push({ name: no, code: code || (R.src === 'demo' ? 'SIM' : ''), lat: R.lat, lon: R.lon, h: R.h, H: R.H != null ? R.H : null, q: R.q != null ? R.q : null, src: R.src || RX.src, acc: R.acc, sd: R.sd, se: R.se, n: R.n, rej: R.rej, t: R.t || Date.now(), auto: auto || undefined });
   j.next = nextName(no); j.lastCode = code;
   saveJobs();
   justAdded = true; render(); justAdded = false;
@@ -1468,21 +1535,24 @@ $('btnCalOff').onclick = () => { cal = null; store.set('cal', null); calText(); 
 function stamp() { const d = new Date(), p = v => String(v).padStart(2, '0'); return d.getFullYear() + p(d.getMonth() + 1) + p(d.getDate()) + '_' + p(d.getHours()) + p(d.getMinutes()); }
 const safe = s => s.replace(/[\\/:*?"<>|]+/g, '').replace(/\s+/g, '_').slice(0, 40);
 function fileBase() { const j = J(); return safe(j.name) + '_' + SYSN[j.sys].replace(/ · /g, '_') + '_DOM' + j.dom + '_' + stamp(); }
-function makeNcn() { const d = +$('dec').value;
-  return pts().map(pt => { const p = project(pt); return [pt.name.replace(/\s+/g, '_'), fmtDot(p.Y, d), fmtDot(p.X, d), fmtDot(zOut(p), 3)].join(' ') + (pt.code ? ' ' + pt.code.replace(/\s+/g, '_') : ''); }).join('\r\n') + '\r\n'; }
+function makeNcn() { const d = +$('dec').value;   // NetCAD: N.NO Y X [Z]
+  return pts().map(pt => { const p = project(pt); return [pt.name.replace(/\s+/g, '_'), fmtDot(p.Y, d), fmtDot(p.X, d)].concat(COLS.z ? [fmtDot(zOut(p), 3)] : []).join(' '); }).join('\r\n') + '\r\n'; }
 function makeTxt() {
   const d = +$('dec').value, j = J(), p0 = pts()[0] ? project(pts()[0]) : { label: SYSN[j.sys] };
   const head = ['# GNSS Koordinat Okuyucu - YHAN', '# İş: ' + j.name, '# Sistem: ' + p0.label + ' (Y=Sağa, X=Yukarı)', '# RTK noktaları TUSAGA-Aktif/ITRF96 (2005.0) olarak alınır; epok düzeltmesi uygulanmaz.',
     '# Bilinen nokta düzeltmesi: ' + (cal && p0.cal ? 'dY=' + cal.dY.toFixed(3) + ' dX=' + cal.dX.toFixed(3) + ' (' + cal.pt + ')' : 'yok'),
     '# ED50 parametreleri: ' + Object.entries(params()).map(([k, v]) => k + '=' + v).join(' '), '# Oluşturma: ' + new Date().toLocaleString('tr-TR'),
-    ['Nokta', 'Y', 'X', 'Z', 'Enlem', 'Boylam', 'Elip_h', 'Ort_H', 'Kaynak', 'Cozum', 'Dogruluk_m', 'Dagilim_m', 'Epok', 'Kod', 'Tarih'].join('\t')];
+    ['N.NO', 'Y', 'X'].concat(COLS.z ? ['Z'] : [], COLS.acc ? ['Hata_m'] : [], COLS.time ? ['Saat'] : []).join('\t')];
   const rows = pts().map(pt => { const p = project(pt);
-    return [pt.name, fmtDot(p.Y, d), fmtDot(p.X, d), fmtDot(zOut(p), 3), fmtDot(pt.lat, 10), fmtDot(pt.lon, 10), fmtDot(pt.h || 0, 3), pt.H != null ? fmtDot(pt.H, 3) : '', { phone: 'Telefon', bt: 'RTK alici', demo: 'DENEME' }[pt.src || 'phone'], pt.q != null ? (QN[pt.q] || ['?'])[0] : '', fmtDot(pt.acc, 3), fmtDot(pt.sd || 0, 3), pt.n, pt.code || '', new Date(pt.t).toLocaleString('tr-TR')].join('\t'); });
+    return [pt.name, fmtDot(p.Y, d), fmtDot(p.X, d)].concat(COLS.z ? [fmtDot(zOut(p), 3)] : [], COLS.acc ? [fmtDot(pt.acc, 3)] : [], COLS.time ? [new Date(pt.t).toLocaleString('tr-TR')] : []).join('\t'); });
   return head.concat(rows).join('\r\n') + '\r\n';
 }
 function makeKml() {
   const esc = s => String(s).replace(/[<>&"]/g, c => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;' }[c]));
-  const pm = pts().map(pt => '<Placemark><name>' + esc(pt.name) + '</name><description>' + esc((pt.code ? 'Kod: ' + pt.code + ' · ' : '') + '±' + pt.acc.toFixed(2) + ' m · ' + new Date(pt.t).toLocaleString('tr-TR')) + '</description><styleUrl>#p</styleUrl><Point><coordinates>' + pt.lon.toFixed(9) + ',' + pt.lat.toFixed(9) + ',0</coordinates></Point></Placemark>').join('\n');
+  const d = +$('dec').value;
+  const pm = pts().map(pt => { const p = project(pt);
+    const desc = ['Y ' + fmtDot(p.Y, d), 'X ' + fmtDot(p.X, d)].concat(COLS.z ? ['Z ' + fmtDot(zOut(p), 3)] : [], COLS.acc ? ['Hata ±' + fmtAcc(pt.acc)] : [], COLS.time ? [new Date(pt.t).toLocaleString('tr-TR')] : []).join(' · ');
+    return '<Placemark><name>' + esc(pt.name) + '</name><description>' + esc(desc) + '</description><styleUrl>#p</styleUrl><Point><coordinates>' + pt.lon.toFixed(9) + ',' + pt.lat.toFixed(9) + ',0</coordinates></Point></Placemark>'; }).join('\n');
   return '<?xml version="1.0" encoding="UTF-8"?>\n<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>' + esc(J().name) + '</name><Style id="p"><IconStyle><color>ff05b7f2</color><scale>1.1</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>\n' + pm + '\n</Document></kml>\n';
 }
 function download(name, text, mime) {
@@ -1507,7 +1577,7 @@ async function copy() { if (!pts().length) { toast('Bu işte nokta yok'); return
 let map, here, circle, trailLine, trail = [], layerIdx = 0, layers = [], ptLayer;
 function initMap() {
   if (!window.L) { $('map').innerHTML = '<div class="empty" style="color:#ccc;padding-top:40px">Harita yüklenemedi (internet gerekli). Ölçüm ve kayıt çalışmaya devam eder.</div>'; return; }
-  map = L.map('map', { zoomControl: false }).setView([39.0, 33.0], 6);
+  map = L.map('map', { zoomControl: false, attributionControl: false }).setView([39.0, 33.0], 6);
   L.control.zoom({ position: 'topleft' }).addTo(map);
   trailLine = L.polyline([], { color: '#1f7aff', weight: 3, opacity: .75 }).addTo(map);
   const sat = L.layerGroup([
@@ -1532,7 +1602,9 @@ function updateMap() {
 }
 function drawPoints() { if (!ptLayer) return; ptLayer.clearLayers();
   pts().forEach(pt => L.circleMarker([pt.lat, pt.lon], { radius: 5, color: '#14181d', weight: 2, fillColor: '#f2b705', fillOpacity: 1 }).bindTooltip(pt.name, { permanent: true, direction: 'right', offset: [8, 0] }).addTo(ptLayer)); }
-function openEarth() { const p = last || pts()[pts().length - 1]; if (!p) { toast('Önce konum alın'); return; }
+function openEarth() {
+  if (NATIVE && pts().length) { Android.openKml(fileBase() + '.kml', makeKml()); toast('Kayıtlı noktalar Google Earth\'te açılıyor'); return; }
+  const p = last || pts()[pts().length - 1]; if (!p) { toast('Önce konum alın'); return; }
   const u = 'https://earth.google.com/web/@' + p.lat.toFixed(8) + ',' + p.lon.toFixed(8) + ',' + Math.round(p.h || 0) + 'a,250d,35y,0h,0t,0r'; if (NATIVE) Android.openUrl(u); else window.open(u, '_blank'); }
 
 // ===== BAYRAK =====
@@ -1565,10 +1637,10 @@ function renderRx() {
   const src = RX.src, demo = src === 'demo';
   let a, b, c;
   if (src === 'phone') a = ['good', 'Telefonun kendi GPS\'i'];
-  else if (demo) a = ['warn', 'Deneme alıcısı (simülasyon)'];
+  else if (demo) a = ['warn', 'Simülasyon'];
   else a = ({ on: ['good', (rx.btName || (RX.bt && RX.bt.name) || 'Bağlı') + ' · ' + rx.lines + ' cümle'], connecting: ['warn', 'Bağlanıyor…', 1], reconnect: ['warn', 'Bağlantı koptu, yeniden deneniyor…', 1], error: ['bad', rx.btMsg || 'Bağlanamadı'] })[rx.bt] || ['bad', NATIVE ? 'Bağlı değil' : 'Yalnız Android uygulamasında'];
   if (src === 'phone') b = ['', 'Kullanılmıyor'];
-  else if (demo) b = ['good', 'Deneme verisi · ' + kb(rx.ntBytes)];
+  else if (demo) b = ['good', 'Sahte veri · ' + kb(rx.ntBytes)];
   else if (rx.nt === 'on') b = ['good', 'NTRIP bağlı · ' + kb(rx.ntBytes) + (rx.age != null ? ' · yaş ' + fmt(rx.age, 1) + ' sn' : '')];
   else if (rx.nt === 'connecting') b = ['warn', 'NTRIP bağlanıyor…', 1];
   else if (rx.nt === 'reconnect') b = ['warn', 'NTRIP koptu, yeniden deneniyor…', 1];
@@ -1585,8 +1657,8 @@ function renderRx() {
   $('btCard').hidden = src !== 'bt'; $('ntCard').hidden = src !== 'bt';
   document.querySelectorAll('#srcSeg button').forEach(x => x.setAttribute('aria-pressed', x.dataset.src === src));
   $('srcNote').innerHTML = src === 'phone' ? 'Telefonun GPS\'i kullanılıyor. Tipik doğruluk 1–5 m; kadastro hassasiyeti için <b>RTK Alıcı</b> seçin.'
-    : demo ? 'Alıcı olmadan arayüzü öğrenmek için. Tekil → Float → <b>RTK Fix</b> geçişi taklit edilir; kaydedilen noktalara <b>DENEME</b> kodu yazılır.'
-    : NATIVE ? 'Bluetooth RTK alıcısından NMEA okunur. Yatayda 1–2 cm (RTK Fix).' : '<b>Bluetooth alıcı yalnız Android uygulamasında çalışır.</b> Tarayıcıda Deneme modunu kullanabilirsiniz.';
+    : demo ? '<b>Simülasyon açık:</b> gerçek konum okunmuyor. Tekil → Float → <b>RTK Fix</b> geçişi sahte veriyle gösterilir; kaydedilen noktalara <b>SIM</b> kodu yazılır. Gerçek ölçü için <b>Telefon</b> veya <b>RTK Alıcı</b> seçin.'
+    : NATIVE ? 'Bluetooth RTK alıcısından NMEA okunur. Yatayda 1–2 cm (RTK Fix).' : '<b>Bluetooth alıcı yalnız Android uygulamasında çalışır.</b> Tarayıcıda Simülasyon modunu kullanabilirsiniz.';
   if (rx.last) $('nmeaLine').textContent = rx.last;
   $('ntConn').textContent = rx.nt === 'on' || rx.nt === 'connecting' || rx.nt === 'reconnect' ? 'Kes' : 'Bağlan';
   $('ntConn').className = 'btn sm ' + (rx.nt === 'on' ? 'stop' : 'primary');
@@ -1662,7 +1734,7 @@ document.querySelectorAll('#srcSeg button').forEach(b => b.onclick = () => {
   ['vY', 'vX', 'vZ'].forEach(i => $(i).textContent = '—'); $('badge').textContent = 'Bekliyor'; $('badge').className = 'badge'; $('acc').innerHTML = '— <small>m</small>';
   if (running) startRun();
   renderRx(); updSaveBtn();
-  toast({ phone: 'Kaynak: telefon GPS\'i', bt: 'Kaynak: RTK alıcı', demo: 'Deneme modu açıldı' }[s]);
+  toast({ phone: 'Kaynak: telefon GPS\'i', bt: 'Kaynak: RTK alıcı', demo: 'Simülasyon açıldı (gerçek ölçüm değil)' }[s]);
 });
 
 // Android geri tuşu
@@ -1690,10 +1762,12 @@ $('autoInt').value = UI.autoInt;
 $('autoInt').addEventListener('change', () => { UI.autoInt = Math.max(1, Math.min(3600, parseInt($('autoInt').value, 10) || 5)); $('autoInt').value = UI.autoInt; store.set('ui', UI); });
 $('autoSave').addEventListener('change', () => {
   const on = $('autoSave').checked; $('autoBox').classList.toggle('on', on); autoNext = 0;
+  $('mapAuto').checked = on; $('mapAuto').parentElement.classList.toggle('on', on);
   if (on && watchId == null) toast('Otomatik kayıt açık; okuma başlayınca kaydeder');
   msg(on ? '<b>Otomatik kayıt açık</b> · her ' + UI.autoInt + ' sn sıradaki numarayla kaydedilir' + (RX.src !== 'phone' && RX.fixOnly ? ' (yalnız RTK Fix)' : '') : 'Otomatik kayıt kapatıldı.');
 });
 $('mapSave').onclick = saveNow;
+$('mapAuto').onchange = () => { $('autoSave').checked = $('mapAuto').checked; $('autoSave').dispatchEvent(new Event('change')); };
 
 // ===== BAŞLANGIÇ =====
 loadSettings(); calText();
@@ -1704,10 +1778,17 @@ $('btnMeasure').onclick = () => collecting ? cancelCollect() : (last ? beginColl
 $('btnFollow').onclick = () => { follow = true; if (map && last) map.setView([last.lat, last.lon], Math.max(map.getZoom(), 18)); else toast('Önce konumu başlatın'); };
 $('btnLayer').onclick = () => { if (!map) return; map.removeLayer(layers[layerIdx][1]); layerIdx = (layerIdx + 1) % layers.length; layers[layerIdx][1].addTo(map); $('btnLayer').textContent = layers[(layerIdx + 1) % layers.length][0]; };
 $('btnEarth').onclick = openEarth;
+$('btnTkgm').onclick = () => {
+  $('dec').value = '3'; $('zMode').value = 'h'; $('ep0').value = '2005.0'; $('vN').value = '0'; $('vE').value = '0';
+  $('maxAcc').value = '10'; $('warm').value = '8'; $('sigK').value = '2.5';
+  Object.entries(DEF_P).forEach(([k, v]) => $(k).value = v);
+  render(); toast('TKGM varsayılanları yüklendi: ITRF96 · TM3 · 2005.0 · mm');
+};
 $('btnPReset').onclick = () => { Object.entries(DEF_P).forEach(([k, v]) => $(k).value = v); render(); toast('EPSG:1784 parametreleri yüklendi'); };
 $('exNcn').onclick = () => download(fileBase() + '.ncn', makeNcn(), 'text/plain');
 $('exTxt').onclick = () => download(fileBase() + '.txt', makeTxt(), 'text/plain');
-$('exKml').onclick = () => download(fileBase() + '.kml', makeKml(), 'application/vnd.google-earth.kml+xml');
+$('exKml').onclick = () => { if (!pts().length) { toast('Bu işte nokta yok'); return; } const n = fileBase() + '.kml', k = makeKml(); download(n, k, 'application/vnd.google-earth.kml+xml'); if (NATIVE) setTimeout(() => Android.openKml(n, k), 400); };
+[['colZ', 'z'], ['colA', 'acc'], ['colT', 'time']].forEach(([id, k]) => { $(id).checked = COLS[k]; $(id).onchange = () => { COLS[k] = $(id).checked; store.set('cols', COLS); renderList(); }; });
 $('exShare').onclick = share; $('exCopy').onclick = copy;
 $('exClear').onclick = e => { if (!pts().length) { toast('Bu işte nokta yok'); return; } armed(e.currentTarget, () => { job().points = []; job().next = '1'; saveJobs(); render(); toast('Noktalar silindi'); }, 'Emin misiniz?'); };
 SET_IDS.forEach(id => $(id).addEventListener('change', render));

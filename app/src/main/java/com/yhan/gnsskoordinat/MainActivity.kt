@@ -363,6 +363,31 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /** KML dosyasını Google Earth uygulamasında açar; yoksa KML açabilen başka bir uygulama seçtirir. */
+    private fun openKml(name: String, text: String) {
+        try {
+            val dir = File(cacheDir, "paylas").apply { mkdirs() }
+            val f = File(dir, name)
+            f.writeText(text, Charsets.UTF_8)
+            val uri = FileProvider.getUriForFile(this, "$packageName.files", f)
+            val view = Intent(Intent.ACTION_VIEW).apply {
+                setDataAndType(uri, "application/vnd.google-earth.kml+xml")
+                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            }
+            try {
+                startActivity(Intent(view).setPackage("com.google.earth"))
+            } catch (e: Exception) {
+                try {
+                    startActivity(Intent.createChooser(view, "KML dosyasını aç"))
+                } catch (e2: Exception) {
+                    Toast.makeText(this, "Google Earth yüklü değil. Play Store'dan yükleyebilirsiniz.", Toast.LENGTH_LONG).show()
+                }
+            }
+        } catch (e: Exception) {
+            Toast.makeText(this, "KML açılamadı", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     private fun openExternal(url: String) {
         try { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url))) }
         catch (e: Exception) { Toast.makeText(this, "Bağlantı açılamadı", Toast.LENGTH_SHORT).show() }
@@ -657,6 +682,7 @@ class MainActivity : AppCompatActivity() {
         @JavascriptInterface fun saveFile(name: String, text: String, mime: String): String = this@MainActivity.saveFile(name, text, mime)
         @JavascriptInterface fun shareFiles(json: String) { main.post { this@MainActivity.shareFiles(json) } }
         @JavascriptInterface fun openUrl(url: String) { main.post { openExternal(url) } }
+        @JavascriptInterface fun openKml(name: String, text: String) { main.post { this@MainActivity.openKml(name, text) } }
         @JavascriptInterface fun copy(text: String) {
             main.post {
                 val cm = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
