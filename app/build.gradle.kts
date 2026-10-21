@@ -11,8 +11,8 @@ android {
         applicationId = "com.yhan.gnsskoordinat"
         minSdk = 24
         targetSdk = 34
-        versionCode = 7
-        versionName = "3.0"
+        versionCode = 8
+        versionName = "3.1"
     }
 
     // Sabit imza: her derlenen APK bir öncekinin üzerine kurulabilir (veriler korunur).

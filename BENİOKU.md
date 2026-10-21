@@ -31,6 +31,12 @@ Telefondan ITRF96 ve ED50 koordinatı okuyup iş adı altında kaydeden, NetCAD 
 2. Dosyaya dokunun. "Bilinmeyen uygulamalar" uyarısı çıkarsa **Ayarlar › Bu kaynağa izin ver** deyin.
 3. **Yükle**'ye basın. Play Koruma uyarısı çıkarsa **Yine de yükle** seçin (uygulama Play Store'dan gelmediği için çıkar).
 
+## Sürüm 3.1
+
+- Başlık paneli ve anlık koordinat satırı daha ince; alt menü koyu renk.
+- **Aplikasyon:** "TXT / NCN Dosyası Aç" ile telefondaki dosyadan hedef noktalar yüklenir (NetCAD NCN: N.NO Y X Z; TXT: boşluk, sekme veya ; ayrımlı; Türkçe karakterli eski dosyalar da okunur). Hedef, **N.NO yazarak** veya listeden seçilir.
+- **Harita › PARSEL:** konumdaki (veya uzun basılan yerdeki) parselin sınırı TKGM'nin açık parsel servisinden alınıp haritaya çizilir; ada/parsel, il/ilçe/mahalle, alan, nitelik ve parsel içindeki ölçülen nokta sayısı gösterilir. TKGM günlük sorgu sınırı uygular.
+
 ## Sürüm 3.0 — GNSS BOZOKLUHAN GPS
 
 - **Ana sayfa:** uygulama adı, kısa açıklama, ilk kurulum (tam konum izni, konumun açılması, Bluetooth izni) ve BAŞLAT, ÖLÇÜM, APLİKASYON, HARİTA, TKGM PARSEL SORGUYA GİT düğmeleri. Sol üstteki YH logosu ana sayfaya döner; geri tuşu ölçüm ekranından ana sayfaya gelir.
@@ -106,7 +112,7 @@ Sürüm 2'den itibaren APK sabit bir anahtarla (`app/yhan.keystore`) imzalanır;
 
 ## Teknik bilgiler
 
-- Paket adı: `com.yhan.gnsskoordinat` · Sürüm 3.0 · En düşük Android 7.0 (API 24) · Hedef API 34
+- Paket adı: `com.yhan.gnsskoordinat` · Sürüm 3.1 · En düşük Android 7.0 (API 24) · Hedef API 34
 - Arayüz: `app/src/main/assets/index.html`. Arayüzde değişiklik yapmak için bu dosyayı düzenleyip APK'yı yeniden derlemeniz yeterli.
 - Yerel kod: `app/src/main/java/com/yhan/gnsskoordinat/MainActivity.kt`
 - APK, `app/yhan.keystore` anahtarıyla imzalanır (kişisel kullanım). Bu dosyayı silmeyin; silinirse güncellemeler eskisinin üzerine kurulamaz. Play Store için ayrı ve gizli bir anahtar gerekir.

@@ -35,6 +35,8 @@ import android.provider.MediaStore
 import android.provider.Settings
 import android.view.WindowManager
 import android.webkit.JavascriptInterface
+import android.webkit.ValueCallback
+import android.webkit.WebChromeClient
 import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
 import android.webkit.WebView
@@ -90,6 +92,15 @@ class MainActivity : AppCompatActivity() {
         afterBtPerm = null
     }
 
+    // Sayfadaki <input type=file> için dosya seçici (Aplikasyon: TXT / NCN)
+    private var fileCb: ValueCallback<Array<Uri>>? = null
+    private val fileLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { r ->
+        val cb = fileCb; fileCb = null
+        cb?.onReceiveValue(WebChromeClient.FileChooserParams.parseResult(r.resultCode, r.data))
+    }
+
     private val settingsLauncher = registerForActivityResult(
         ActivityResultContracts.StartIntentSenderForResult()
     ) { report(if (isLocationOn()) "ok" else "off") }
@@ -121,6 +132,24 @@ class MainActivity : AppCompatActivity() {
                 if (u.host == "appassets.androidplatform.net") return false
                 openExternal(u.toString())
                 return true
+            }
+        }
+        web.webChromeClient = object : WebChromeClient() {
+            override fun onShowFileChooser(view: WebView, cb: ValueCallback<Array<Uri>>, params: FileChooserParams): Boolean {
+                fileCb?.onReceiveValue(null)
+                fileCb = cb
+                val pick = Intent(Intent.ACTION_GET_CONTENT).apply {
+                    addCategory(Intent.CATEGORY_OPENABLE)
+                    type = "*/*"
+                }
+                return try {
+                    fileLauncher.launch(Intent.createChooser(pick, "Koordinat dosyası seç (TXT / NCN)"))
+                    true
+                } catch (e: Exception) {
+                    fileCb = null
+                    cb.onReceiveValue(null)
+                    false
+                }
             }
         }
         web.addJavascriptInterface(Bridge(), "Android")
@@ -388,6 +417,33 @@ class MainActivity : AppCompatActivity() {
             }
         } catch (e: Exception) {
             Toast.makeText(this, "KML açılamadı", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    /** Yalnız TKGM parsel servisine GET isteği (WebView'in CORS kısıtını aşmak için). */
+    private fun httpGet(id: String, url: String) {
+        thread(name = "yhan-http") {
+            var code = 0
+            var body: String
+            try {
+                val u = java.net.URL(url)
+                if (u.protocol != "https" || u.host != "cbsapi.tkgm.gov.tr") throw Exception("İzin verilmeyen adres")
+                val c = u.openConnection() as java.net.HttpURLConnection
+                c.connectTimeout = 15000
+                c.readTimeout = 20000
+                c.setRequestProperty("Accept", "application/json")
+                c.setRequestProperty("User-Agent", "Mozilla/5.0 (Linux; Android) GNSS-BOZOKLUHAN")
+                c.setRequestProperty("Referer", "https://parselsorgu.tkgm.gov.tr/")
+                code = c.responseCode
+                val s = if (code in 200..299) c.inputStream else c.errorStream
+                body = s?.bufferedReader(Charsets.UTF_8)?.use { it.readText() } ?: ""
+                c.disconnect()
+            } catch (e: Exception) {
+                code = 0
+                body = e.message ?: "İnternet bağlantısı yok"
+            }
+            val o = JSONObject(); o.put("id", id); o.put("status", code); o.put("body", body)
+            js("window.__http && window.__http($o)")
         }
     }
 
@@ -699,6 +755,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         @JavascriptInterface fun vibrate(ms: Int) { main.post { doVibrate(ms) } }
+        @JavascriptInterface fun httpGet(id: String, url: String) { this@MainActivity.httpGet(id, url) }
         @JavascriptInterface fun btPermState(): String = if (hasBtPerm()) "ok" else "no"
         @JavascriptInterface fun btRequestPerm() { main.post { withBtPerm { js("window.__btPerm && window.__btPerm(true)") } } }
         @JavascriptInterface fun btList() { main.post { this@MainActivity.btList() } }
