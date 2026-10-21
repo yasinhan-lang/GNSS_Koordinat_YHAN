@@ -447,6 +447,45 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // ---------- LİSANS (çevrimdışı): cihaz kodu + HMAC anahtar, deneme başlangıcı ----------
+    private val licPrefs by lazy { getSharedPreferences("yhan_lic", Context.MODE_PRIVATE) }
+    private fun hx(s: String) = ByteArray(s.length / 2) { s.substring(it * 2, it * 2 + 2).toInt(16).toByte() }
+    private fun licSecret(): ByteArray {
+        val a = hx("85047cab429c91841a17b1ad0b1f3633a58aac51b33df30e41cbe105a7abba03")
+        val b = hx("cb1c85a3218305ff9621a9c750c0780fba9ccd08a0706d4dc9066c5d4a636319")
+        return ByteArray(32) { (a[it].toInt() xor b[it].toInt()).toByte() }
+    }
+    private fun toHex(h: ByteArray) = h.joinToString("") { "%02X".format(it.toInt() and 0xFF) }
+    @SuppressLint("HardwareIds")
+    private fun deviceCode(): String {
+        val id = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID) ?: "0"
+        val hex = toHex(java.security.MessageDigest.getInstance("SHA-256").digest(("GNSS-BZK|$id").toByteArray(Charsets.UTF_8)))
+        return hex.substring(0, 4) + "-" + hex.substring(4, 8)
+    }
+    private fun licKeyFor(dev: String): String {
+        val mac = javax.crypto.Mac.getInstance("HmacSHA256")
+        mac.init(javax.crypto.spec.SecretKeySpec(licSecret(), "HmacSHA256"))
+        return toHex(mac.doFinal(("BZK1|$dev").toByteArray(Charsets.UTF_8))).substring(0, 12)
+    }
+    private fun licInfo(): String {
+        val now = System.currentTimeMillis()
+        var start = licPrefs.getLong("start", 0L)
+        if (start == 0L) { start = now; licPrefs.edit().putLong("start", now).apply() }
+        val lastSeen = licPrefs.getLong("last", 0L)
+        val tamper = lastSeen > 0L && now < lastSeen - 86_400_000L      // saat 1 günden fazla geri alınmış
+        if (now > lastSeen) licPrefs.edit().putLong("last", now).apply()
+        val dev = deviceCode()
+        val key = licPrefs.getString("key", "") ?: ""
+        val o = JSONObject()
+        o.put("device", dev); o.put("start", start); o.put("now", now); o.put("tamper", tamper)
+        o.put("licensed", key.isNotEmpty() && key == licKeyFor(dev))
+        return o.toString()
+    }
+    private fun licActivate(input: String): String {
+        val k = input.uppercase().filter { it in '0'..'9' || it in 'A'..'F' }
+        return if (k.length == 12 && k == licKeyFor(deviceCode())) { licPrefs.edit().putString("key", k).apply(); "ok" } else "bad"
+    }
+
     private fun openExternal(url: String) {
         try { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url))) }
         catch (e: Exception) { Toast.makeText(this, "Bağlantı açılamadı", Toast.LENGTH_SHORT).show() }
@@ -755,6 +794,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
         @JavascriptInterface fun vibrate(ms: Int) { main.post { doVibrate(ms) } }
+        @JavascriptInterface fun licInfo(): String = this@MainActivity.licInfo()
+        @JavascriptInterface fun licActivate(key: String): String = this@MainActivity.licActivate(key)
         @JavascriptInterface fun httpGet(id: String, url: String) { this@MainActivity.httpGet(id, url) }
         @JavascriptInterface fun btPermState(): String = if (hasBtPerm()) "ok" else "no"
         @JavascriptInterface fun btRequestPerm() { main.post { withBtPerm { js("window.__btPerm && window.__btPerm(true)") } } }

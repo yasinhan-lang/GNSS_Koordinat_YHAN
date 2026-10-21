@@ -31,6 +31,14 @@ Telefondan ITRF96 ve ED50 koordinatı okuyup iş adı altında kaydeden, NetCAD 
 2. Dosyaya dokunun. "Bilinmeyen uygulamalar" uyarısı çıkarsa **Ayarlar › Bu kaynağa izin ver** deyin.
 3. **Yükle**'ye basın. Play Koruma uyarısı çıkarsa **Yine de yükle** seçin (uygulama Play Store'dan gelmediği için çıkar).
 
+## Sürüm 3.2
+
+- **Başlık bandı:** koyu lacivert koordinat ağı deseni, altın alt çizgi, "BOZOKLUHAN" altın renkte, ad ve logo ince çerçevede; ana sayfa üst kartı aynı tasarımda.
+- **Harita › İz göster** tiki: yürünen iz gizlenir/gösterilir; kayıtlı noktalar ve mavi konum işareti her zaman görünür.
+- **Lisans:** ilk açılıştan itibaren **21 gün tam sürüm**. Süre dolunca kısıtlı mod: dışa aktarma, RTK alıcı/NTRIP, aplikasyon, ortalama, otomatik kayıt ve parsel sorgu kapanır; iş başına en fazla 5 nokta kaydedilir. Anlık koordinat, harita ve simülasyon açık kalır.
+- Her telefonun **cihaz kodu** Lisans penceresinde görünür (Ana sayfa rozeti, Ayarlar › Lisans). Cihaza özel **lisans anahtarı** girilince tam sürüm açılır. Anahtarlar ayrı verilen **Lisans Üretici** dosyasıyla üretilir (bu dosya uygulama paketinde yoktur, gizli tutulmalıdır).
+- Telefon saati bir günden fazla geri alınırsa deneme süresi biter. Uygulama kaldırılıp yeniden kurulursa deneme süresi yeniden başlar (çevrimdışı lisansın sınırı).
+
 ## Sürüm 3.1
 
 - Başlık paneli ve anlık koordinat satırı daha ince; alt menü koyu renk.
@@ -112,7 +120,7 @@ Sürüm 2'den itibaren APK sabit bir anahtarla (`app/yhan.keystore`) imzalanır;
 
 ## Teknik bilgiler
 
-- Paket adı: `com.yhan.gnsskoordinat` · Sürüm 3.1 · En düşük Android 7.0 (API 24) · Hedef API 34
+- Paket adı: `com.yhan.gnsskoordinat` · Sürüm 3.2 · En düşük Android 7.0 (API 24) · Hedef API 34
 - Arayüz: `app/src/main/assets/index.html`. Arayüzde değişiklik yapmak için bu dosyayı düzenleyip APK'yı yeniden derlemeniz yeterli.
 - Yerel kod: `app/src/main/java/com/yhan/gnsskoordinat/MainActivity.kt`
 - APK, `app/yhan.keystore` anahtarıyla imzalanır (kişisel kullanım). Bu dosyayı silmeyin; silinirse güncellemeler eskisinin üzerine kurulamaz. Play Store için ayrı ve gizli bir anahtar gerekir.
