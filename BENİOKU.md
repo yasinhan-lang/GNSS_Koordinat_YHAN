@@ -1,4 +1,4 @@
-# GNSS Koordinat Okuyucu - YHAN (Android)
+# GNSS BOZOKLUHAN GPS (Android)
 
 Tasarım ve Geliştirme: Yasin HAN
 
@@ -30,6 +30,15 @@ Telefondan ITRF96 ve ED50 koordinatı okuyup iş adı altında kaydeden, NetCAD 
 1. APK dosyasını telefona gönderin (WhatsApp, Drive, USB kablo).
 2. Dosyaya dokunun. "Bilinmeyen uygulamalar" uyarısı çıkarsa **Ayarlar › Bu kaynağa izin ver** deyin.
 3. **Yükle**'ye basın. Play Koruma uyarısı çıkarsa **Yine de yükle** seçin (uygulama Play Store'dan gelmediği için çıkar).
+
+## Sürüm 3.0 — GNSS BOZOKLUHAN GPS
+
+- **Ana sayfa:** uygulama adı, kısa açıklama, ilk kurulum (tam konum izni, konumun açılması, Bluetooth izni) ve BAŞLAT, ÖLÇÜM, APLİKASYON, HARİTA, TKGM PARSEL SORGUYA GİT düğmeleri. Sol üstteki YH logosu ana sayfaya döner; geri tuşu ölçüm ekranından ana sayfaya gelir.
+- **ÖLÇÜM:** önce DOM, sonra sistem — ITRF96 (TM3), ED50 (TM3), ITRF96 (UTM6), ED50 (UTM6), WGS84 Coğrafi — sonra İŞ ADI sorulur; noktalar bu iş adı altında kaydedilir.
+- **Ölçüm ekranı:** DOM ve sistem doğrudan seçilir; okunacak nokta numarası (N.NO) ve kod en üstte, kayıt doğrudan bu numarayla yapılır ve numara kendiliğinden artar. Otomatik kayıt satırı düğmelerin üstünde. DURDUR'a basınca kaç nokta kaydedildiği yazılır. Tüm satırlar daha ince.
+- **APLİKASYON:** hedef noktalar elle, NCN/TXT satırı yapıştırarak veya kayıtlı noktalardan eklenir; hedefe mesafe, Kuzey/Doğu farkı, semt açısı (grad) ve kuzey yukarı yön çizimi gösterilir; "Kontrol Kaydet" aplike edilen noktayı N.NO+"A" olarak kaydeder.
+- **Harita:** küçük düğmeler (Konuma Git, Uydu/Sokak, PS GİT, Google Earth); daha küçük mavi konum noktası, 22. seviyeye kadar yakınlaştırma; kayıtlı noktaların numaraları kutusuz yazılır.
+- **PS GİT / TKGM Parsel Sorgu:** Parsel Sorgu sitesini açar ve konumun enlem/boylamını panoya kopyalar ("Koordinat ile sorgu" alanına yapıştırılır).
 
 ## Sürüm 2.4
 
@@ -97,7 +106,7 @@ Sürüm 2'den itibaren APK sabit bir anahtarla (`app/yhan.keystore`) imzalanır;
 
 ## Teknik bilgiler
 
-- Paket adı: `com.yhan.gnsskoordinat` · Sürüm 2.4 · En düşük Android 7.0 (API 24) · Hedef API 34
+- Paket adı: `com.yhan.gnsskoordinat` · Sürüm 3.0 · En düşük Android 7.0 (API 24) · Hedef API 34
 - Arayüz: `app/src/main/assets/index.html`. Arayüzde değişiklik yapmak için bu dosyayı düzenleyip APK'yı yeniden derlemeniz yeterli.
 - Yerel kod: `app/src/main/java/com/yhan/gnsskoordinat/MainActivity.kt`
 - APK, `app/yhan.keystore` anahtarıyla imzalanır (kişisel kullanım). Bu dosyayı silmeyin; silinirse güncellemeler eskisinin üzerine kurulamaz. Play Store için ayrı ve gizli bir anahtar gerekir.

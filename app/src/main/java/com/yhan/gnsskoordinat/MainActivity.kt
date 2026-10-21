@@ -83,7 +83,10 @@ class MainActivity : AppCompatActivity() {
         ActivityResultContracts.RequestMultiplePermissions()
     ) {
         if (hasBtPerm()) afterBtPerm?.invoke()
-        else js("window.__btList && window.__btList({ok:false,msg:'Bluetooth izni verilmedi. Uygulama izinlerinden Yakındaki cihazlar iznini açın.'})")
+        else {
+            js("window.__btPerm && window.__btPerm(false)")
+            js("window.__btList && window.__btList({ok:false,msg:'Bluetooth izni verilmedi. Uygulama izinlerinden Yakındaki cihazlar iznini açın.'})")
+        }
         afterBtPerm = null
     }
 
@@ -696,6 +699,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
         @JavascriptInterface fun vibrate(ms: Int) { main.post { doVibrate(ms) } }
+        @JavascriptInterface fun btPermState(): String = if (hasBtPerm()) "ok" else "no"
+        @JavascriptInterface fun btRequestPerm() { main.post { withBtPerm { js("window.__btPerm && window.__btPerm(true)") } } }
         @JavascriptInterface fun btList() { main.post { this@MainActivity.btList() } }
         @JavascriptInterface fun btConnect(addr: String, name: String) { main.post { this@MainActivity.btConnect(addr, name) } }
         @JavascriptInterface fun btDisconnect() { this@MainActivity.btDisconnect() }

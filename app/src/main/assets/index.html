@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#ffffff">
 <meta name="mobile-web-app-capable" content="yes">
-<title>GNSS Koordinat Okuyucu - YHAN</title>
+<title>GNSS BOZOKLUHAN GPS</title>
 <link rel="stylesheet" href="fonts/fonts.css">
 <link rel="stylesheet" href="leaflet/leaflet.css">
 <style>
@@ -24,7 +24,7 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 [hidden]{display:none!important}
 html,body{margin:0;height:100%;overflow:hidden}
-body{background:var(--bg);color:var(--ink);font:13px/1.35 var(--f-body);display:flex;flex-direction:column}
+body{background:var(--bg);color:var(--ink);font:12.5px/1.35 var(--f-body);display:flex;flex-direction:column}
 
 /* Başlık — üstte telefon durum çubuğundan boşluk */
 .hdr{flex:none;display:grid;grid-template-columns:40px 1fr 42px;align-items:center;gap:8px;background:var(--panel);border-bottom:1px solid var(--line);
@@ -34,20 +34,20 @@ body{background:var(--bg);color:var(--ink);font:13px/1.35 var(--f-body);display:
 .brand b{display:block;font:700 15px/1.1 var(--f-disp);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .brand i{font:italic 500 11px var(--f-body)}
 .brand small{display:block;font:500 8.5px var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-#flag,#flag2{width:42px;height:29px;justify-self:end}
+#flag,#flag2,#flag3{width:42px;height:29px;justify-self:end}
 .hdr{grid-template-columns:42px 1fr 42px}
 
 main{flex:1;min-height:0;position:relative}
 .tab{position:absolute;inset:0;overflow-y:auto;-webkit-overflow-scrolling:touch;
-  padding:8px max(10px,env(safe-area-inset-right,0px)) 14px max(10px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:7px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:7px 9px}
+  padding:6px max(9px,env(safe-area-inset-right,0px)) 12px max(9px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:6px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:6px 8px}
 .lbl{font:600 9.5px var(--f-disp);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 h3{margin:0 0 6px;font:700 13px var(--f-disp);letter-spacing:.08em;text-transform:uppercase}
 
-nav{flex:none;display:grid;grid-template-columns:repeat(6,1fr);background:var(--panel);border-top:1px solid var(--line);
+nav{flex:none;display:grid;grid-template-columns:repeat(7,1fr);background:var(--panel);border-top:1px solid var(--line);
   padding:0 env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)}
-nav button{all:unset;cursor:pointer;height:var(--tabh);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
-  font:600 10px var(--f-disp);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);position:relative}
+nav button{all:unset;cursor:pointer;height:var(--tabh);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-width:0;
+  font:600 9.5px var(--f-disp);letter-spacing:.02em;text-transform:uppercase;color:var(--muted);position:relative}
 nav button svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.8}
 nav button[aria-selected="true"]{color:var(--ink)}
 nav button[aria-selected="true"]::before{content:"";position:absolute;top:0;left:25%;right:25%;height:3px;background:var(--accent);border-radius:0 0 3px 3px}
@@ -141,19 +141,84 @@ nav .dot{position:absolute;top:8px;left:calc(50% + 8px);min-width:16px;height:16
 .autorow{display:flex;align-items:center;gap:6px;font:12px var(--f-body);color:var(--muted)}
 .autorow input[type=checkbox]{width:22px;height:22px;margin:0;accent-color:var(--good)}
 .autorow input#autoInt{width:44px;text-align:center;padding:4px;font:600 13px var(--f-num)}
+/* Ölçüm üst bilgisi: iş satırı, DOM, sistem, nokta no */
+.jobline{display:grid;grid-template-columns:1.6fr .7fr 1.1fr;border:1px solid var(--ink);border-radius:7px;background:var(--panel);overflow:hidden}
+.jobline>div{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2px 4px;min-width:0}
+.jobline>div+div{border-left:1px solid var(--line)}
+.jobline .k{font-size:8px}
+.jobline b{font:700 11.5px/1.2 var(--f-disp);letter-spacing:.02em;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.jobline button{all:unset;cursor:pointer;display:flex;flex-direction:column;align-items:center;min-width:0;max-width:100%}
+.domrow2{display:grid;grid-template-columns:auto 1fr;gap:6px;align-items:center}
+.domrow2 .k{font-size:8.5px;line-height:1.05;text-align:center}
+.domchips{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.domchips button{all:unset;cursor:pointer;text-align:center;padding:3px 0;font:600 11px var(--f-num);border:1px solid var(--line);border-radius:5px;background:var(--panel)}
+.domchips button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--panel)}
+.domchips button.here:not([aria-pressed="true"]){border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.domchips button:disabled{opacity:.3;cursor:default}
+.sysseg5{display:grid;grid-template-columns:repeat(5,1fr);gap:3px}
+.sysseg5 button{all:unset;cursor:pointer;text-align:center;padding:3px 1px;border:1px solid var(--line);border-radius:6px;background:var(--panel);line-height:1.05;min-width:0}
+.sysseg5 b{display:block;font:700 10.5px var(--f-disp);letter-spacing:.02em}
+.sysseg5 span{font:600 9px var(--f-disp);color:var(--muted)}
+.sysseg5 button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--panel)}
+.sysseg5 button[aria-pressed="true"] span{color:var(--panel);opacity:.85}
+.domchips button:focus-visible,.sysseg5 button:focus-visible{outline:2px solid var(--accent)}
+.ptrow{display:grid;grid-template-columns:auto 1fr auto 1fr;gap:5px;align-items:center;margin-bottom:4px}
+.ptrow label{font:700 9px var(--f-disp);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.ptrow input{height:26px;padding:2px 6px;text-align:center;font:600 13px var(--f-num);border-radius:6px}
+#ptNo{border-color:var(--ink);background:var(--panel)}
 /* Anlık koordinat tablosu */
 .ctab{width:100%;border-collapse:collapse;table-layout:fixed;border:1px solid var(--ink);border-radius:6px}
-.ctab caption{caption-side:top;padding:0 0 3px;font:700 10.5px var(--f-disp);letter-spacing:.16em;text-transform:uppercase}
+.ctab caption{caption-side:top;padding:0 0 2px;font:700 10px var(--f-disp);letter-spacing:.16em;text-transform:uppercase}
 .ctab caption small{display:block;font:500 9.5px var(--f-num);letter-spacing:0;text-transform:none;color:var(--muted);margin-top:1px}
-.ctab th{background:var(--soft);font:700 9px var(--f-disp);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:1px 4px;border:1px solid var(--line);border-bottom-color:var(--ink)}
+.ctab th{background:var(--soft);font:700 8.5px var(--f-disp);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:1px 4px;border:1px solid var(--line);border-bottom-color:var(--ink)}
 .ctab th.nt{text-transform:none;letter-spacing:.04em;font-size:10px}
-.ctab td{padding:2px 4px 3px;border:1px solid var(--line);font:500 11.5px/1.25 var(--f-num);font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:clip}
-.ctab td.big{font:600 clamp(13px,4vw,15.5px)/1.2 var(--f-num);padding:3px 4px 4px}
-.autobar{display:flex;align-items:center;justify-content:center;gap:7px;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:6px 8px;font-size:12px;color:var(--muted);cursor:pointer}
+.ctab td{padding:1px 4px 2px;border:1px solid var(--line);font:500 10.5px/1.25 var(--f-num);font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:clip}
+.ctab td.big{font:600 clamp(12px,3.7vw,14px)/1.2 var(--f-num);padding:2px 4px 3px}
+.autobar{display:flex;align-items:center;justify-content:center;gap:7px;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:4px 8px;font-size:11.5px;color:var(--muted);cursor:pointer}
 .autobar b{color:var(--ink)}
 .autobar.on{border-color:var(--good);box-shadow:inset 0 0 0 1px var(--good)}
-.autobar input[type=checkbox]{width:20px;height:20px;margin:0;accent-color:var(--good)}
+.autobar input[type=checkbox]{width:17px;height:17px;margin:0;accent-color:var(--good)}
 .autobar #autoInt{width:42px;text-align:center;padding:3px;font:600 12px var(--f-num)}
+/* Ana sayfa */
+#home{overflow-y:auto}
+.hbody{flex:1;display:flex;flex-direction:column;gap:10px;padding:14px max(16px,env(safe-area-inset-right,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));max-width:560px;width:100%;margin:0 auto}
+.hhero{display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;padding:4px 0 2px}
+.hhero .logo{width:74px;height:74px}
+.hname{margin:4px 0 0;font:700 25px/1.05 var(--f-disp);letter-spacing:.07em;text-transform:uppercase}
+.hname span{color:var(--accent);-webkit-text-stroke:.4px var(--ink)}
+.hsub{font:500 12px/1.4 var(--f-body);color:var(--muted);max-width:34ch}
+.setup{display:flex;flex-direction:column;gap:6px}
+.setup h3{text-align:center;margin:0 0 2px}
+.srow2{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:center;padding:4px 0;border-top:1px dashed var(--line)}
+.srow2:first-of-type{border-top:none}
+.srow2 .gicon{width:34px;height:34px}
+.srow2 .gicon svg{width:18px;height:18px}
+.srow2 .t{font:700 12.5px var(--f-disp);letter-spacing:.05em;text-transform:uppercase}
+.srow2 .d{font-size:11px;color:var(--muted)}
+.hstart{width:100%;padding:13px 8px!important;font-size:15px!important;letter-spacing:.14em!important;border-radius:10px!important}
+.hstart.done{background:var(--good);color:#fff}
+.hgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.hbtn{all:unset;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:12px 6px;border-radius:10px;background:var(--panel);border:1px solid var(--line);text-align:center;min-height:62px}
+.hbtn svg{width:24px;height:24px;stroke:var(--ink);fill:none;stroke-width:1.7}
+.hbtn b{font:700 12.5px/1.1 var(--f-disp);letter-spacing:.08em;text-transform:uppercase}
+.hbtn small{font:10.5px var(--f-body);color:var(--muted)}
+.hbtn:focus-visible{outline:2px solid var(--accent)}
+.hbtn.tk{border-color:#a3171d}
+.hbtn.tk svg{stroke:#c62828}
+.hnote{font-size:11px;color:var(--muted);text-align:center;margin:0}
+.logo-btn{all:unset;cursor:pointer;display:block;border-radius:50%}
+.logo-btn:focus-visible{outline:2px solid var(--accent)}
+/* Aplikasyon */
+.stk-sel{display:grid;grid-template-columns:34px 1fr 34px;gap:5px;align-items:center}
+.stk-sel button{all:unset;cursor:pointer;text-align:center;font:700 18px/30px var(--f-num);border:1px solid var(--line);border-radius:6px;background:var(--soft)}
+.stk-sel select{height:32px;text-align:center;text-align-last:center;font:600 12px var(--f-num)}
+.stk-main{display:flex;flex-direction:column;align-items:center;gap:5px}
+#stkRadar{width:100%;max-width:240px;aspect-ratio:1;max-height:240px}
+.stk-dist{display:flex;align-items:baseline;gap:8px}
+.stk-dist b{font:600 22px var(--f-num)}
+.stk-state{font:700 12px var(--f-disp);letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:5px;background:var(--soft);text-align:center}
+.stk-state.ok{background:var(--good);color:#fff}
+#stkPaste{width:100%;min-height:58px;font:12px/1.4 var(--f-num);border:1px solid var(--line);border-radius:6px;background:var(--soft);color:var(--ink);padding:6px;resize:vertical;box-sizing:border-box}
 /* Liste sekmesi: küçük puntolu tablo */
 .exhd{display:flex;flex-direction:column;align-items:center;gap:1px;margin-bottom:6px}
 .exhd b{font:700 14px var(--f-disp);letter-spacing:.03em;text-align:center}
@@ -187,11 +252,20 @@ nav .dot{position:absolute;top:8px;left:calc(50% + 8px);min-width:16px;height:16
 .k.nt{text-transform:none;letter-spacing:.04em;font-size:10.5px}
 .lgg .v{font:500 12px var(--f-num);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
 .lgf{margin-top:4px;font:10.5px var(--f-num);color:var(--muted)}
+/* Harita: üst araç çubuğu, nokta etiketleri */
+.maptools{position:absolute;top:6px;left:max(6px,env(safe-area-inset-left,0px));right:max(6px,env(safe-area-inset-right,0px));z-index:600;display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
+.maptools button{all:unset;cursor:pointer;text-align:center;padding:6px 2px;border-radius:6px;background:var(--panel);color:var(--ink);font:700 10px/1.1 var(--f-disp);letter-spacing:.05em;text-transform:uppercase;box-shadow:0 1px 4px rgba(0,0,0,.35)}
+.maptools button.pri{background:var(--accent);color:var(--accent-ink)}
+.maptools button:focus-visible{outline:2px solid var(--accent)}
+#tabMap .leaflet-top{top:38px}
+.ptmk{background:none;border:none}
+.ptmk i{position:absolute;left:-4px;top:-4px;width:8px;height:8px;border-radius:50%;background:#f2b705;box-shadow:0 0 0 1.5px #14181d}
+.ptmk span{position:absolute;left:7px;top:-8px;white-space:nowrap;font:700 12px var(--f-disp);color:#fff;letter-spacing:.02em;text-shadow:0 0 2px #000,0 0 3px #000,1px 1px 1px #000}
 /* Harita paneli */
-.mappanel{position:absolute;left:max(8px,env(safe-area-inset-left,0px));right:max(8px,env(safe-area-inset-right,0px));bottom:8px;z-index:500;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px;display:grid;grid-template-columns:repeat(3,1fr);gap:5px 6px;box-shadow:0 4px 14px rgba(0,0,0,.3)}
+.mappanel{position:absolute;left:max(8px,env(safe-area-inset-left,0px));right:max(8px,env(safe-area-inset-right,0px));bottom:8px;z-index:500;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:6px;display:grid;grid-template-columns:repeat(3,1fr);gap:4px 6px;box-shadow:0 4px 14px rgba(0,0,0,.3)}
 .mappanel .mpc{display:flex;flex-direction:column;align-items:center;min-width:0}
-.mappanel .mpc b{font:600 12.5px var(--f-num);white-space:nowrap}
-.mappanel .btn{grid-column:2/-1;padding:11px 6px}
+.mappanel .mpc b{font:600 11.5px var(--f-num);white-space:nowrap}
+.mappanel .btn{grid-column:2/-1;padding:8px 4px;font-size:11.5px}
 .mapauto{display:flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--line);border-radius:8px;font:600 10.5px/1.15 var(--f-disp);letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
 .mapauto input{width:18px;height:18px;margin:0;accent-color:var(--good)}
 .mapauto.on{border-color:var(--good);box-shadow:inset 0 0 0 1px var(--good)}
@@ -201,16 +275,16 @@ nav .dot{position:absolute;top:8px;left:calc(50% + 8px);min-width:16px;height:16
 .status{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}
 .srow{display:flex;align-items:center;justify-content:center;gap:8px}
 .status .sep{margin:0 6px;color:var(--line)}
-.badge{flex:none;font:700 10.5px/1 var(--f-disp);letter-spacing:.06em;text-transform:uppercase;padding:5px 7px;border-radius:4px;color:#fff;background:var(--muted)}
+.badge{flex:none;font:700 10px/1 var(--f-disp);letter-spacing:.06em;text-transform:uppercase;padding:5px 7px;border-radius:4px;color:#fff;background:var(--muted)}
 .badge.good{background:var(--good)}.badge.warn{background:var(--warn)}.badge.bad{background:var(--bad)}.badge.info{background:var(--info)}
-.acc{font:600 15px/1 var(--f-num);white-space:nowrap}
+.acc{font:600 14px/1 var(--f-num);white-space:nowrap}
 .acc small{font-size:10.5px;color:var(--muted);font-weight:500}
-.status .meta{font:10px/1.3 var(--f-num);color:var(--muted)}
-.bar{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:6px;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.status .meta{font:9.5px/1.3 var(--f-num);color:var(--muted)}
+.bar{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:4px;border:1px solid var(--line);border-radius:6px;overflow:hidden}
 .bar>div{padding:2px 2px 3px}
 .bar>div+div{border-left:1px solid var(--line)}
-.bar div{text-align:center}.bar .v{display:block;font:600 11px/1.2 var(--f-num)}
-.bar .lbl{font-size:8.5px}
+.bar div{text-align:center}.bar .v{display:block;font:600 10.5px/1.2 var(--f-num)}
+.bar .lbl{font-size:8px}
 .satline{margin-top:6px;font:10.5px/1.5 var(--f-num);color:var(--muted);display:flex;flex-wrap:wrap;justify-content:center;gap:2px 10px}
 .satline b{color:var(--ink);font-weight:600}
 .satline .l5{color:var(--good);font-weight:600}
@@ -224,8 +298,8 @@ nav .dot{position:absolute;top:8px;left:calc(50% + 8px);min-width:16px;height:16
 .cal{color:var(--good);font-weight:600}
 
 .ctrl{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
-.ctrl .btn{padding:9px 4px;font-size:12px;border-radius:8px}
-.ctrl .btn.save{font-size:13px}
+.ctrl .btn{padding:8px 2px;font-size:11.5px;letter-spacing:.08em;border-radius:7px}
+.ctrl .btn.save{font-size:12px}
 .btn{font:700 12.5px/1 var(--f-disp);letter-spacing:.06em;text-transform:uppercase;border-radius:7px;border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:13px 8px;cursor:pointer;touch-action:manipulation;text-align:center}
 .btn.primary{background:var(--accent);color:var(--accent-ink);border-color:transparent}
 .btn.stop{background:var(--bad);color:#fff;border-color:transparent}
@@ -236,7 +310,7 @@ nav .dot{position:absolute;top:8px;left:calc(50% + 8px);min-width:16px;height:16
 .btn:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
 .prog{height:6px;background:var(--line);border-radius:3px;overflow:hidden}
 .prog i{display:block;height:100%;width:0;background:var(--accent);transition:width .2s}
-.msg{font-size:11.5px;color:var(--muted);min-height:2.5em;text-align:center}
+.msg{font-size:11px;color:var(--muted);min-height:2.3em;text-align:center}
 .msg b{color:var(--ink)}
 
 .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px 8px}
@@ -329,9 +403,9 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
 .dchip[aria-pressed="true"] span{color:var(--panel)}
 .dchip.here::after{content:"Buradasınız";position:absolute;top:-8px;left:50%;transform:translateX(-50%);font:700 9px/1 var(--f-disp);letter-spacing:.06em;text-transform:uppercase;background:var(--accent);color:var(--accent-ink);padding:3px 5px;border-radius:3px;white-space:nowrap}
 .dchip:focus-visible,.syscard:focus-visible{outline:2px solid var(--accent)}
-.syscard{all:unset;cursor:pointer;display:grid;grid-template-columns:auto 1fr;gap:2px 12px;align-items:center;padding:12px;border:2px solid var(--line);border-radius:10px;background:var(--panel)}
+.syscard{all:unset;cursor:pointer;display:grid;grid-template-columns:auto 1fr;gap:1px 12px;align-items:center;padding:8px 12px;border:2px solid var(--line);border-radius:10px;background:var(--panel)}
 .syscard .r{grid-row:1/3;width:20px;height:20px;border-radius:50%;border:2px solid var(--line)}
-.syscard b{font:700 20px/1 var(--f-disp);letter-spacing:.04em}
+.syscard b{font:700 16px/1 var(--f-disp);letter-spacing:.04em}
 .syscard span{font-size:12px;color:var(--muted)}
 .syscard[aria-pressed="true"]{border-color:var(--ink);box-shadow:inset 4px 0 0 var(--accent)}
 .syscard[aria-pressed="true"] .r{border:6px solid var(--accent)}
@@ -386,25 +460,29 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
 </symbol></defs></svg>
 
 <header class="hdr">
-  <svg class="logo" viewBox="0 0 108 108" role="img" aria-label="YH logosu"><use href="#yhLogo"/></svg>
-  <div class="brand"><b>GNSS Koordinat Okuyucu</b><i>Yasin HAN</i><small>Tasarım ve Geliştirme</small></div>
+  <button class="logo-btn" id="homeBtn" type="button" aria-label="Ana sayfa"><svg class="logo" viewBox="0 0 108 108" role="img" aria-label="YH logosu"><use href="#yhLogo"/></svg></button>
+  <div class="brand"><b>GNSS BOZOKLUHAN GPS</b><i>Yasin HAN</i><small>Tasarım ve Geliştirme</small></div>
   <canvas id="flag" width="120" height="84" aria-label="Türk bayrağı"></canvas>
 </header>
 
 <main>
   <!-- ÖLÇÜM -->
   <section class="tab" id="tabMeasure">
-    <div class="jobbox">
-      <table>
-        <tr><th style="width:38%">İş Adı</th><th>DOM</th><th style="width:30%">Sistem</th></tr>
-        <tr><td id="jbName">—</td><td class="num" id="jbDom">—</td><td id="jbSys">—</td></tr>
-      </table>
-      <div class="edit"><button id="jbEdit" type="button">DOM / Sistemi Değiştir</button></div>
+    <div class="jobline">
+      <div><button id="jbEdit" type="button" aria-label="İşi değiştir"><span class="k">İş Adı</span><b id="jbName">—</b></button></div>
+      <div><span class="k">DOM</span><b id="jbDom">—</b></div>
+      <div><span class="k">Sistem</span><b id="jbSys">—</b></div>
     </div>
-    <div class="sysseg" id="sysSeg" role="group" aria-label="Koordinat sistemi">
-      <button type="button" data-s="itrf3"><b>ITRF96</b><span>TM 3°</span></button>
-      <button type="button" data-s="ed3"><b>ED50</b><span>TM 3°</span></button>
-      <button type="button" data-s="ed6"><b>ED50</b><span>UTM 6°</span></button>
+    <div class="domrow2">
+      <span class="k">DOM<br>(Dilim Orta<br>Meridyeni)</span>
+      <div class="domchips" id="domChips" role="group" aria-label="Dilim orta meridyeni"></div>
+    </div>
+    <div class="sysseg5" id="sysSeg" role="group" aria-label="Koordinat sistemi">
+      <button type="button" data-s="itrf3"><b>ITRF96</b><span>(TM3)</span></button>
+      <button type="button" data-s="ed3"><b>ED50</b><span>(TM3)</span></button>
+      <button type="button" data-s="itrf6"><b>ITRF96</b><span>(UTM6)</span></button>
+      <button type="button" data-s="ed6"><b>ED50</b><span>(UTM6)</span></button>
+      <button type="button" data-s="wgs"><b>WGS84</b><span>Coğrafi</span></button>
     </div>
 
     <div class="demo-flag" id="demoFlag" hidden>SİMÜLASYON · GERÇEK ÖLÇÜM DEĞİL</div>
@@ -429,9 +507,13 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
     </div>
 
     <div class="card coord">
+      <div class="ptrow">
+        <label for="ptNo">N.NO</label><input id="ptNo" inputmode="numeric" autocomplete="off" aria-label="Okunacak nokta numarası">
+        <label for="ptCode">Kod</label><input id="ptCode" autocomplete="off" placeholder="—" aria-label="Nokta kodu">
+      </div>
       <table class="ctab">
         <caption>Anlık Koordinat<small id="gInfo">—</small></caption>
-        <tr><th>Y</th><th>X</th></tr>
+        <tr><th id="thY">Y</th><th id="thX">X</th></tr>
         <tr><td class="big" id="vY">—</td><td class="big" id="vX">—</td></tr>
         <tr><th>Enlem</th><th>Boylam</th></tr>
         <tr><td id="gLat">—</td><td id="gLon">—</td></tr>
@@ -443,18 +525,57 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
       </div>
     </div>
 
+    <label class="autobar" id="autoBox" for="autoSave">
+      <input type="checkbox" id="autoSave"><span><b>Otomatik kayıt</b> · her</span>
+      <input id="autoInt" inputmode="numeric" value="5" aria-label="Kayıt aralığı (saniye)"><span>sn</span>
+    </label>
     <div class="ctrl">
       <button class="btn primary" id="btnRun">Başlat</button>
       <button class="btn save" id="btnSave" disabled>Kaydet</button>
       <button class="btn" id="btnMeasure" disabled>Ortalama</button>
     </div>
-    <label class="autobar" id="autoBox" for="autoSave">
-      <input type="checkbox" id="autoSave"><span><b>Otomatik kayıt</b> · her</span>
-      <input id="autoInt" inputmode="numeric" value="5" aria-label="Kayıt aralığı (saniye)"><span>sn</span>
-    </label>
     <div class="prog"><i id="prog"></i></div>
     <div class="msg" id="msg">Hazırlanıyor…</div>
+  </section>
 
+  <!-- APLİKASYON -->
+  <section class="tab" id="tabStake" hidden>
+    <div class="card">
+      <div class="exhd"><b id="stkJob">—</b><span>Aplikasyon · <span id="stkSys">—</span></span></div>
+      <div class="stk-sel"><button type="button" id="stkPrev" aria-label="Önceki hedef">‹</button><select id="stkSel" aria-label="Hedef nokta"></select><button type="button" id="stkNext" aria-label="Sonraki hedef">›</button></div>
+    </div>
+    <div class="card stk-main">
+      <canvas id="stkRadar" width="560" height="560" aria-label="Hedefe göre konum (kuzey yukarıda)"></canvas>
+      <div class="stk-dist"><span class="k">Mesafe</span><b id="stkD">—</b></div>
+      <table class="ctab">
+        <tr><th>Kuzey (ΔX)</th><th>Doğu (ΔY)</th></tr>
+        <tr><td id="stkDX">—</td><td id="stkDY">—</td></tr>
+        <tr><th>Semt açısı</th><th>Konum hatası</th></tr>
+        <tr><td id="stkAz">—</td><td id="stkAcc">—</td></tr>
+      </table>
+      <div class="stk-state" id="stkState">Hedef nokta ekleyin</div>
+    </div>
+    <div class="ctrl">
+      <button class="btn primary" id="stkRun">Başlat</button>
+      <button class="btn save" id="stkSave" disabled>Kontrol Kaydet</button>
+      <button class="btn" id="stkFromJob">Kayıtlılardan</button>
+    </div>
+    <div class="card">
+      <h3 style="text-align:center">Hedef Nokta Ekle</h3>
+      <div class="fgrid c3">
+        <div><label for="stkNo">N.NO</label><input id="stkNo" autocomplete="off"></div>
+        <div><label for="stkY" id="stkLY">Y</label><input id="stkY" class="mono" inputmode="decimal" autocomplete="off"></div>
+        <div><label for="stkX" id="stkLX">X</label><input id="stkX" class="mono" inputmode="decimal" autocomplete="off"></div>
+      </div>
+      <button class="btn sm primary" id="stkAdd" type="button" style="width:100%;margin-top:6px">Hedefi Ekle</button>
+      <label class="fl" for="stkPaste" style="margin-top:8px;text-align:center">veya NCN / TXT satırlarını yapıştırın (N.NO Y X)</label>
+      <textarea id="stkPaste" placeholder="1 506758.850 4328635.412&#10;2 506770.100 4328640.000"></textarea>
+      <div class="fgrid" style="margin-top:6px">
+        <button class="btn sm" id="stkLoad" type="button">Listeye Yükle</button>
+        <button class="btn sm" id="stkClear" type="button">Hedefleri Sil</button>
+      </div>
+      <p class="note" id="stkInfo" style="text-align:center"></p>
+    </div>
   </section>
 
   <!-- LİSTE -->
@@ -562,14 +683,15 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
   <!-- HARİTA -->
   <section class="tab" id="tabMap" hidden>
     <div id="map"></div>
-    <div class="mapfab">
-      <button class="btn" id="btnFollow" type="button">Konuma Git</button>
-      <button class="btn" id="btnLayer" type="button">Sokak</button>
-      <button class="btn primary" id="btnEarth" type="button">Google Earth'te Göster</button>
+    <div class="maptools">
+      <button type="button" id="btnFollow">Konuma Git</button>
+      <button type="button" id="btnLayer">Uydu/Sokak</button>
+      <button type="button" id="btnPs" class="pri">PS GİT</button>
+      <button type="button" id="btnEarth">Google Earth</button>
     </div>
     <div class="mappanel">
-      <div class="mpc"><span class="k">Y</span><b id="mY">—</b></div>
-      <div class="mpc"><span class="k">X</span><b id="mX">—</b></div>
+      <div class="mpc"><span class="k" id="mkY">Y</span><b id="mY">—</b></div>
+      <div class="mpc"><span class="k" id="mkX">X</span><b id="mX">—</b></div>
       <div class="mpc"><span class="k">Hata</span><b id="mA">—</b></div>
       <label class="mapauto" for="mapAuto"><input type="checkbox" id="mapAuto"><span>Otomatik<br>kayıt</span></label>
       <button class="btn save" id="mapSave" type="button" disabled>Koordinatı Kaydet</button>
@@ -674,6 +796,7 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
 
 <nav role="tablist">
   <button role="tab" data-t="tabMeasure" aria-selected="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>Ölçüm</button>
+  <button role="tab" data-t="tabStake" aria-selected="false"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.5"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4"/></svg>Aplikasyon</button>
   <button role="tab" data-t="tabLog" aria-selected="false"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>Liste</button>
   <button role="tab" data-t="tabRx" aria-selected="false"><svg viewBox="0 0 24 24"><path d="M12 13v8M8 21h8"/><circle cx="12" cy="10" r="3"/><path d="M6.3 15.7a8 8 0 0 1 0-11.4M17.7 4.3a8 8 0 0 1 0 11.4"/></svg>Alıcı</button>
   <button role="tab" data-t="tabMap" aria-selected="false"><svg viewBox="0 0 24 24"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14"/></svg>Harita</button>
@@ -681,26 +804,50 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
   <button role="tab" data-t="tabSet" aria-selected="false"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>Ayarlar</button>
 </nav>
 
+<!-- ANA SAYFA -->
+<div class="layer" id="home" role="dialog" aria-modal="true" aria-label="Ana sayfa">
+  <header class="hdr">
+    <svg class="logo" viewBox="0 0 108 108" aria-hidden="true"><use href="#yhLogo"/></svg>
+    <div class="brand"><b>GNSS BOZOKLUHAN GPS</b><i>Yasin HAN</i><small>Tasarım ve Geliştirme</small></div>
+    <canvas id="flag3" width="120" height="84" aria-hidden="true"></canvas>
+  </header>
+  <div class="hbody">
+    <div class="hhero">
+      <svg class="logo" viewBox="0 0 108 108" aria-hidden="true"><use href="#yhLogo"/></svg>
+      <h1 class="hname">GNSS <span>BOZOKLUHAN</span> GPS</h1>
+      <div class="hsub">Uydu ile koordinat ölçümü, aplikasyon ve kayıt. ITRF96 · ED50 · WGS84, NetCAD (.ncn), TXT ve Google Earth (.kml) çıktısı.</div>
+    </div>
+    <div class="card setup">
+      <h3>İlk Kurulum</h3>
+      <div class="srow2"><div class="gicon" id="pIcon"><svg viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.6"/></svg></div>
+        <div><div class="t" id="pT">İzin bekleniyor</div><div class="d" id="pD">Henüz izin istenmedi.</div></div></div>
+      <button class="btn primary big" id="pBtn" type="button" hidden>Tam Konum İznini Ver</button>
+      <div id="pHelp" hidden style="margin-top:12px;display:flex;flex-direction:column;gap:10px"></div>
+      <div class="srow2"><div class="gicon" id="btpI"><svg viewBox="0 0 24 24"><path d="M7 7l10 10-5 5V2l5 5L7 17"/></svg></div>
+        <div><div class="t" id="btpT">Bluetooth izni</div><div class="d" id="btpD">RTK alıcı bağlamak için gerekir.</div></div></div>
+    </div>
+    <button class="btn primary hstart" id="homeStart" type="button">Başlat</button>
+    <div class="hgrid">
+      <button class="hbtn" id="hMeasure" type="button"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="1.5"/></svg><b>Ölçüm</b><small>Nokta oku ve kaydet</small></button>
+      <button class="hbtn" id="hStake" type="button"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.5"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4"/></svg><b>Aplikasyon</b><small>Koordinatı araziye işaretle</small></button>
+      <button class="hbtn" id="hMap" type="button"><svg viewBox="0 0 24 24"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14"/></svg><b>Harita</b><small>Uydu görüntüsünde konum</small></button>
+      <button class="hbtn tk" id="hPs" type="button"><svg viewBox="0 0 24 24"><path d="M4 20h16M5 20V9l7-5 7 5v11M9 20v-6h6v6"/></svg><b>TKGM Parsel<br>Sorguya Git</b><small>Konumu Parsel Sorgu'da aç</small></button>
+    </div>
+    <p class="hnote">Ana sayfaya dönmek için sol üstteki YH logosuna dokunun. Kurulum bir kez yapılır; izinler telefonda hatırlanır.</p>
+  </div>
+</div>
+
 <!-- KURULUM SİHİRBAZI -->
 <div class="layer" id="wz" hidden role="dialog" aria-modal="true" aria-label="Ölçüm kurulumu">
   <header class="hdr">
     <svg class="logo" viewBox="0 0 108 108" aria-hidden="true"><use href="#yhLogo"/></svg>
-    <div class="brand"><b>GNSS Koordinat Okuyucu</b><i>Yasin HAN</i><small>Tasarım ve Geliştirme</small></div>
+    <div class="brand"><b>GNSS BOZOKLUHAN GPS</b><i>Yasin HAN</i><small>Tasarım ve Geliştirme</small></div>
     <canvas id="flag2" width="120" height="84" aria-hidden="true"></canvas>
   </header>
   <div class="wz-steps" id="wzSteps">
-    <div data-n="1" data-s="perm">Konum İzni</div><div data-n="2" data-s="name">İş Adı</div><div data-n="3" data-s="dom">DOM</div><div data-n="4" data-s="sys">Sistem</div>
+    <div data-n="1" data-s="dom">DOM</div><div data-n="2" data-s="sys">Sistem</div><div data-n="3" data-s="name">İş Adı</div>
   </div>
   <div class="wz-body">
-    <!-- 1 izin -->
-    <div data-step="perm" hidden>
-      <h2>Tam Konum İzni</h2>
-      <p style="margin:6px 0 12px">Koordinat okumak için telefonun <b>tam (hassas) konum</b> iznine ihtiyaç var. Düğmeye basın ve çıkan pencerelerde <b>İzin ver › Tam</b> ile <b>Tamam</b>'ı seçin.</p>
-      <div class="permcard"><div class="gicon" id="pIcon"><svg viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.6"/></svg></div>
-        <div><div class="t" id="pT">İzin bekleniyor</div><div class="d" id="pD">Henüz izin istenmedi.</div></div></div>
-      <button class="btn primary big" id="pBtn" type="button" style="margin-top:12px;width:100%">Tam Konum İznini Ver</button>
-      <div id="pHelp" hidden style="margin-top:12px;display:flex;flex-direction:column;gap:10px"></div>
-    </div>
     <!-- 2 iş adı -->
     <div data-step="name" hidden>
       <h2>İş Adı</h2>
@@ -718,19 +865,20 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
       <h2>Dilim Orta Meridyeni</h2>
       <p style="margin:6px 0 14px" id="domHint">Çalışma alanınızın DOM'unu seçin.</p>
       <div class="domgrid" id="domGrid"></div>
-      <p class="note" style="margin-top:12px">3° dilimler: 27 (25,5–28,5°D) · 30 · 33 (31,5–34,5°D) · 36 · 39 · 42 · 45. ED50 UTM 6° seçilirse 27, 33, 39 ve 45 kullanılır.</p>
+      <p class="note" style="margin-top:12px">3° dilimler: 27 (25,5–28,5°D) · 30 · 33 (31,5–34,5°D) · 36 · 39 · 42 · 45. UTM6 seçilirse 27, 33, 39 ve 45 kullanılır; WGS84 Coğrafi'de DOM kullanılmaz.</p>
     </div>
     <!-- 4 Sistem -->
     <div data-step="sys" hidden>
       <h2>Koordinat Sistemi</h2>
       <p style="margin:6px 0 12px">Koordinatlar bu sistemde okunup kaydedilir.</p>
-      <div style="display:flex;flex-direction:column;gap:8px" id="sysList">
-        <button class="syscard" data-s="itrf3" type="button"><i class="r"></i><b>ITRF96</b><span>TM 3° · k=1 · GRS80 · TKGM güncel sistemi</span></button>
-        <button class="syscard" data-s="ed3" type="button"><i class="r"></i><b>ED50 · TM 3°</b><span>k=1 · Uluslararası 1924 · eski 3° paftalar</span></button>
-        <button class="syscard" data-s="ed6" type="button"><i class="r"></i><b>ED50 · UTM 6°</b><span>k=0,9996 · Uluslararası 1924</span></button>
+      <div style="display:flex;flex-direction:column;gap:6px" id="sysList">
+        <button class="syscard" data-s="itrf3" type="button"><i class="r"></i><b>ITRF96 (TM3)</b><span>k=1 · GRS80 · TKGM güncel sistemi</span></button>
+        <button class="syscard" data-s="ed3" type="button"><i class="r"></i><b>ED50 (TM3)</b><span>k=1 · Uluslararası 1924 · eski 3° paftalar</span></button>
+        <button class="syscard" data-s="itrf6" type="button"><i class="r"></i><b>ITRF96 (UTM6)</b><span>k=0,9996 · GRS80</span></button>
+        <button class="syscard" data-s="ed6" type="button"><i class="r"></i><b>ED50 (UTM6)</b><span>k=0,9996 · Uluslararası 1924</span></button>
+        <button class="syscard" data-s="wgs" type="button"><i class="r"></i><b>WGS84 Coğrafi</b><span>Enlem / Boylam · derece</span></button>
       </div>
       <div class="summary" style="margin-top:12px"><table>
-        <tr><th>İş Adı</th><td id="smName">—</td></tr>
         <tr><th>DOM</th><td id="smDom">—</td></tr>
         <tr><th>Sistem</th><td id="smSys">—</td></tr>
       </table></div>
@@ -932,7 +1080,9 @@ const Demo = { t0: 0, timer: null, base: null,
     if (q > 1) rx.ntBytes += 860;
   } };
 
-const SYSN = { itrf3: 'ITRF96 · TM3', ed3: 'ED50 · TM3', ed6: 'ED50 · UTM6' };
+const SYSN = { itrf3: 'ITRF96 (TM3)', ed3: 'ED50 (TM3)', itrf6: 'ITRF96 (UTM6)', ed6: 'ED50 (UTM6)', wgs: 'WGS84 Coğrafi' };
+const SYSF = { itrf3: 'ITRF96_TM3', ed3: 'ED50_TM3', itrf6: 'ITRF96_UTM6', ed6: 'ED50_UTM6', wgs: 'WGS84' };
+const isUtm = s => s === 'itrf6' || s === 'ed6';
 let jobs = store.get('jobs', null);
 if (!jobs) { // önceki sürümden aktarım
   jobs = []; const old = store.get('points', []), st = store.get('state', {});
@@ -964,20 +1114,27 @@ function decYear(t) { const d = new Date(t), y = d.getFullYear(); const s = Date
 function project(pt, raw, jb) {
   const jj = jb || J(), sys = jj.sys;
   let lat = pt.lat, lon = pt.lon, h = pt.h || 0, out;
-  if (sys === 'itrf3') {
+  if (sys === 'wgs') {
+    out = { Y: lon, X: lat, Z: h, cm: null, lonC: null, geo: true, label: 'WGS84 · Coğrafi (Boylam / Enlem)' };
+  } else if (sys === 'itrf3' || sys === 'itrf6') {
     const vN = num('vN') / 1000, vE = num('vE') / 1000, dt = num('ep0') - decYear(pt.t || Date.now());
     if ((vN || vE) && !isRtk(pt)) { lat += (vN * dt) / R0 / D2R; lon += (vE * dt) / (R0 * Math.cos(lat * D2R)) / D2R; }
-    const cm = jj.dom, p = tmForward(lat, lon, cm, 1, 500000, ELL.GRS80);
-    out = { Y: p.Y, X: p.X, Z: h, cm, lonC: lon, label: 'ITRF96 · TM3 · DOM ' + cm };
+    if (sys === 'itrf3') {
+      const cm = jj.dom, p = tmForward(lat, lon, cm, 1, 500000, ELL.GRS80);
+      out = { Y: p.Y, X: p.X, Z: h, cm, lonC: lon, label: 'ITRF96 (TM3) · DOM ' + cm };
+    } else {
+      const cm = [27, 33, 39, 45].includes(jj.dom) ? jj.dom : utmZone(lon) * 6 - 183, p = tmForward(lat, lon, cm, 0.9996, 500000, ELL.GRS80);
+      out = { Y: p.Y, X: p.X, Z: h, cm, lonC: lon, label: 'ITRF96 (UTM6) · ' + ((cm + 183) / 6) + 'N · DOM ' + cm };
+    }
   } else {
     const ed = ecef2geo(...helmert(geo2ecef(lat, lon, h, ELL.WGS84), params(), true), ELL.INT24);
     if (sys === 'ed3') {
       const cm = jj.dom, p = tmForward(ed[0], ed[1], cm, 1, 500000, ELL.INT24);
-      out = { Y: p.Y, X: p.X, Z: ed[2], cm, lonC: ed[1], label: 'ED50 · TM3 · DOM ' + cm };
+      out = { Y: p.Y, X: p.X, Z: ed[2], cm, lonC: ed[1], label: 'ED50 (TM3) · DOM ' + cm };
     } else {
       const cm = [27, 33, 39, 45].includes(jj.dom) ? jj.dom : utmZone(ed[1]) * 6 - 183;
       const p = tmForward(ed[0], ed[1], cm, 0.9996, 500000, ELL.INT24);
-      out = { Y: p.Y, X: p.X, Z: ed[2], cm, lonC: ed[1], label: 'ED50 · UTM ' + ((cm + 183) / 6) + 'N · DOM ' + cm };
+      out = { Y: p.Y, X: p.X, Z: ed[2], cm, lonC: ed[1], label: 'ED50 (UTM6) · ' + ((cm + 183) / 6) + 'N · DOM ' + cm };
     }
   }
   out.calKey = sys + ':' + out.cm;
@@ -986,6 +1143,9 @@ function project(pt, raw, jb) {
   return out;
 }
 const fmt = (v, d) => v.toFixed(d).replace('.', ',');
+const fmtC = (v, p) => fmt(v, p && p.geo ? 9 : +$('dec').value);   // projeksiyon: mm · coğrafi: 9 ondalık
+const fmtCDot = (v, p) => v.toFixed(p && p.geo ? 9 : +$('dec').value);
+const hdY = p => p && p.geo ? 'Boylam' : 'Y', hdX = p => p && p.geo ? 'Enlem' : 'X';
 const fmtDot = (v, d) => v.toFixed(d);
 function dms(v, pos, neg) { const s = v < 0 ? neg : pos; v = Math.abs(v); const d = Math.floor(v), m = Math.floor((v - d) * 60), sec = ((v - d) * 60 - m) * 60;
   return d + '°' + String(m).padStart(2, '0') + '′' + sec.toFixed(4).padStart(7, '0') + '″' + s; }
@@ -1016,8 +1176,14 @@ function renderSats() {
 // ===== EKRAN =====
 function renderJobBox() {
   const j = J();
-  $('jbName').textContent = j.name; $('jbDom').textContent = j.dom + '°'; $('jbSys').textContent = SYSN[j.sys];
+  $('jbName').textContent = j.name; $('jbDom').textContent = j.sys === 'wgs' ? '—' : j.dom + '°'; $('jbSys').textContent = SYSN[j.sys];
   document.querySelectorAll('#sysSeg button').forEach(b => b.setAttribute('aria-pressed', b.dataset.s === j.sys));
+  const here = last ? dom3(last.lon) : null;
+  document.querySelectorAll('#domChips button').forEach(b => { const d = +b.dataset.d;
+    b.setAttribute('aria-pressed', d === j.dom && j.sys !== 'wgs'); b.classList.toggle('here', d === here);
+    b.disabled = j.sys === 'wgs' || (isUtm(j.sys) && ![27, 33, 39, 45].includes(d)); });
+  if (document.activeElement !== $('ptNo')) $('ptNo').value = j.next || '1';
+  if (document.activeElement !== $('ptCode')) $('ptCode').value = j.lastCode || '';
   document.querySelectorAll('#gfmt button').forEach(b => b.setAttribute('aria-pressed', b.dataset.g === UI.geo));
 }
 // Coğrafi koordinat: ondalık derece veya derece-dakika-saniye
@@ -1032,11 +1198,12 @@ function render() {
   renderJobBox();
   if (last) {
     const p = project(last);
-    $('vY').textContent = fmt(p.Y, d); $('vX').textContent = fmt(p.X, d);
+    $('thY').textContent = hdY(p); $('thX').textContent = hdX(p);
+    $('vY').textContent = fmtC(p.Y, p); $('vX').textContent = fmtC(p.X, p);
     $('vZ').textContent = last.h != null ? fmt(p.Z, 3) + ' m' : '—'; $('vH').textContent = last.H != null ? fmt(last.H, 3) + ' m' : '—';
     $('gLat').textContent = geoTxt(last.lat); $('gLon').textContent = geoTxt(last.lon);
     $('gInfo').innerHTML = p.label + (p.cal ? ' · <span class="cal">düzeltmeli</span>' : '');
-    const off = Math.abs(p.lonC - p.cm), lim = J().sys === 'ed6' ? 3 : 1.5, w = $('zoneWarn');
+    const off = p.geo ? 0 : Math.abs(p.lonC - p.cm), lim = isUtm(J().sys) ? 3 : 1.5, w = $('zoneWarn');
     if (off > lim + 0.01) { w.hidden = false; w.textContent = 'Dikkat: Konum seçili dilim dışında. Bulunduğunuz yerin DOM\'u ' + dom3(last.lon) + '°.'; } else w.hidden = true;
   }
   renderList(); saveSettings();
@@ -1079,14 +1246,14 @@ function renderLog() {
   const box = $('logList'), d = +$('dec').value, P = pts();
   $('logEmpty').hidden = P.length > 0; box.innerHTML = '';
   if (!P.length) return;
-  const head = ['N.NO', 'Y', 'X'].concat(COLS.z ? ['Z'] : [], COLS.acc ? ['Hata'] : [], COLS.time ? ['Saat'] : []);
+  const p0 = project(P[0]), head = ['N.NO', hdY(p0), hdX(p0)].concat(COLS.z ? ['Z'] : [], COLS.acc ? ['Hata'] : [], COLS.time ? ['Saat'] : []);
   const tb = document.createElement('table'); tb.className = 'ltab';
   tb.innerHTML = '<thead><tr>' + head.map(h => '<th>' + h + '</th>').join('') + '</tr></thead>';
   const body = document.createElement('tbody');
   P.forEach((pt, i) => {   // kaydediliş sırası: ilk kaydedilen en üstte
     const p = project(pt), tr = document.createElement('tr'), qn = pt.q != null ? QN[pt.q] : null;
     if (i === P.length - 1 && justAdded) tr.className = 'new';
-    const cells = [pt.name, fmt(p.Y, d), fmt(p.X, d)];
+    const cells = [pt.name, fmtC(p.Y, p), fmtC(p.X, p)];
     if (COLS.z) cells.push(pt.h != null || zOut(p) === 0 ? fmt(zOut(p), 2) : '—');
     if (COLS.acc) cells.push(pt.acc < 1 ? fmt(pt.acc * 100, 1) + 'cm' : fmt(pt.acc, 1) + 'm');
     if (COLS.time) cells.push(new Date(pt.t).toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
@@ -1125,7 +1292,7 @@ function renderJobs() {
   });
 }
 function renderList() {
-  renderMini(); renderLog(); renderJobs();
+  renderMini(); renderLog(); renderJobs(); renderStakeList();
   const box = $('plist'), d = +$('dec').value, P = pts(), j = J();
   $('cnt').hidden = !P.length; $('cnt').textContent = P.length; $('empty').hidden = P.length > 0;
   $('ptTitle').textContent = j.name;
@@ -1133,11 +1300,11 @@ function renderList() {
   box.innerHTML = '';
   if (P.length) {
     const tb = document.createElement('table'); tb.className = 'ltab ptab';
-    tb.innerHTML = '<thead><tr><th>N.NO</th><th>Y</th><th>X</th><th>h</th><th></th></tr></thead>';
+    const p0 = project(P[0]); tb.innerHTML = '<thead><tr><th>N.NO</th><th>' + hdY(p0) + '</th><th>' + hdX(p0) + '</th><th>h</th><th></th></tr></thead>';
     const body = document.createElement('tbody');
     P.forEach((pt, i) => {
       const p = project(pt), tr = document.createElement('tr'), qn = pt.q != null ? QN[pt.q] : null;
-      [pt.name, fmt(p.Y, d), fmt(p.X, d), pt.h != null ? fmt(p.Z, 2) : '—'].forEach((v, c) => { const td = document.createElement('td'); td.textContent = v; if (c === 0 && qn) td.className = 'q-' + qn[1]; tr.appendChild(td); });
+      [pt.name, fmtC(p.Y, p), fmtC(p.X, p), pt.h != null ? fmt(p.Z, 2) : '—'].forEach((v, c) => { const td = document.createElement('td'); td.textContent = v; if (c === 0 && qn) td.className = 'q-' + qn[1]; tr.appendChild(td); });
       const td = document.createElement('td'), b = document.createElement('button'); b.className = 'xdel'; b.type = 'button'; b.textContent = '✕'; b.setAttribute('aria-label', 'Nokta ' + pt.name + ' sil');
       b.onclick = () => armed(b, () => { P.splice(i, 1); saveJobs(); render(); toast('Nokta silindi'); }, 'Sil?');
       td.appendChild(b); tr.appendChild(td); body.appendChild(tr);
@@ -1174,6 +1341,7 @@ function msg(h) { $('msg').innerHTML = h; }
 document.querySelectorAll('nav button').forEach(b => b.onclick = () => {
   document.querySelectorAll('nav button').forEach(x => x.setAttribute('aria-selected', x === b));
   document.querySelectorAll('.tab').forEach(t => t.hidden = t.id !== b.dataset.t);
+  if (b.dataset.t === 'tabStake') { updateStake(); if (permOk && watchId == null && job()) startRun(); }
   if (b.dataset.t === 'tabMap' && map) setTimeout(() => { map.invalidateSize(); if (last && follow) map.setView([last.lat, last.lon], Math.max(map.getZoom(), 18)); }, 50);
 });
 function goTab(id) { document.querySelector('nav button[data-t=' + id + ']').click(); }
@@ -1183,25 +1351,25 @@ function deleteJob(id) {
   jobs = jobs.filter(j => j.id !== id);
   if (curId === id) curId = jobs.length ? jobs[jobs.length - 1].id : null;
   saveJobs(); render(); toast('İş silindi');
-  if (!curId) openWizard(permOk ? 'dom' : 'perm', 'first');
+  if (!curId) openWizard('dom');
 }
 
 // ===== KURULUM SİHİRBAZI =====
-const WZ = ['perm', 'name', 'dom', 'sys'];
-const stepsOf = () => wz.mode === 'first' ? ['perm', 'dom', 'sys'] : WZ;
-let wz = { step: 'perm', mode: 'new', name: '', dom: null, sys: null };
-function openWizard(step, mode) {
+const stepsOf = () => wz.mode === 'edit' ? ['dom', 'sys'] : ['dom', 'sys', 'name'];
+let wz = { step: 'dom', mode: 'new', name: '', dom: null, sys: null, after: null };
+function openWizard(step, mode, after) {
   const j = job();
-  wz = { step, mode: mode || 'new', name: mode === 'edit' && j ? j.name : '', dom: mode === 'edit' && j ? j.dom : null, sys: mode === 'edit' && j ? j.sys : null };
-  $('wz').hidden = false; $('wzName').value = wz.name; showStep(step);
+  if (step === 'perm' || step === 'name') step = 'dom';
+  wz = { step, mode: mode === 'edit' ? 'edit' : 'new', name: mode === 'edit' && j ? j.name : '', dom: j ? j.dom : null, sys: j ? j.sys : 'itrf3', after: after || null };
+  $('home').hidden = true; $('wz').hidden = false; $('wzName').value = wz.name; showStep(step);
 }
 function showStep(s) {
   wz.step = s; const ST = stepsOf(), k = ST.indexOf(s);
   document.querySelectorAll('[data-step]').forEach(el => el.hidden = el.dataset.step !== s);
   document.querySelectorAll('#wzSteps div').forEach(el => { const i = ST.indexOf(el.dataset.s); el.hidden = i < 0; el.dataset.n = i + 1; el.className = i < 0 ? '' : i < k ? 'done' : i === k ? 'on' : ''; });
   $('wzSteps').style.gridTemplateColumns = 'repeat(' + ST.length + ',1fr)';
-  $('wzBack').disabled = k === 0 || (wz.mode === 'edit' && s === 'dom');
-  $('wzBack').textContent = wz.mode === 'edit' && s === 'dom' ? 'Geri' : 'Geri';
+  $('wzBack').disabled = false;
+  $('wzBack').textContent = k === 0 ? 'Vazgeç' : 'Geri';
   if (s === 'perm') { updPermCard(); }
   if (s === 'name') { renderWzJobs(); $('wzNameErr').hidden = true; setTimeout(() => $('wzName').focus(), 100); }
   if (s === 'dom') buildDomGrid();
@@ -1210,22 +1378,21 @@ function showStep(s) {
 }
 function updNext() {
   const s = wz.step, n = $('wzNext');
-  n.textContent = s === 'sys' ? (wz.mode === 'edit' ? 'Kaydet' : 'Ölçüme Başla') : 'İleri';
-  n.disabled = (s === 'perm' && !permOk) || (s === 'name' && !$('wzName').value.trim()) || (s === 'dom' && !wz.dom) || (s === 'sys' && !wz.sys);
+  n.textContent = s === 'name' ? 'Ölçüme Başla' : s === 'sys' && wz.mode === 'edit' ? 'Kaydet' : 'İleri';
+  n.disabled = (s === 'name' && !$('wzName').value.trim()) || (s === 'dom' && !wz.dom) || (s === 'sys' && !wz.sys);
 }
 $('wzName').addEventListener('input', () => { $('wzNameErr').hidden = true; updNext(); });
 $('wzName').addEventListener('keydown', e => { if (e.key === 'Enter' && !$('wzNext').disabled) $('wzNext').click(); });
-$('wzBack').onclick = () => { const ST = stepsOf(), k = ST.indexOf(wz.step); if (k > 0) showStep(ST[k - 1]); };
+$('wzBack').onclick = () => { const ST = stepsOf(), k = ST.indexOf(wz.step); if (k > 0) showStep(ST[k - 1]); else { $('wz').hidden = true; if (!job()) openHome(); } };
 $('wzNext').onclick = () => {
   const s = wz.step;
-  if (s === 'perm') return showStep(stepsOf()[1]);
+  if (s === 'dom') return showStep('sys');
+  if (s === 'sys') return wz.mode === 'edit' ? finishWizard() : showStep('name');
   if (s === 'name') {
     const nm = $('wzName').value.trim().replace(/\s+/g, ' ');
-    if (jobs.some(j => j.name.toLocaleLowerCase('tr') === nm.toLocaleLowerCase('tr'))) { $('wzNameErr').hidden = false; $('wzNameErr').textContent = 'Bu adla bir iş zaten var. Listeden seçin veya başka bir ad yazın.'; return; }
-    wz.name = nm; return showStep('dom');
+    if (jobs.some(j => j.name.toLocaleLowerCase('tr') === nm.toLocaleLowerCase('tr'))) { $('wzNameErr').hidden = false; $('wzNameErr').textContent = 'Bu adla bir iş zaten var. Aşağıdaki listeden devam edin veya başka bir ad yazın.'; return; }
+    wz.name = nm; finishWizard();
   }
-  if (s === 'dom') return showStep('sys');
-  if (s === 'sys') finishWizard();
 };
 function renderWzJobs() {
   const box = $('wzJobs'); box.innerHTML = ''; $('wzJobsWrap').hidden = !jobs.length;
@@ -1234,7 +1401,7 @@ function renderWzJobs() {
     const l = document.createElement('div'); const t = document.createElement('b'); t.textContent = j.name; t.style.cssText = 'font:700 15px var(--f-disp)';
     const sm = document.createElement('small'); sm.style.cssText = 'display:block;font:10.5px var(--f-num);color:var(--muted)'; sm.textContent = SYSN[j.sys] + ' · DOM ' + j.dom + ' · ' + j.points.length + ' nokta';
     l.append(t, sm); const go = document.createElement('span'); go.textContent = 'Devam ›'; go.style.cssText = 'font:700 12px var(--f-disp);letter-spacing:.06em;text-transform:uppercase;color:var(--info)';
-    b.append(l, go); b.onclick = () => { curId = j.id; saveJobs(); closeWizard(); toast('“' + j.name + '” işine devam'); };
+    b.append(l, go); b.onclick = () => { curId = j.id; if (wz.dom) j.dom = wz.dom; if (wz.sys) j.sys = wz.sys; saveJobs(); closeWizard(); toast('“' + j.name + '” işine devam · ' + SYSN[j.sys]); };
     box.appendChild(b);
   });
 }
@@ -1253,13 +1420,13 @@ function buildDomGrid() {
 }
 function syncSys() {
   document.querySelectorAll('.syscard').forEach(b => b.setAttribute('aria-pressed', b.dataset.s === wz.sys));
-  $('smName').textContent = wz.name || '—'; $('smDom').textContent = wz.dom ? wz.dom + '°' : '—'; $('smSys').textContent = wz.sys ? SYSN[wz.sys] : '—';
+  $('smDom').textContent = wz.dom ? wz.dom + '°' : '—'; $('smSys').textContent = wz.sys ? SYSN[wz.sys] : '—';
 }
 document.querySelectorAll('.syscard').forEach(b => b.onclick = () => { wz.sys = b.dataset.s; syncSys(); updNext(); });
 function finishWizard() {
   if (wz.mode === 'edit' && job()) { const j = job(); j.dom = wz.dom; j.sys = wz.sys; toast('DOM ve sistem güncellendi'); }
   else {
-    if (wz.mode === 'first' || !wz.name) { // ilk açılış: iş adı sorulmaz, tarihli ad verilir
+    if (!wz.name) { // ad girilmediyse tarihli ad
       const base = 'Ölçüm ' + new Date().toLocaleDateString('tr-TR'); let nm = base, i = 2;
       while (jobs.some(x => x.name === nm)) nm = base + ' (' + i++ + ')';
       wz.name = nm;
@@ -1268,9 +1435,9 @@ function finishWizard() {
   }
   saveJobs(); closeWizard();
 }
-function closeWizard() { $('wz').hidden = true; goTab('tabMeasure'); render(); if (permOk && watchId == null) startRun(); }
-$('jbEdit').onclick = () => job() ? openWizard('dom', 'edit') : openWizard('name');
-$('btnNewJob').onclick = () => openWizard(permOk ? 'name' : 'perm');
+function closeWizard() { $('wz').hidden = true; goTab(wz.after || 'tabMeasure'); render(); if (permOk && watchId == null) startRun(); }
+$('jbEdit').onclick = () => job() ? goTab('tabPoints') : openWizard('dom');
+$('btnNewJob').onclick = () => openWizard('dom');
 
 // ===== TAM KONUM İZNİ =====
 const PIN = '<svg viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.6"/></svg>';
@@ -1280,7 +1447,7 @@ function updPermCard() {
   const st = permInfo.st, I = $('pIcon'), help = $('pHelp');
   const set = (cls, ico, t, d, btn) => { I.className = 'gicon ' + cls; I.innerHTML = ico; $('pT').textContent = t; $('pD').innerHTML = d; $('pBtn').textContent = btn; };
   help.hidden = true; help.innerHTML = ''; $('pBtn').disabled = st === 'wait';
-  if (st === 'ok') set('ok', CHECK, 'Tam konum izni verildi', permInfo.acc != null ? 'İlk okuma ±' + fmt(permInfo.acc, 1) + ' m. Devam etmek için İleri\'ye basın.' : 'Konum açık, uydu bekleniyor. İleri\'ye basabilirsiniz.', 'Tekrar Kontrol Et');
+  if (st === 'ok') set('ok', CHECK, 'Konum izni ve konum açık', permInfo.acc != null ? 'Tam konum · ilk okuma ±' + fmt(permInfo.acc, 1) + ' m.' : 'Tam konum · uydu bekleniyor.', 'Tekrar Kontrol Et');
   else if (st === 'wait') set('wait', PIN, 'Bekleniyor…', 'Açılan pencerede <b>İzin ver</b> ve <b>Tam</b> konumu seçin; konum kapalıysa <b>Tamam</b> deyin.', 'Bekleniyor…');
   else if (st === 'approx' && NATIVE) { set('off', PIN, 'Yaklaşık konum verilmiş', 'Koordinat için <b>tam konum</b> gerekir.', 'Tekrar Dene');
     help.hidden = false; help.innerHTML = '<ol class="steps"><li>Aşağıdaki düğmeyle uygulama ayarlarını açın.</li><li><b>İzinler › Konum</b>: <b>Uygulamayı kullanırken izin ver</b> ve <b>Tam konumu kullan</b> açık olsun.</li><li>Geri dönün; durum kendiliğinden güncellenir.</li></ol>';
@@ -1296,7 +1463,7 @@ function updPermCard() {
     if (permInfo.tries > 0) { help.hidden = false;
       if (NATIVE) help.appendChild(nativeBtn('Konum Ayarlarını Aç', () => Android.openLocationSettings()));
       else help.appendChild($('tplQS').content.cloneNode(true)); } }
-  else set('', PIN, 'İzin bekleniyor', 'Henüz izin istenmedi.', 'Tam Konum İznini Ver');
+  else set('', PIN, 'Tam konum izni', 'BAŞLAT\'a basın; çıkan pencerede İzin ver › Tam seçin.', 'Tam Konum İznini Ver');
   updNext();
 }
 function askPrecise(silent) {
@@ -1312,38 +1479,89 @@ function askPrecise(silent) {
     const a = pos.coords.accuracy; onPos(pos);
     if (a > 500) { permOk = true; permInfo = { st: 'approx', acc: a, tries }; } // yaklaşık konum: uyar ama engelleme
     else { permOk = true; permInfo = { st: 'ok', acc: a, tries }; }
-    updPermCard(); if ($('wz').hidden && watchId == null) startRun();
+    updPermCard(); if ($('wz').hidden && watchId == null) startRun(); onLocReady();
   }, e => {
     if (e.code === 1) { permOk = false; permInfo = { st: 'denied', tries }; }
     else if (e.code === 2) { permOk = false; permInfo = { st: 'off', tries }; }
     else { permOk = true; permInfo = { st: 'ok', acc: null, tries }; } // zaman aşımı: izin var, uydu bekleniyor
-    updPermCard();
+    updPermCard(); if (permOk) onLocReady(); else setupRun = false;
   }, { enableHighAccuracy: true, timeout: 25000, maximumAge: 0 });
 }
 $('pBtn').onclick = () => askPrecise(false);
 document.addEventListener('visibilitychange', () => {
   if (document.visibilityState !== 'visible') return;
-  if (!$('wz').hidden && wz.step === 'perm' && permInfo.st !== 'ok') askPrecise(true);
+  if (homeOpen() && permInfo.st !== 'ok') askPrecise(true);
+  if (homeOpen()) btPermRender();
   if (!$('gate').hidden) enableLocation(true);
   if (watchId != null) { try { navigator.wakeLock.request('screen').then(w => wakeLock = w).catch(() => {}); } catch (e) {} }
 });
 
 // Android uygulamasından gelen durum: ok | approx | denied | off | none
 window.__locState = (st, silent) => {
-  const inWz = !$('wz').hidden && wz.step === 'perm';
+  const inWz = homeOpen();
   if (st === 'ok') {
     permOk = true;
     if (inWz) {
       permInfo = { st: 'ok', acc: last && Date.now() - last.recv < 20000 ? last.acc : null, tries: permInfo.tries || 0 }; updPermCard();
-      if (watchId == null) { Geo._probe = p => { onPos(p); if (permInfo.st === 'ok' && permInfo.acc == null && !$('wz').hidden) { permInfo.acc = p.coords.accuracy; updPermCard(); } }; Android.startUpdates(); }
+      if (watchId == null) { if (job()) restartRun(); else { Geo._probe = p => { onPos(p); if (permInfo.st === 'ok' && permInfo.acc == null) { permInfo.acc = p.coords.accuracy; updPermCard(); } }; Android.startUpdates(); } }
+      onLocReady();
     } else { $('gate').hidden = true; gateTries = 0; if (job() && (watchId == null || !silent)) restartRun(); }
     return;
   }
   permOk = false;
-  if (inWz) { permInfo = { st: st === 'none' ? 'idle' : st, tries: permInfo.tries || 0 }; updPermCard(); return; }
+  if (inWz) { permInfo = { st: st === 'none' ? 'idle' : st, tries: permInfo.tries || 0 }; updPermCard(); if (!silent) setupRun = false; return; }
   if (st === 'none' && silent) return;
   showGate(st === 'off' ? 'off' : 'denied');
 };
+// ===== ANA SAYFA: kurulum (konum + Bluetooth izni) ve gezinme =====
+let setupRun = false, pendingNav = null;
+const homeOpen = () => !$('home').hidden;
+function openHome() { $('home').hidden = false; $('wz').hidden = true; btPermRender(); updPermCard(); setupLabel(); }
+function closeHome() { $('home').hidden = true; }
+function btPermRender() {
+  const I = $('btpI'), T = $('btpT'), D = $('btpD');
+  const BT = '<svg viewBox="0 0 24 24"><path d="M7 7l10 10-5 5V2l5 5L7 17"/></svg>';
+  if (!NATIVE) { I.className = 'gicon'; I.innerHTML = BT; T.textContent = 'Bluetooth izni'; D.textContent = 'RTK alıcı yalnız Android uygulamasında bağlanır.'; return; }
+  const ok = Android.btPermState() === 'ok';
+  I.className = 'gicon ' + (ok ? 'ok' : ''); I.innerHTML = ok ? CHECK : BT;
+  T.textContent = ok ? 'Bluetooth izni verildi' : 'Bluetooth izni'; D.textContent = ok ? 'RTK alıcı bağlanabilir.' : 'RTK alıcı bağlamak için gerekir; BAŞLAT ile istenir.';
+}
+function setupDone() { return permOk && permInfo.st === 'ok' && (!NATIVE || Android.btPermState() === 'ok'); }
+function setupLabel() { const b = $('homeStart'), d = setupDone(); b.textContent = d ? 'Kurulum Tamam ✓' : 'Başlat'; b.classList.toggle('done', d); }
+function startSetup() { setupRun = true; askPrecise(false); }
+function onLocReady() {
+  if (!setupRun) { setupLabel(); return; }
+  if (NATIVE && Android.btPermState() !== 'ok') { Android.btRequestPerm(); return; }
+  finishSetup();
+}
+window.__btPerm = ok => { btPermRender(); if (!ok) toast('Bluetooth izni verilmedi; RTK alıcı için Uygulama izinlerinden açabilirsiniz'); finishSetup(); };
+function finishSetup() {
+  setupRun = false; setupLabel();
+  if (permOk) toast('Kurulum tamamlandı');
+  if (pendingNav && permOk) { const f = pendingNav; pendingNav = null; f(); }
+}
+function navNeedsSetup(f) { if (permOk) { f(); return; } pendingNav = f; startSetup(); }
+function goMeasure() { closeHome(); openWizard('dom', 'new', 'tabMeasure'); }
+function goStake() { closeHome(); if (!job()) { openWizard('dom', 'new', 'tabStake'); return; } goTab('tabStake'); if (permOk && watchId == null) startRun(); }
+// TKGM Parsel Sorgu: siteyi açar, enlem/boylamı panoya kopyalar (Koordinat ile sorguya yapıştırılır)
+function openParsel() {
+  const c = last ? { lat: last.lat, lon: last.lon } : map ? { lat: map.getCenter().lat, lon: map.getCenter().lng } : null;
+  let u = 'https://parselsorgu.tkgm.gov.tr/';
+  if (c) {
+    const txt = c.lat.toFixed(7) + ', ' + c.lon.toFixed(7);
+    if (NATIVE) Android.copy(txt); else { try { navigator.clipboard.writeText(txt).catch(() => {}); } catch (e) {} }
+    u += '#ara/cografi/' + c.lat.toFixed(7) + '/' + c.lon.toFixed(7);
+    toast('Parsel Sorgu açılıyor · enlem/boylam panoya kopyalandı: ' + txt);
+  } else toast('Parsel Sorgu açılıyor (konum yok)');
+  if (NATIVE) Android.openUrl(u); else window.open(u, '_blank');
+}
+$('homeStart').onclick = () => { if (setupDone()) { toast('Kurulum zaten tamam'); return; } startSetup(); };
+$('hMeasure').onclick = () => navNeedsSetup(goMeasure);
+$('hStake').onclick = () => navNeedsSetup(goStake);
+$('hMap').onclick = () => navNeedsSetup(() => { closeHome(); goTab('tabMap'); if (job() && watchId == null) startRun(); });
+$('hPs').onclick = openParsel;
+$('homeBtn').onclick = openHome;
+
 function nativeBtn(txt, fn) { const b = document.createElement('button'); b.type = 'button'; b.className = 'btn big'; b.style.width = '100%'; b.textContent = txt; b.onclick = fn; return b; }
 
 // ===== ÖLÇÜM SIRASINDA KONUM KAPANIRSA =====
@@ -1378,7 +1596,7 @@ function onPos(pos) {
   if (recent.length && recent[recent.length - 1].q !== last.q) recent.length = 0; // çözüm türü değişti: kararlılığı baştan hesapla
   if (!recent.length || recent[recent.length - 1].t !== last.t) { recent.push(last); if (recent.length > 15) recent.shift(); }
   updSaveBtn();
-  renderStatus(); render(); updateMap();
+  renderStatus(); render(); updateMap(); if (!$('tabStake').hidden) updateStake();
   if (collecting) feed(last);
 }
 // RTK modunda "yalnız Fix'te kaydet" kuralı
@@ -1387,8 +1605,10 @@ function updSaveBtn() {
   const b = $('btnSave'), fresh = last && Date.now() - last.recv < 15000;
   const m = $('mapSave');
   if (watchId == null || !fresh) { b.disabled = m.disabled = true; b.textContent = 'Kaydet'; m.textContent = 'Koordinatı Kaydet'; return; }
+  $('stkSave').disabled = true;
   if (fixBlocked()) { b.disabled = m.disabled = true; b.textContent = m.textContent = 'FIX BEKLENİYOR'; return; }
-  b.disabled = m.disabled = false; b.textContent = 'Kaydet'; m.textContent = 'Koordinatı Kaydet';
+  b.disabled = m.disabled = false; b.textContent = 'Kaydet'; m.textContent = 'Kaydet · N.NO ' + ($('ptNo').value.trim() || '—');
+  $('stkSave').disabled = !curTarget();
 }
 function onErr(e) {
   if (e.code !== 1 && last && Date.now() - last.recv < 30000) return;
@@ -1398,8 +1618,8 @@ function onErr(e) {
 async function startRun() {
   if (watchId != null || !job()) return;
   watchId = Geo.watch(onPos, onErr); if (NATIVE) Android.keepScreen(true);
-  startT = Date.now(); recent.length = 0;
-  $('btnRun').textContent = 'Durdur'; $('btnRun').className = 'btn stop'; $('btnMeasure').disabled = false;
+  startT = Date.now(); recent.length = 0; sessCount = 0;
+  $('btnRun').textContent = $('stkRun').textContent = 'Durdur'; $('btnRun').className = $('stkRun').className = 'btn stop'; $('btnMeasure').disabled = false;
   updSaveBtn();
   msg('Koordinatlar <b>' + SYSN[J().sys] + ' · DOM ' + J().dom + '</b> sisteminde okunuyor' + (RX.src === 'bt' ? ' (RTK alıcı). <b>RTK Fix</b> olunca kaydedin.' : RX.src === 'demo' ? ' (SİMÜLASYON — gerçek ölçüm değil).' : '. Kararlılık düşünce <b>Kaydet</b>\'e basın.'));
   try { if ('wakeLock' in navigator) wakeLock = await navigator.wakeLock.request('screen'); } catch (e) {}
@@ -1407,16 +1627,18 @@ async function startRun() {
 function stopRun() {
   if (watchId != null) Geo.clear(watchId);
   watchId = null; if (collecting) cancelCollect(); if (NATIVE) Android.keepScreen(false);
-  $('btnRun').textContent = 'Başlat'; $('btnRun').className = 'btn primary'; $('btnMeasure').disabled = true; $('btnSave').disabled = true;
+  $('btnRun').textContent = $('stkRun').textContent = 'Başlat'; $('btnRun').className = $('stkRun').className = 'btn primary'; $('btnMeasure').disabled = true; $('btnSave').disabled = true; $('stkSave').disabled = true;
   try { wakeLock && wakeLock.release(); } catch (e) {} wakeLock = null;
-  msg('Okuma durduruldu.');
+  msg('Okuma durduruldu · bu oturumda <b>' + sessCount + ' nokta</b> kaydedildi' + (job() ? ' · “' + J().name + '” işinde toplam ' + pts().length + ' nokta' : ''));
+  toast(sessCount + ' nokta kayıt yapıldı');
 }
 
 // ===== ORTALAMA ÖLÇÜM =====
 function beginCollect() {
+  const no = ptNoOk(); if (!no) return;
   const rtk = RX.src !== 'phone';
   const n = AVG_N, warm = rtk ? 0 : Math.max(0, num('warm')) * 1000;
-  collecting = { n, rtk, max: rtk ? RX.rtkMaxCm / 100 : (num('maxAcc') || 10), list: [], lastT: 0, start: Date.now(), warmUntil: Math.max(Date.now(), startT + warm) };
+  collecting = { no, n, rtk, max: rtk ? RX.rtkMaxCm / 100 : (num('maxAcc') || 10), list: [], lastT: 0, start: Date.now(), warmUntil: Math.max(Date.now(), startT + warm) };
   $('btnMeasure').textContent = 'İptal'; $('prog').style.width = '0%'; msg('Ortalama başladı… telefonu sabit tutun.');
   collecting.timer = setInterval(() => {
     const c = collecting; if (!c) return;
@@ -1456,18 +1678,32 @@ function finishCollect(partial) {
   if (use.length < Math.min(3, c.list.length)) use = c.list.slice().sort((a, b) => a.acc - b.acc).slice(0, Math.max(1, Math.ceil(c.list.length / 2)));
   const R = robustMean(use, num('sigK') || 2.5); R.rej += c.list.length - use.length;
   $('btnMeasure').textContent = 'Ortalama'; $('prog').style.width = '100%';
-  openSheet(R, (partial ? 'Süre doldu. ' : '') + R.n + (c.rtk ? ' Fix epoğu' : ' okuma') + ' ortalaması · dağılım ±' + fmtAcc(R.sd) + ' · ortalamanın hatası ±' + fmtAcc(R.se));
+  R.t = Date.now(); R.src = RX.src;
+  commitPoint(R, c.no, $('ptCode').value.trim(), false);
+  msg('<b>“' + c.no + '” kaydedildi</b> · ' + (partial ? 'süre doldu, ' : '') + R.n + (c.rtk ? ' Fix epoğu' : ' okuma') + ' ortalaması · dağılım ±' + fmtAcc(R.sd) + ' · sıradaki <b>' + J().next + '</b>');
 }
 function cancelCollect() { if (!collecting) return; clearInterval(collecting.timer); collecting = null; $('btnMeasure').textContent = 'Ortalama'; $('prog').style.width = '0%'; msg('Ortalama iptal edildi.'); }
 function nextName(n) { const m = String(n).match(/^(.*?)(\d+)$/); return m ? m[1] + String(+m[2] + 1).padStart(m[2].length, '0') : n + '1'; }
 
 // ===== KAYIT PENCERESİ (nokta numarası sorulur) =====
 let pending = null;
+// Nokta numarası ölçüm ekranının üstünde sorulur; aynı numara varsa ikinci basışta kaydedilir
+let dupArm = null, sessCount = 0;
+function ptNoOk() {
+  const no = $('ptNo').value.trim();
+  if (!no) { toast('Önce nokta numarasını yazın'); $('ptNo').focus(); return null; }
+  if (pts().some(p => p.name === no) && dupArm !== no) { dupArm = no; setTimeout(() => { if (dupArm === no) dupArm = null; }, 4000); toast('N.NO ' + no + ' bu işte var · yine de kaydetmek için tekrar basın'); return null; }
+  dupArm = null; return no;
+}
 function saveNow() {
   if (!last) { toast('Henüz konum yok'); return; }
   if (Date.now() - last.recv > 15000) { toast('Son okuma eski, yeni okuma bekleniyor'); return; }
   if (fixBlocked()) { toast('RTK Fix bekleniyor'); return; }
+  const no = ptNoOk(); if (!no) return;
   if (collecting) cancelCollect();
+  commitPoint({ lat: last.lat, lon: last.lon, h: last.h, H: last.H, q: last.q, src: RX.src, acc: last.acc, sd: 0, se: 0, n: 1, rej: 0, t: Date.now() }, no, $('ptCode').value.trim(), false);
+}
+function _sheetSave() {
   openSheet({ lat: last.lat, lon: last.lon, h: last.h, H: last.H, q: last.q, acc: last.acc, sd: 0, se: 0, n: 1, rej: 0, t: Date.now() }, (last.q != null ? (QN[last.q] || ['—'])[0] + ' · ' : '') + 'tek epok · ' + new Date().toLocaleTimeString('tr-TR'));
 }
 function openSheet(R, info) {
@@ -1498,8 +1734,8 @@ $('shOk').onclick = () => {
 function commitPoint(R, no, code, auto) {
   const j = job(); if (!j) return;
   j.points.push({ name: no, code: code || (R.src === 'demo' ? 'SIM' : ''), lat: R.lat, lon: R.lon, h: R.h, H: R.H != null ? R.H : null, q: R.q != null ? R.q : null, src: R.src || RX.src, acc: R.acc, sd: R.sd, se: R.se, n: R.n, rej: R.rej, t: R.t || Date.now(), auto: auto || undefined });
-  j.next = nextName(no); j.lastCode = code;
-  saveJobs();
+  j.next = nextName(no); j.lastCode = code; sessCount++;
+  saveJobs(); $('ptNo').value = j.next;
   justAdded = true; render(); justAdded = false;
   msg('<b>“' + no + '” kaydedildi</b>' + (auto ? ' (otomatik)' : '') + ' · ±' + fmtAcc(R.acc) + ' · sıradaki numara <b>' + j.next + '</b>');
   toast('Nokta ' + no + ' kaydedildi');
@@ -1514,7 +1750,7 @@ function autoTick() {
   if (fixBlocked()) { msg('Otomatik kayıt açık · <b>RTK Fix bekleniyor</b>'); return; }
   autoLastT = last.t; autoNext = Date.now() + Math.max(1, UI.autoInt) * 1000;
   const j = J();
-  commitPoint({ lat: last.lat, lon: last.lon, h: last.h, H: last.H, q: last.q, src: RX.src, acc: last.acc, sd: 0, se: 0, n: 1, rej: 0, t: Date.now() }, j.next || String(pts().length + 1), j.lastCode || '', true);
+  commitPoint({ lat: last.lat, lon: last.lon, h: last.h, H: last.H, q: last.q, src: RX.src, acc: last.acc, sd: 0, se: 0, n: 1, rej: 0, t: Date.now() }, $('ptNo').value.trim() || j.next || String(pts().length + 1), $('ptCode').value.trim(), true);
 }
 setInterval(autoTick, 250);
 
@@ -1524,7 +1760,8 @@ $('btnCal').onclick = () => {
   const pt = pts()[pts().length - 1]; if (!pt) { toast('Önce bilinen noktada kayıt yapın'); return; }
   const kY = parseFloat($('kY').value.replace(',', '.')), kX = parseFloat($('kX').value.replace(',', '.'));
   if (!isFinite(kY) || !isFinite(kX)) { toast('Bilinen Y ve X değerlerini girin'); return; }
-  const p = project(pt, true), dY = kY - p.Y, dX = kX - p.X;
+  const p = project(pt, true); if (p.geo) { toast('Bilinen nokta düzeltmesi projeksiyon sistemlerinde kullanılır'); return; }
+  const dY = kY - p.Y, dX = kX - p.X;
   if (Math.hypot(dY, dX) > 50) { toast('Fark ' + fmt(Math.hypot(dY, dX), 1) + ' m: sistem veya DOM yanlış olabilir'); return; }
   cal = { key: p.calKey, label: p.label, dY, dX, pt: pt.name }; store.set('cal', cal); calText(); render();
   toast('Düzeltme uygulandı: ' + fmt(Math.hypot(dY, dX), 2) + ' m');
@@ -1534,24 +1771,24 @@ $('btnCalOff').onclick = () => { cal = null; store.set('cal', null); calText(); 
 // ===== DIŞA AKTARIM =====
 function stamp() { const d = new Date(), p = v => String(v).padStart(2, '0'); return d.getFullYear() + p(d.getMonth() + 1) + p(d.getDate()) + '_' + p(d.getHours()) + p(d.getMinutes()); }
 const safe = s => s.replace(/[\\/:*?"<>|]+/g, '').replace(/\s+/g, '_').slice(0, 40);
-function fileBase() { const j = J(); return safe(j.name) + '_' + SYSN[j.sys].replace(/ · /g, '_') + '_DOM' + j.dom + '_' + stamp(); }
+function fileBase() { const j = J(); return safe(j.name) + '_' + SYSF[j.sys] + (j.sys === 'wgs' ? '' : '_DOM' + j.dom) + '_' + stamp(); }
 function makeNcn() { const d = +$('dec').value;   // NetCAD: N.NO Y X [Z]
-  return pts().map(pt => { const p = project(pt); return [pt.name.replace(/\s+/g, '_'), fmtDot(p.Y, d), fmtDot(p.X, d)].concat(COLS.z ? [fmtDot(zOut(p), 3)] : []).join(' '); }).join('\r\n') + '\r\n'; }
+  return pts().map(pt => { const p = project(pt); return [pt.name.replace(/\s+/g, '_'), fmtCDot(p.Y, p), fmtCDot(p.X, p)].concat(COLS.z ? [fmtDot(zOut(p), 3)] : []).join(' '); }).join('\r\n') + '\r\n'; }
 function makeTxt() {
   const d = +$('dec').value, j = J(), p0 = pts()[0] ? project(pts()[0]) : { label: SYSN[j.sys] };
   const head = ['# GNSS Koordinat Okuyucu - YHAN', '# İş: ' + j.name, '# Sistem: ' + p0.label + ' (Y=Sağa, X=Yukarı)', '# RTK noktaları TUSAGA-Aktif/ITRF96 (2005.0) olarak alınır; epok düzeltmesi uygulanmaz.',
     '# Bilinen nokta düzeltmesi: ' + (cal && p0.cal ? 'dY=' + cal.dY.toFixed(3) + ' dX=' + cal.dX.toFixed(3) + ' (' + cal.pt + ')' : 'yok'),
     '# ED50 parametreleri: ' + Object.entries(params()).map(([k, v]) => k + '=' + v).join(' '), '# Oluşturma: ' + new Date().toLocaleString('tr-TR'),
-    ['N.NO', 'Y', 'X'].concat(COLS.z ? ['Z'] : [], COLS.acc ? ['Hata_m'] : [], COLS.time ? ['Saat'] : []).join('\t')];
+    ['N.NO', p0.geo ? 'Boylam' : 'Y', p0.geo ? 'Enlem' : 'X'].concat(COLS.z ? ['Z'] : [], COLS.acc ? ['Hata_m'] : [], COLS.time ? ['Saat'] : []).join('\t')];
   const rows = pts().map(pt => { const p = project(pt);
-    return [pt.name, fmtDot(p.Y, d), fmtDot(p.X, d)].concat(COLS.z ? [fmtDot(zOut(p), 3)] : [], COLS.acc ? [fmtDot(pt.acc, 3)] : [], COLS.time ? [new Date(pt.t).toLocaleString('tr-TR')] : []).join('\t'); });
+    return [pt.name, fmtCDot(p.Y, p), fmtCDot(p.X, p)].concat(COLS.z ? [fmtDot(zOut(p), 3)] : [], COLS.acc ? [fmtDot(pt.acc, 3)] : [], COLS.time ? [new Date(pt.t).toLocaleString('tr-TR')] : []).join('\t'); });
   return head.concat(rows).join('\r\n') + '\r\n';
 }
 function makeKml() {
   const esc = s => String(s).replace(/[<>&"]/g, c => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;' }[c]));
   const d = +$('dec').value;
   const pm = pts().map(pt => { const p = project(pt);
-    const desc = ['Y ' + fmtDot(p.Y, d), 'X ' + fmtDot(p.X, d)].concat(COLS.z ? ['Z ' + fmtDot(zOut(p), 3)] : [], COLS.acc ? ['Hata ±' + fmtAcc(pt.acc)] : [], COLS.time ? [new Date(pt.t).toLocaleString('tr-TR')] : []).join(' · ');
+    const desc = [hdY(p) + ' ' + fmtCDot(p.Y, p), hdX(p) + ' ' + fmtCDot(p.X, p)].concat(COLS.z ? ['Z ' + fmtDot(zOut(p), 3)] : [], COLS.acc ? ['Hata ±' + fmtAcc(pt.acc)] : [], COLS.time ? [new Date(pt.t).toLocaleString('tr-TR')] : []).join(' · ');
     return '<Placemark><name>' + esc(pt.name) + '</name><description>' + esc(desc) + '</description><styleUrl>#p</styleUrl><Point><coordinates>' + pt.lon.toFixed(9) + ',' + pt.lat.toFixed(9) + ',0</coordinates></Point></Placemark>'; }).join('\n');
   return '<?xml version="1.0" encoding="UTF-8"?>\n<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>' + esc(J().name) + '</name><Style id="p"><IconStyle><color>ff05b7f2</color><scale>1.1</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>\n' + pm + '\n</Document></kml>\n';
 }
@@ -1577,31 +1814,33 @@ async function copy() { if (!pts().length) { toast('Bu işte nokta yok'); return
 let map, here, circle, trailLine, trail = [], layerIdx = 0, layers = [], ptLayer;
 function initMap() {
   if (!window.L) { $('map').innerHTML = '<div class="empty" style="color:#ccc;padding-top:40px">Harita yüklenemedi (internet gerekli). Ölçüm ve kayıt çalışmaya devam eder.</div>'; return; }
-  map = L.map('map', { zoomControl: false, attributionControl: false }).setView([39.0, 33.0], 6);
-  L.control.zoom({ position: 'topleft' }).addTo(map);
-  trailLine = L.polyline([], { color: '#1f7aff', weight: 3, opacity: .75 }).addTo(map);
+  map = L.map('map', { zoomControl: false, attributionControl: false, maxZoom: 22 }).setView([39.0, 33.0], 6);
+  L.control.zoom({ position: 'topright' }).addTo(map);
+  trailLine = L.polyline([], { color: '#1f7aff', weight: 2, opacity: .7 }).addTo(map);
   const sat = L.layerGroup([
-    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { maxZoom: 21, maxNativeZoom: 19, attribution: 'Uydu: Esri, Maxar' }),
-    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', { maxZoom: 21, maxNativeZoom: 19 })]);
-  const osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 21, maxNativeZoom: 19, attribution: '© OpenStreetMap' });
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { maxZoom: 22, maxNativeZoom: 19, attribution: 'Uydu: Esri, Maxar' }),
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', { maxZoom: 22, maxNativeZoom: 19 })]);
+  const osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 22, maxNativeZoom: 19, attribution: '© OpenStreetMap' });
   layers = [['Uydu', sat], ['Sokak', osm]]; sat.addTo(map); ptLayer = L.layerGroup().addTo(map);
   map.on('dragstart', () => { follow = false; }); drawPoints();
 }
 function updateMap() {
   if (!last) return;
   const p = project(last), d = +$('dec').value;
-  $('mY').textContent = fmt(p.Y, d); $('mX').textContent = fmt(p.X, d); $('mA').textContent = '±' + fmtAcc(last.acc);
+  $('mkY').textContent = hdY(p); $('mkX').textContent = hdX(p);
+  $('mY').textContent = fmtC(p.Y, p); $('mX').textContent = fmtC(p.X, p); $('mA').textContent = '±' + fmtAcc(last.acc);
   if (!map) return; const ll = [last.lat, last.lon];
   const pr = trail[trail.length - 1];
   if (!pr || pr[0] !== ll[0] || pr[1] !== ll[1]) { trail.push(ll); if (trail.length > 600) trail.shift(); trailLine.setLatLngs(trail); }
   if (!here) {
     circle = L.circle(ll, { radius: last.acc, color: '#1f7aff', weight: 1, fillColor: '#1f7aff', fillOpacity: .12 }).addTo(map);
-    here = L.circleMarker(ll, { radius: 8, color: '#ffffff', weight: 3, fillColor: '#1f7aff', fillOpacity: 1, className: 'herepulse' }).addTo(map);
-    map.setView(ll, 19);
+    here = L.circleMarker(ll, { radius: 5, color: '#ffffff', weight: 2, fillColor: '#1f7aff', fillOpacity: 1, className: 'herepulse' }).addTo(map);
+    map.setView(ll, 20);
   } else { here.setLatLng(ll); circle.setLatLng(ll).setRadius(last.acc); here.bringToFront(); if (follow && !$('tabMap').hidden) map.panTo(ll, { animate: false }); }
 }
 function drawPoints() { if (!ptLayer) return; ptLayer.clearLayers();
-  pts().forEach(pt => L.circleMarker([pt.lat, pt.lon], { radius: 5, color: '#14181d', weight: 2, fillColor: '#f2b705', fillOpacity: 1 }).bindTooltip(pt.name, { permanent: true, direction: 'right', offset: [8, 0] }).addTo(ptLayer)); }
+  const esc = s => String(s).replace(/[<>&"]/g, c => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;' }[c]));
+  pts().forEach(pt => L.marker([pt.lat, pt.lon], { icon: L.divIcon({ className: 'ptmk', html: '<i></i><span>' + esc(pt.name) + '</span>', iconSize: [0, 0] }), keyboard: false, interactive: false }).addTo(ptLayer)); }
 function openEarth() {
   if (NATIVE && pts().length) { Android.openKml(fileBase() + '.kml', makeKml()); toast('Kayıtlı noktalar Google Earth\'te açılıyor'); return; }
   const p = last || pts()[pts().length - 1]; if (!p) { toast('Önce konum alın'); return; }
@@ -1737,20 +1976,129 @@ document.querySelectorAll('#srcSeg button').forEach(b => b.onclick = () => {
   toast({ phone: 'Kaynak: telefon GPS\'i', bt: 'Kaynak: RTK alıcı', demo: 'Simülasyon açıldı (gerçek ölçüm değil)' }[s]);
 });
 
+// ===== APLİKASYON: hedef noktaya yön ve mesafe =====
+function curTarget() { const j = job(); if (!j || !j.targets || !j.targets.length) return null; return j.targets[Math.min(j.tIdx || 0, j.targets.length - 1)]; }
+const fmtLen = v => v < 1 ? fmt(v * 100, 1) + ' cm' : v < 1000 ? fmt(v, 3) + ' m' : fmt(v / 1000, 3) + ' km';
+function numTok(s) { const v = parseFloat(String(s).replace(',', '.')); return isFinite(v) ? v : NaN; }
+function parseTargets(text) {
+  const out = [];
+  String(text).split(/\r?\n/).forEach(line => {
+    line = line.trim(); if (!line || line[0] === '#') return;
+    let f = /[;\t]/.test(line) ? line.split(/[;\t]+/) : /\s/.test(line) ? line.split(/\s+/) : line.split(',');
+    f = f.map(s => s.trim()).filter(Boolean);
+    if (f.length < 3) return;
+    const Y = numTok(f[1]), X = numTok(f[2]);
+    if (!isFinite(Y) || !isFinite(X)) return;
+    out.push({ name: f[0], Y, X });
+  });
+  return out;
+}
+function setTargets(list, add) {
+  const j = job(); if (!j) { toast('Önce bir iş oluşturun'); return; }
+  const key = j.sys + ':' + j.dom;
+  list.forEach(t => t.key = key);
+  j.targets = add ? (j.targets || []).concat(list) : list;
+  if (j.tIdx == null || j.tIdx >= j.targets.length) j.tIdx = 0;
+  saveJobs(); renderStakeList(); updateStake();
+}
+function renderStakeList() {
+  const j = J(), s = $('stkSel'), T = j.targets || [];
+  $('stkJob').textContent = j.name; $('stkSys').textContent = SYSN[j.sys] + (j.sys === 'wgs' ? '' : ' · DOM ' + j.dom);
+  const geo = j.sys === 'wgs'; $('stkLY').textContent = geo ? 'Boylam' : 'Y'; $('stkLX').textContent = geo ? 'Enlem' : 'X';
+  s.innerHTML = '';
+  if (!T.length) { const o = document.createElement('option'); o.textContent = 'Hedef nokta yok'; s.appendChild(o); }
+  T.forEach((t, i) => { const o = document.createElement('option'); o.value = i; o.textContent = 'N.NO ' + t.name + ' · ' + fmt(t.Y, geo ? 7 : 2) + ' · ' + fmt(t.X, geo ? 7 : 2); s.appendChild(o); });
+  s.value = String(j.tIdx || 0);
+  const bad = T.filter(t => t.key && t.key !== j.sys + ':' + j.dom).length;
+  $('stkInfo').textContent = T.length + ' hedef nokta' + (bad ? ' · DİKKAT: ' + bad + ' hedef farklı sistem/DOM ile girildi' : '') + '. Hedef koordinatları ' + SYSN[j.sys] + ' sisteminde girilmelidir.';
+}
+function updateStake() {
+  if (!$('stkRadar')) return;
+  const T = curTarget(), j = J();
+  if (!T || !last) {
+    ['stkD', 'stkDX', 'stkDY', 'stkAz', 'stkAcc'].forEach(i => $(i).textContent = '—');
+    $('stkState').className = 'stk-state'; $('stkState').textContent = !T ? 'Hedef nokta ekleyin' : 'Konum bekleniyor — Başlat\'a basın';
+    drawRadar(null, null, last ? last.acc : null); return;
+  }
+  const p = project(last);
+  let dN, dE;
+  if (p.geo) { const e = enu({ lat: last.lat, lon: last.lon }, { lat: T.X, lon: T.Y }); dN = e[0]; dE = e[1]; }
+  else { dE = T.Y - p.Y; dN = T.X - p.X; }
+  const d = Math.hypot(dE, dN), az = ((Math.atan2(dE, dN) * 200 / Math.PI) + 400) % 400;
+  $('stkD').textContent = fmtLen(d);
+  $('stkDX').textContent = (dN >= 0 ? 'Kuzeye ' : 'Güneye ') + fmtLen(Math.abs(dN));
+  $('stkDY').textContent = (dE >= 0 ? 'Doğuya ' : 'Batıya ') + fmtLen(Math.abs(dE));
+  $('stkAz').textContent = fmt(az, 4) + 'ᵍ';
+  $('stkAcc').textContent = '±' + fmtAcc(last.acc);
+  const tol = Math.max(0.02, Math.min(last.acc, 1)), ok = d <= tol;
+  $('stkState').className = 'stk-state' + (ok ? ' ok' : '');
+  $('stkState').textContent = ok ? 'Hedefte ✓ · N.NO ' + T.name : 'N.NO ' + T.name + ' · ' + fmtLen(d) + ' uzakta';
+  drawRadar(dE, dN, last.acc);
+}
+function drawRadar(dE, dN, acc) {
+  const cv = $('stkRadar'), c = cv.getContext('2d'), W = cv.width, cx = W / 2, cy = W / 2, R = W / 2 - 40;
+  const cs = getComputedStyle(document.documentElement), col = n => cs.getPropertyValue(n).trim() || '#888';
+  c.clearRect(0, 0, W, W);
+  const d = dE == null ? null : Math.hypot(dE, dN);
+  const steps = [0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000];
+  const maxR = d == null ? Math.max(1, acc || 1) : (steps.find(s => s >= d * 1.15) || steps[steps.length - 1]);
+  const k = R / maxR;
+  c.lineWidth = 2; c.strokeStyle = col('--line');
+  for (let i = 1; i <= 4; i++) { c.beginPath(); c.arc(cx, cy, R * i / 4, 0, 2 * Math.PI); c.stroke(); }
+  c.beginPath(); c.moveTo(cx - R, cy); c.lineTo(cx + R, cy); c.moveTo(cx, cy - R); c.lineTo(cx, cy + R); c.stroke();
+  c.fillStyle = col('--muted'); c.font = '700 26px "Barlow Condensed", Arial, sans-serif'; c.textAlign = 'center';
+  c.fillText('K', cx, cy - R - 10); c.fillText('G', cx, cy + R + 30); c.fillText('D', cx + R + 22, cy + 9); c.fillText('B', cx - R - 22, cy + 9);
+  c.font = '500 20px "IBM Plex Mono", monospace'; c.textAlign = 'left'; c.fillText(maxR < 1 ? Math.round(maxR * 100) + ' cm' : maxR + ' m', cx + 8, cy - R + 24);
+  if (acc) { c.fillStyle = 'rgba(31,122,255,.16)'; c.beginPath(); c.arc(cx, cy, Math.min(R, Math.max(3, acc * k)), 0, 2 * Math.PI); c.fill(); }
+  if (d != null) {
+    const tx = cx + dE * k, ty = cy - dN * k;
+    c.strokeStyle = col('--accent'); c.lineWidth = 5; c.beginPath(); c.moveTo(cx, cy); c.lineTo(tx, ty); c.stroke();
+    const a = Math.atan2(ty - cy, tx - cx); c.fillStyle = col('--accent');
+    if (d > 0) { c.beginPath(); c.moveTo(tx, ty); c.lineTo(tx - 26 * Math.cos(a - .4), ty - 26 * Math.sin(a - .4)); c.lineTo(tx - 26 * Math.cos(a + .4), ty - 26 * Math.sin(a + .4)); c.closePath(); c.fill(); }
+    c.strokeStyle = col('--ink'); c.lineWidth = 4; c.beginPath(); c.arc(tx, ty, 14, 0, 2 * Math.PI); c.stroke();
+    c.beginPath(); c.moveTo(tx - 22, ty); c.lineTo(tx + 22, ty); c.moveTo(tx, ty - 22); c.lineTo(tx, ty + 22); c.stroke();
+  }
+  c.fillStyle = '#1f7aff'; c.strokeStyle = '#fff'; c.lineWidth = 4; c.beginPath(); c.arc(cx, cy, 10, 0, 2 * Math.PI); c.fill(); c.stroke();
+}
+$('stkSel').onchange = () => { const j = job(); if (!j) return; j.tIdx = +$('stkSel').value || 0; saveJobs(); updateStake(); updSaveBtn(); };
+$('stkPrev').onclick = () => { const j = job(); if (!j || !j.targets || !j.targets.length) return; j.tIdx = (j.tIdx + j.targets.length - 1) % j.targets.length; saveJobs(); renderStakeList(); updateStake(); };
+$('stkNext').onclick = () => { const j = job(); if (!j || !j.targets || !j.targets.length) return; j.tIdx = (j.tIdx + 1) % j.targets.length; saveJobs(); renderStakeList(); updateStake(); };
+$('stkAdd').onclick = () => {
+  const Y = numTok($('stkY').value), X = numTok($('stkX').value), no = $('stkNo').value.trim() || String(((job() || {}).targets || []).length + 1);
+  if (!isFinite(Y) || !isFinite(X)) { toast('Y ve X değerlerini girin'); return; }
+  setTargets([{ name: no, Y, X }], true); const j = job(); j.tIdx = j.targets.length - 1; saveJobs(); renderStakeList(); updateStake();
+  $('stkNo').value = nextName(no); $('stkY').value = ''; $('stkX').value = ''; toast('Hedef ' + no + ' eklendi');
+};
+$('stkLoad').onclick = () => { const L = parseTargets($('stkPaste').value); if (!L.length) { toast('Satır okunamadı · biçim: N.NO Y X'); return; } setTargets(L, true); $('stkPaste').value = ''; toast(L.length + ' hedef nokta yüklendi'); };
+$('stkClear').onclick = e => { const j = job(); if (!j || !(j.targets || []).length) { toast('Hedef yok'); return; } armed(e.currentTarget, () => { j.targets = []; j.tIdx = 0; saveJobs(); renderStakeList(); updateStake(); toast('Hedefler silindi'); }, 'Emin misiniz?'); };
+$('stkFromJob').onclick = () => { const P = pts(); if (!P.length) { toast('Bu işte kayıtlı nokta yok'); return; } setTargets(P.map(pt => { const p = project(pt); return { name: pt.name, Y: p.Y, X: p.X }; }), false); toast(P.length + ' kayıtlı nokta hedef yapıldı'); };
+$('stkRun').onclick = () => watchId == null ? (job() ? enableLocation(false) : openWizard('dom', 'new', 'tabStake')) : stopRun();
+$('stkSave').onclick = () => {
+  const T = curTarget(); if (!T || !last) return;
+  if (fixBlocked()) { toast('RTK Fix bekleniyor'); return; }
+  commitPoint({ lat: last.lat, lon: last.lon, h: last.h, H: last.H, q: last.q, src: RX.src, acc: last.acc, sd: 0, se: 0, n: 1, rej: 0, t: Date.now() }, T.name + 'A', 'APL', false);
+  toast('Aplikasyon kontrolü N.NO ' + T.name + 'A olarak kaydedildi');
+};
+
 // Android geri tuşu
 window.__back = () => {
+  if (homeOpen()) return '';
   if (!$('sheet').hidden) { closeSheet(); return 'handled'; }
   if (!$('wz').hidden) {
     const ST = stepsOf(), k = ST.indexOf(wz.step);
-    if (wz.mode === 'edit' || (k <= 1 && job())) { $('wz').hidden = true; return 'handled'; }
     if (k > 0) { showStep(ST[k - 1]); return 'handled'; }
-    return '';
+    $('wz').hidden = true; if (!job()) openHome(); return 'handled';
   }
   if ($('tabMeasure').hidden) { goTab('tabMeasure'); return 'handled'; }
-  return '';
+  openHome(); return 'handled';
 };
 
 // Ölçüm sekmesi kontrolleri
+DOMS.forEach(d => { const b = document.createElement('button'); b.type = 'button'; b.textContent = d; b.dataset.d = d;
+  b.onclick = () => { const j = job(); if (!j) { toast('Önce bir iş oluşturun'); return; } j.dom = d; saveJobs(); render(); updateMap(); toast('DOM ' + d + '°'); };
+  $('domChips').appendChild(b); });
+$('ptNo').addEventListener('change', () => { const j = job(); if (j && $('ptNo').value.trim()) { j.next = $('ptNo').value.trim(); saveJobs(); } });
+$('ptCode').addEventListener('change', () => { const j = job(); if (j) { j.lastCode = $('ptCode').value.trim(); saveJobs(); } });
 $('nEpoch').value = AVG_N; $('rtkN').value = AVG_N;
 document.querySelectorAll('#sysSeg button').forEach(b => b.onclick = () => {
   const j = job(); if (!j) { toast('Önce bir iş oluşturun'); return; }
@@ -1775,8 +2123,9 @@ $('btnRun').onclick = () => watchId == null ? enableLocation(false) : stopRun();
 $('btnSave').onclick = saveNow;
 $('btnMeasure').onclick = () => collecting ? cancelCollect() : (last ? beginCollect() : msg('Henüz konum yok, bekleyin.'));
 
-$('btnFollow').onclick = () => { follow = true; if (map && last) map.setView([last.lat, last.lon], Math.max(map.getZoom(), 18)); else toast('Önce konumu başlatın'); };
-$('btnLayer').onclick = () => { if (!map) return; map.removeLayer(layers[layerIdx][1]); layerIdx = (layerIdx + 1) % layers.length; layers[layerIdx][1].addTo(map); $('btnLayer').textContent = layers[(layerIdx + 1) % layers.length][0]; };
+$('btnFollow').onclick = () => { follow = true; if (map && last) map.setView([last.lat, last.lon], Math.max(map.getZoom(), 20)); else toast('Önce konumu başlatın'); };
+$('btnLayer').onclick = () => { if (!map) return; map.removeLayer(layers[layerIdx][1]); layerIdx = (layerIdx + 1) % layers.length; layers[layerIdx][1].addTo(map); toast('Harita: ' + layers[layerIdx][0]); };
+$('btnPs').onclick = openParsel;
 $('btnEarth').onclick = openEarth;
 $('btnTkgm').onclick = () => {
   $('dec').value = '3'; $('zMode').value = 'h'; $('ep0').value = '2005.0'; $('vN').value = '0'; $('vE').value = '0';
@@ -1792,22 +2141,20 @@ $('exKml').onclick = () => { if (!pts().length) { toast('Bu işte nokta yok'); r
 $('exShare').onclick = share; $('exCopy').onclick = copy;
 $('exClear').onclick = e => { if (!pts().length) { toast('Bu işte nokta yok'); return; } armed(e.currentTarget, () => { job().points = []; job().next = '1'; saveJobs(); render(); toast('Noktalar silindi'); }, 'Emin misiniz?'); };
 SET_IDS.forEach(id => $(id).addEventListener('change', render));
-flag($('flag')); flag($('flag2')); initMap(); render();
-if (NATIVE) $('permApp').textContent = 'GNSS Koordinat';
+flag($('flag')); flag($('flag2')); flag($('flag3')); initMap(); render();
+if (NATIVE) $('permApp').textContent = 'GNSS BOZOKLUHAN GPS';
 
-// Açılış: her zaman önce tam konum iznini doğrula
+// Açılış: ana sayfa; izin varsa konum arka planda ısınır
 renderRx();
 if (NATIVE && RX.src === 'bt' && RX.bt && RX.bt.addr) { rx.bt = 'connecting'; rx.btName = RX.bt.name; Android.btConnect(RX.bt.addr, RX.bt.name || ''); }
 if (NATIVE) {
   document.documentElement.classList.add('native');
-  const st = Android.checkState();
-  if (st === 'ok' && job()) { permOk = true; restartRun(); }
-  else { openWizard('perm', job() ? 'new' : 'first'); window.__locState(st, true); }
+  openHome();
+  window.__locState(Android.checkState(), true);
 } else (async () => {
+  openHome();
   let st = null; try { st = (await navigator.permissions.query({ name: 'geolocation' })).state; } catch (e) {}
-  if (st === 'granted' && job()) { permOk = true; permInfo = { st: 'ok', acc: null }; enableLocation(true); return; }
-  openWizard('perm', job() ? 'new' : 'first');
-  if (st === 'granted') askPrecise(true); // izin önceden verilmişse doğruluğu kontrol et
+  if (st === 'granted') askPrecise(true); // izin önceden verilmişse sessizce doğrula ve okumayı başlat
 })();
 </script>
 </body>
