@@ -13,4 +13,3 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "BZK_Lisans_Uretici"
-include(":app")
