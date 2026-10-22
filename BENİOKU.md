@@ -31,6 +31,16 @@ Telefondan ITRF96 ve ED50 koordinatı okuyup iş adı altında kaydeden, NetCAD 
 2. Dosyaya dokunun. "Bilinmeyen uygulamalar" uyarısı çıkarsa **Ayarlar › Bu kaynağa izin ver** deyin.
 3. **Yükle**'ye basın. Play Koruma uyarısı çıkarsa **Yine de yükle** seçin (uygulama Play Store'dan gelmediği için çıkar).
 
+## Sürüm 3.9
+
+- Yeni logo: dünya haritası üzerinde içinde "yh" yazan konum pini (uygulama simgesi, başlık, ana sayfa).
+- Her yerde Enlem solda, Boylam sağda (WGS84 işlerinde listeler, harita, aplikasyon ve dosyalar dahil). Aplikasyon: Kuzey (ΔX) | Doğu (ΔY).
+- Harita: alt panelde koordinat ve hata ince siyah çizgili tabloda; kaydet satırı inceldi. + / − düğmeleri ve yeni pusula G. Earth sütununa hizalı.
+- Parsel etiketi çerçevesiz, kalın ve konturlu (her zeminde okunur).
+- PS GİT: telefonda TKGM Parsel Sorgu uygulaması (com.tkgm.parselsorgu) varsa onu, yoksa web sitesini açar.
+- G. Earth: açık ve kayıtlı parseller de Google Earth'te gösterilir.
+- Aplikasyon: hedefe 5 m'den yakınken bip (yaklaştıkça sıklaşır, 1 m altında titreşim); zemin rengi değişti.
+
 ## Sürüm 3.8
 
 - Ölçüm: iş adı / DOM / sistem satırı artık hiç kapanmıyor (dar ekranda satırların sıkışma hatası giderildi); uzun iş adı iki satıra iner.

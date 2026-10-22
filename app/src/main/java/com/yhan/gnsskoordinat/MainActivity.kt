@@ -121,7 +121,7 @@ class MainActivity : AppCompatActivity() {
             domStorageEnabled = true
             databaseEnabled = true
             allowFileAccess = false
-            mediaPlaybackRequiresUserGesture = true
+            mediaPlaybackRequiresUserGesture = false
         }
         web.webViewClient = object : WebViewClient() {
             override fun shouldInterceptRequest(view: WebView, request: WebResourceRequest): WebResourceResponse? =
@@ -486,6 +486,14 @@ class MainActivity : AppCompatActivity() {
         return if (k.length == 12 && k == licKeyFor(deviceCode())) { licPrefs.edit().putString("key", k).apply(); "ok" } else "bad"
     }
 
+    /** Uygulama yüklüyse onu açar ("app"), değilse adresi tarayıcıda açar ("web"). Geri tuşu bu uygulamaya döner. */
+    private fun openAppOr(pkg: String, url: String): String {
+        return try {
+            val li = packageManager.getLaunchIntentForPackage(pkg)
+            if (li != null) { startActivity(li); "app" } else { openExternal(url); "web" }
+        } catch (e: Exception) { openExternal(url); "web" }
+    }
+
     private fun openExternal(url: String) {
         try { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url))) }
         catch (e: Exception) { Toast.makeText(this, "Bağlantı açılamadı", Toast.LENGTH_SHORT).show() }
@@ -780,6 +788,7 @@ class MainActivity : AppCompatActivity() {
         @JavascriptInterface fun saveFile(name: String, text: String, mime: String): String = this@MainActivity.saveFile(name, text, mime)
         @JavascriptInterface fun shareFiles(json: String) { main.post { this@MainActivity.shareFiles(json) } }
         @JavascriptInterface fun openUrl(url: String) { main.post { openExternal(url) } }
+        @JavascriptInterface fun openAppOr(pkg: String, url: String): String { val l = packageManager.getLaunchIntentForPackage(pkg) != null; main.post { this@MainActivity.openAppOr(pkg, url) }; return if (l) "app" else "web" }
         @JavascriptInterface fun openKml(name: String, text: String) { main.post { this@MainActivity.openKml(name, text) } }
         @JavascriptInterface fun copy(text: String) {
             main.post {

@@ -12,6 +12,16 @@
     <uses-feature android:name="android.hardware.location.gps" android:required="false" />
     <uses-feature android:name="android.hardware.bluetooth" android:required="false" />
 
+    <!-- Android 11+: yüklü olup olmadığını görebilmek için -->
+    <queries>
+        <package android:name="com.tkgm.parselsorgu" />
+        <package android:name="com.google.earth" />
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
+    </queries>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
