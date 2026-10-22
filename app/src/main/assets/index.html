@@ -44,8 +44,8 @@ body{background:var(--bg);color:var(--ink);font:12.5px/1.35 var(--f-body);displa
 .hdr::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:linear-gradient(90deg,transparent,#fff6cc,transparent);opacity:.55;pointer-events:none}
 .hdr>*{position:relative}
 .hdr .logo{filter:drop-shadow(0 0 4px rgba(242,183,5,.65))}
-.hdr .brand{border:1px solid rgba(242,183,5,.55);border-radius:7px;padding:2px 8px 3px;background:rgba(255,255,255,.04);justify-self:center;max-width:100%}
-.hdr .brand b{color:#fff;letter-spacing:.12em;text-shadow:0 1px 2px rgba(0,0,0,.5)}
+.hdr .brand{border:1px solid rgba(242,183,5,.55);border-radius:7px;padding:5px 10px;background:rgba(255,255,255,.04);justify-self:center;max-width:100%}
+.hdr .brand b{color:#fff;letter-spacing:.12em;font-size:15px;text-shadow:0 1px 2px rgba(0,0,0,.5)}
 .hdr .brand b span{color:#f2b705}
 .hdr .brand i{color:#e6edf5}
 .hdr .brand small{color:#9fb6cc;letter-spacing:.2em}
@@ -531,7 +531,7 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
 
 <header class="hdr">
   <button class="logo-btn" id="homeBtn" type="button" aria-label="Ana sayfa"><svg class="logo" viewBox="0 0 108 108" role="img" aria-label="YH logosu"><use href="#yhLogo"/></svg></button>
-  <div class="brand"><b>GNSS <span>BOZOKLUHAN</span> GPS</b><i>Yasin HAN</i><small>Tasarım ve Geliştirme</small></div>
+  <div class="brand"><b>GNSS <span>BOZOKLUHAN</span> GPS</b></div>
   <canvas id="flag" width="120" height="84" aria-label="Türk bayrağı"></canvas>
 </header>
 
@@ -907,7 +907,7 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
 <div class="layer" id="home" role="dialog" aria-modal="true" aria-label="Ana sayfa">
   <header class="hdr">
     <svg class="logo" viewBox="0 0 108 108" aria-hidden="true"><use href="#yhLogo"/></svg>
-    <div class="brand"><b>GNSS <span>BOZOKLUHAN</span> GPS</b><i>Yasin HAN</i><small>Tasarım ve Geliştirme</small></div>
+    <div class="brand"><b>GNSS <span>BOZOKLUHAN</span> GPS</b></div>
     <canvas id="flag3" width="120" height="84" aria-hidden="true"></canvas>
   </header>
   <div class="hbody">
@@ -941,7 +941,7 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
 <div class="layer" id="wz" hidden role="dialog" aria-modal="true" aria-label="Ölçüm kurulumu">
   <header class="hdr">
     <svg class="logo" viewBox="0 0 108 108" aria-hidden="true"><use href="#yhLogo"/></svg>
-    <div class="brand"><b>GNSS <span>BOZOKLUHAN</span> GPS</b><i>Yasin HAN</i><small>Tasarım ve Geliştirme</small></div>
+    <div class="brand"><b>GNSS <span>BOZOKLUHAN</span> GPS</b></div>
     <canvas id="flag2" width="120" height="84" aria-hidden="true"></canvas>
   </header>
   <div class="wz-steps" id="wzSteps">
