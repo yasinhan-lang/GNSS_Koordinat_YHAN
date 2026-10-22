@@ -154,6 +154,7 @@ class MainActivity : AppCompatActivity() {
         }
         web.addJavascriptInterface(Bridge(), "Android")
         web.loadUrl("https://appassets.androidplatform.net/assets/index.html")
+        takeIntent(intent)
 
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -162,6 +163,27 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    // ---------- Paylaşılan metin (ör. TKGM Parsel Sorgu'dan "Paylaş") ----------
+    private val sharedTexts = mutableListOf<String>()
+    private fun takeIntent(i: Intent?) {
+        if (i == null || i.action != Intent.ACTION_SEND) return
+        val tx = listOfNotNull(i.getStringExtra(Intent.EXTRA_SUBJECT), i.getCharSequenceExtra(Intent.EXTRA_TEXT)?.toString()).joinToString("\n").trim()
+        if (tx.isNotEmpty()) synchronized(sharedTexts) { sharedTexts.add(tx) }
+        js("window.__shared && window.__shared()")
+    }
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        takeIntent(intent)
+    }
+    private fun readClipText(): String {
+        val cm = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val c = cm.primaryClip ?: return ""
+        val sb = StringBuilder()
+        for (n in 0 until c.itemCount) { val s = c.getItemAt(n).coerceToText(this)?.toString(); if (!s.isNullOrBlank()) sb.append(s).append('\n') }
+        return sb.toString()
     }
 
     override fun onResume() {
@@ -790,6 +812,12 @@ class MainActivity : AppCompatActivity() {
         @JavascriptInterface fun openUrl(url: String) { main.post { openExternal(url) } }
         @JavascriptInterface fun openAppOr(pkg: String, url: String): String { val l = packageManager.getLaunchIntentForPackage(pkg) != null; main.post { this@MainActivity.openAppOr(pkg, url) }; return if (l) "app" else "web" }
         @JavascriptInterface fun openKml(name: String, text: String) { main.post { this@MainActivity.openKml(name, text) } }
+        @JavascriptInterface fun takeShared(): String = synchronized(sharedTexts) { val a = JSONArray(sharedTexts); sharedTexts.clear(); a.toString() }
+        @JavascriptInterface fun readClip(): String {
+            val q = java.util.concurrent.LinkedBlockingQueue<String>(1)
+            main.post { q.offer(try { readClipText() } catch (e: Exception) { "" }) }
+            return q.poll(2, java.util.concurrent.TimeUnit.SECONDS) ?: ""
+        }
         @JavascriptInterface fun copy(text: String) {
             main.post {
                 val cm = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager

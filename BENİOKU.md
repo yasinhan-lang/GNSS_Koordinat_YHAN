@@ -31,6 +31,14 @@ Telefondan ITRF96 ve ED50 koordinatı okuyup iş adı altında kaydeden, NetCAD 
 2. Dosyaya dokunun. "Bilinmeyen uygulamalar" uyarısı çıkarsa **Ayarlar › Bu kaynağa izin ver** deyin.
 3. **Yükle**'ye basın. Play Koruma uyarısı çıkarsa **Yine de yükle** seçin (uygulama Play Store'dan gelmediği için çıkar).
 
+## Sürüm 4.0
+
+- Harita: Kaydet düğmesi iki satır (KAYDET / çizgi / çerçeveli Nokta No).
+- Parsel etiketi 105/12: ada ve parsel aynı renk, "/" beyaz, boşluksuz.
+- Parsel penceresi: "Bulunduğum Yerdeki Parsel" ve yeni "Açık Olan Parselleri Getir" (iki satır).
+- Açık olan parseller: TKGM Parsel Sorgu'dan Paylaş ile gelen metin veya panodaki bağlantı/bilgilerdeki tüm parseller haritaya çizilir; yoksa "Açık parsel yok".
+- Android: uygulama "Paylaş" menüsünde metin alıcı olarak görünür (singleTask).
+
 ## Sürüm 3.9
 
 - Yeni logo: dünya haritası üzerinde içinde "yh" yazan konum pini (uygulama simgesi, başlık, ana sayfa).
