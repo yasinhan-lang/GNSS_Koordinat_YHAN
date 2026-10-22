@@ -505,6 +505,8 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
 #shCode{text-align:center;border-radius:10px;padding:11px 9px!important}
 .sheetbox .fgrid label{text-align:center}
 .dup{color:var(--bad);font-size:12.5px;font-weight:600}
+.fgrid.cikti{grid-template-columns:1.9fr 1fr}
+.fgrid.cikti select{font-size:13px;padding-left:4px;padding-right:22px;text-align:center;text-align-last:center;min-width:0;white-space:nowrap;text-overflow:ellipsis}
 .sheetbtn{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:2px}
 .pqor{display:flex;align-items:center;gap:8px;font:600 10px var(--f-disp);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .pqor::before,.pqor::after{content:"";flex:1;border-top:1px dashed var(--line)}
@@ -835,8 +837,8 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
       <h3>Bilinen Nokta Düzeltmesi</h3>
       <p class="note" style="margin:0 0 6px">Koordinatı bilinen bir noktada (nirengi, poligon, TUSAGA ile ölçülmüş nokta) kayıt yapıp gerçek değerini girin. Fark, aynı sistem ve DOM'daki tüm noktalara uygulanır.</p>
       <div class="fgrid">
-        <div><label for="kY">Bilinen Y</label><input id="kY" class="mono" inputmode="decimal" placeholder="ör. 506758.900"></div>
-        <div><label for="kX">Bilinen X</label><input id="kX" class="mono" inputmode="decimal" placeholder="ör. 4328635.470"></div>
+        <div><label for="kY">Bilinen Y</label><input id="kY" class="mono" inputmode="decimal" placeholder="506758.900"></div>
+        <div><label for="kX">Bilinen X</label><input id="kX" class="mono" inputmode="decimal" placeholder="4328635.470"></div>
       </div>
       <div class="fgrid" style="margin-top:6px">
         <button class="btn sm primary" id="btnCal" type="button">Son Noktayla Hesapla</button>
@@ -847,8 +849,8 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
 
     <div class="card">
       <h3>Çıktı</h3>
-      <div class="fgrid">
-        <div><label for="zMode">Z değeri</label><select id="zMode"><option value="h">Elipsoit yüksekliği</option><option value="H">Ortometrik (alıcıdan)</option><option value="0">0 yaz</option></select></div>
+      <div class="fgrid cikti">
+        <div><label for="zMode">Z değeri</label><select id="zMode"><option value="h">Elipsoit yük. (h)</option><option value="H">Ortometrik (H)</option><option value="0">0 yaz</option></select></div>
         <div><label for="dec">Ondalık</label><select id="dec"><option>2</option><option selected>3</option><option>4</option></select></div>
       </div>
     </div>

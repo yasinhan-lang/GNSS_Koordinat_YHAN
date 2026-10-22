@@ -31,6 +31,11 @@ Telefondan ITRF96 ve ED50 koordinatı okuyup iş adı altında kaydeden, NetCAD 
 2. Dosyaya dokunun. "Bilinmeyen uygulamalar" uyarısı çıkarsa **Ayarlar › Bu kaynağa izin ver** deyin.
 3. **Yükle**'ye basın. Play Koruma uyarısı çıkarsa **Yine de yükle** seçin (uygulama Play Store'dan gelmediği için çıkar).
 
+## Sürüm 3.6
+
+- Ayarlar › Çıktı: Z değeri seçimi geniş sütunda, seçenekler kısaltıldı (Elipsoit yük. (h) / Ortometrik (H) / 0 yaz); değerler tam görünür.
+- Bilinen nokta kutularının örnek yazıları dar ekranda taşmıyor.
+
 ## Sürüm 3.5
 
 - Harita › Parsel: yeni "Parseli Haritaya Getir" penceresi.
