@@ -420,14 +420,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    /** Yalnız TKGM parsel servisine GET isteği (WebView'in CORS kısıtını aşmak için). */
+    /** Yalnız TKGM parsel servislerine (cbsapi, parselsorgu) GET isteği (WebView'in CORS kısıtını aşmak için). */
     private fun httpGet(id: String, url: String) {
         thread(name = "yhan-http") {
             var code = 0
             var body: String
             try {
                 val u = java.net.URL(url)
-                if (u.protocol != "https" || u.host != "cbsapi.tkgm.gov.tr") throw Exception("İzin verilmeyen adres")
+                if (u.protocol != "https" || (u.host != "cbsapi.tkgm.gov.tr" && u.host != "parselsorgu.tkgm.gov.tr")) throw Exception("İzin verilmeyen adres")
                 val c = u.openConnection() as java.net.HttpURLConnection
                 c.connectTimeout = 15000
                 c.readTimeout = 20000

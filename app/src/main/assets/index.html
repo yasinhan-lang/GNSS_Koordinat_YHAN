@@ -231,7 +231,7 @@ nav .dot{position:absolute;top:8px;left:calc(50% + 8px);min-width:16px;height:16
 .stk-top{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;align-items:center;margin:0 -5px 5px}
 .stk-top label{font:700 9.5px var(--f-disp);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:center}
 .stk-top input{height:26px;box-sizing:border-box;width:100%;min-width:0;padding:0 6px;text-align:center;font:600 12.5px var(--f-num);border:1.5px solid var(--ink);border-radius:16px;background:var(--panel)}
-.stk-fbtn{all:unset;box-sizing:border-box;height:26px;display:flex;align-items:center;justify-content:center;cursor:pointer;white-space:nowrap;font:700 10px var(--f-disp);letter-spacing:.07em;text-transform:uppercase;border:1.5px solid var(--accent);border-radius:16px;background:var(--accent);color:var(--accent-ink);box-shadow:0 1px 3px rgba(11,23,36,.16)}
+.stk-fbtn{all:unset;box-sizing:border-box;height:26px;display:flex;align-items:center;justify-content:center;cursor:pointer;white-space:nowrap;font:700 clamp(8px,2.45vw,10px) var(--f-disp);letter-spacing:.02em;padding:0 4px;overflow:hidden;text-transform:uppercase;border:1.5px solid var(--accent);border-radius:16px;background:var(--accent);color:var(--accent-ink);box-shadow:0 1px 3px rgba(11,23,36,.16)}
 .stk-fbtn:focus-visible{outline:2px solid var(--ink)}
 .stk-pick{display:grid;grid-template-columns:26px 1fr 26px;gap:4px;align-items:center}
 .stk-pick button{all:unset;cursor:pointer;text-align:center;font:700 15px/24px var(--f-num);border:1px solid var(--line);border-radius:6px;background:var(--soft)}
@@ -506,6 +506,13 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
 .sheetbox .fgrid label{text-align:center}
 .dup{color:var(--bad);font-size:12.5px;font-weight:600}
 .sheetbtn{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:2px}
+.pqor{display:flex;align-items:center;gap:8px;font:600 10px var(--f-disp);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.pqor::before,.pqor::after{content:"";flex:1;border-top:1px dashed var(--line)}
+.pqgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px 8px}
+.pqgrid .w2{grid-column:1/-1}
+.pqgrid label{display:block;text-align:center;font:700 9.5px var(--f-disp);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.pqgrid select,.pqgrid input{width:100%;box-sizing:border-box;height:34px;text-align:center;text-align-last:center;font:600 13px var(--f-num)}
+.pqnote{margin:0;font-size:10.5px;color:var(--muted);text-align:center}
 .sheetbtn .btn{padding:12px 8px;font-size:12.5px;letter-spacing:.1em;border-radius:12px}
 .sheetbtn #shCancel{background:var(--soft);border-color:transparent;color:var(--muted)}
 @media (max-width:350px){.rows dd{font-size:20px}}
@@ -606,9 +613,9 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
       <div class="exhd"><b id="stkJob">—</b><span>Aplikasyon · <span id="stkSys">—</span></span></div>
       <input type="file" id="stkFileIn" accept=".txt,.ncn,.csv,.dat,text/plain" hidden>
       <div class="stk-top">
-        <label for="stkFind">Hedef N.NO</label>
+        <label for="stkFind">Hedef Nokta No</label>
         <input id="stkFind" inputmode="text" autocomplete="off" placeholder="yaz" aria-label="Hedef nokta numarası yazın">
-        <button class="stk-fbtn" id="stkFile" type="button">TXT/NCN Aç</button>
+        <button class="stk-fbtn" id="stkFile" type="button">TXT/NCN Dosyası Aç</button>
       </div>
       <div class="stk-pick">
         <button type="button" id="stkPrev" aria-label="Önceki hedef">‹</button>
@@ -992,6 +999,26 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
 </div>
 
 <!-- LİSANS PENCERESİ -->
+<div class="sheet" id="pqDlg" hidden role="dialog" aria-modal="true" aria-labelledby="pqH">
+  <div class="sheetbox">
+    <h2 id="pqH">Parseli Haritaya Getir</h2>
+    <button class="btn primary" id="pqHere" type="button">Bulunduğum Yerdeki Parsel</button>
+    <div class="pqor"><span>veya Ada / Parsel ile</span></div>
+    <div class="pqgrid">
+      <div><label for="pqIl">İl</label><select id="pqIl"><option value="">Yükleniyor…</option></select></div>
+      <div><label for="pqIlce">İlçe</label><select id="pqIlce" disabled><option value="">— önce il —</option></select></div>
+      <div class="w2"><label for="pqMah">Mahalle / Köy</label><select id="pqMah" disabled><option value="">— önce ilçe —</option></select></div>
+      <div><label for="pqAda">Ada</label><input id="pqAda" inputmode="numeric" autocomplete="off" placeholder="ör. 105"></div>
+      <div><label for="pqPar">Parsel</label><input id="pqPar" inputmode="numeric" autocomplete="off" placeholder="ör. 12"></div>
+    </div>
+    <div class="dup" id="pqErr" hidden></div>
+    <p class="pqnote">İpucu: Haritada herhangi bir yere <b>uzun basarak</b> o yerin parselini de getirebilirsiniz. Bilgiler TKGM Parsel Sorgu servisinden alınır (günlük sorgu sınırı vardır).</p>
+    <div class="sheetbtn">
+      <button class="btn save" id="pqGo" type="button">Haritaya Getir</button>
+      <button class="btn" id="pqClose" type="button">Kapat</button>
+    </div>
+  </div>
+</div>
 <div class="sheet" id="licDlg" hidden role="dialog" aria-modal="true" aria-labelledby="licH">
   <div class="sheetbox">
     <h2 id="licH">Lisans</h2>
@@ -2043,7 +2070,8 @@ async function queryParcel(lat, lon) {
   if (!map) { toast('Harita yüklenmedi'); return; }
   toast('Parsel sorgulanıyor…');
   try {
-    const r = await httpJson('https://cbsapi.tkgm.gov.tr/megsiswebapi.v3.1/api/parsel/' + lat.toFixed(7) + '/' + lon.toFixed(7) + '/');
+    let r = await httpJson('https://cbsapi.tkgm.gov.tr/megsiswebapi.v3.1/api/parsel/' + lat.toFixed(7) + '/' + lon.toFixed(7) + '/');
+    if (!r.json && r.status !== 200 && r.status !== 403) r = await httpJson('https://cbsapi.tkgm.gov.tr/megsiswebapi.v3/api/parsel/' + lat.toFixed(7) + '/' + lon.toFixed(7) + '/');
     const d = r.json, low = r.text.toLowerCase();
     if (r.status === 403 || low.includes('limit')) throw new Error('TKGM günlük sorgu limiti doldu');
     if (d && d.Message) throw new Error(d.Message);
@@ -2066,7 +2094,69 @@ function drawParcel(f, qlat, qlon) {
   $('pinfo').hidden = false;
   follow = false; map.fitBounds(b, { maxZoom: 20, padding: [40, 40] });
 }
-$('btnParcel').onclick = () => { const c = last ? { lat: last.lat, lon: last.lon } : map ? { lat: map.getCenter().lat, lon: map.getCenter().lng } : null; if (!c) { toast('Konum yok'); return; } queryParcel(c.lat, c.lon); };
+function parcelHere() { const c = last ? { lat: last.lat, lon: last.lon } : map ? { lat: map.getCenter().lat, lon: map.getCenter().lng } : null; if (!c) { toast('Konum yok'); return; } queryParcel(c.lat, c.lon); }
+$('btnParcel').onclick = () => { if (needPro('Parsel sorgu')) return; $('pqErr').hidden = true; $('pqDlg').hidden = false; pqLoadIl(); };
+$('pqClose').onclick = () => { $('pqDlg').hidden = true; };
+$('pqDlg').addEventListener('click', e => { if (e.target === $('pqDlg')) $('pqDlg').hidden = true; });
+$('pqHere').onclick = () => { $('pqDlg').hidden = true; parcelHere(); };
+// --- İl / İlçe / Mahalle listeleri (TKGM idari yapı servisi) ---
+const TK = 'https://cbsapi.tkgm.gov.tr/megsiswebapi.v3.1/api';
+const IL81 = ['Adana','Adıyaman','Afyonkarahisar','Ağrı','Amasya','Ankara','Antalya','Artvin','Aydın','Balıkesir','Bilecik','Bingöl','Bitlis','Bolu','Burdur','Bursa','Çanakkale','Çankırı','Çorum','Denizli','Diyarbakır','Edirne','Elazığ','Erzincan','Erzurum','Eskişehir','Gaziantep','Giresun','Gümüşhane','Hakkari','Hatay','Isparta','Mersin','İstanbul','İzmir','Kars','Kastamonu','Kayseri','Kırklareli','Kırşehir','Kocaeli','Konya','Kütahya','Malatya','Manisa','Kahramanmaraş','Mardin','Muğla','Muş','Nevşehir','Niğde','Ordu','Rize','Sakarya','Samsun','Siirt','Sinop','Sivas','Tekirdağ','Tokat','Trabzon','Tunceli','Şanlıurfa','Uşak','Van','Yozgat','Zonguldak','Aksaray','Bayburt','Karaman','Kırıkkale','Batman','Şırnak','Bartın','Ardahan','Iğdır','Yalova','Karabük','Kilis','Osmaniye','Düzce'];
+function fcList(d) { return d && Array.isArray(d.features) ? d.features.map(f => ({ id: (f.properties || {}).id, ad: (f.properties || {}).text || (f.properties || {}).ad || '' })).filter(x => x.id != null && x.ad) : []; }
+function fillSel(sel, list, ph, keep) {
+  const S = $(sel); S.innerHTML = '';
+  const o0 = document.createElement('option'); o0.value = ''; o0.textContent = ph; S.appendChild(o0);
+  list.slice().sort((a, b) => a.ad.localeCompare(b.ad, 'tr')).forEach(x => { const o = document.createElement('option'); o.value = x.id; o.textContent = x.ad; S.appendChild(o); });
+  S.disabled = !list.length; if (keep != null && list.some(x => String(x.id) === String(keep))) S.value = String(keep);
+}
+async function tkList(key, url) {
+  const c = store.get('tk_' + key, null); if (c && c.length) return c;
+  const r = await httpJson(url); const L = fcList(r.json);
+  if (!L.length) throw new Error(r.json && r.json.Message ? r.json.Message : 'Liste alınamadı (' + r.status + ')');
+  store.set('tk_' + key, L); return L;
+}
+function pqErr(m) { $('pqErr').textContent = m; $('pqErr').hidden = !m; }
+async function pqLoadIl() {
+  const sel = store.get('pq', {}); if (sel.ada) $('pqAda').value = sel.ada; if (sel.par) $('pqPar').value = sel.par;
+  if ($('pqIl').options.length > 1) return;
+  let L;
+  try { L = await tkList('il', 'https://parselsorgu.tkgm.gov.tr/app/modules/administrativeQuery/data/ilListe.json'); }
+  catch (e) { L = IL81.map((ad, i) => ({ id: i + 1, ad })); }
+  fillSel('pqIl', L, '— il seçin —', sel.il);
+  if ($('pqIl').value) await pqLoadIlce(sel.ilce, sel.mah);
+}
+async function pqLoadIlce(keep, keepMah) {
+  const il = $('pqIl').value; fillSel('pqMah', [], '— önce ilçe —'); if (!il) { fillSel('pqIlce', [], '— önce il —'); return; }
+  fillSel('pqIlce', [], 'Yükleniyor…'); pqErr('');
+  try { fillSel('pqIlce', await tkList('ilce_' + il, TK + '/idariYapi/ilceListe/' + il), '— ilçe seçin —', keep); if ($('pqIlce').value) await pqLoadMah(keepMah); }
+  catch (e) { fillSel('pqIlce', [], '— alınamadı —'); pqErr('İlçe listesi alınamadı: ' + e.message); }
+}
+async function pqLoadMah(keep) {
+  const ilce = $('pqIlce').value; if (!ilce) { fillSel('pqMah', [], '— önce ilçe —'); return; }
+  fillSel('pqMah', [], 'Yükleniyor…'); pqErr('');
+  try { fillSel('pqMah', await tkList('mah_' + ilce, TK + '/idariYapi/mahalleListe/' + ilce), '— mahalle / köy seçin —', keep); }
+  catch (e) { fillSel('pqMah', [], '— alınamadı —'); pqErr('Mahalle listesi alınamadı: ' + e.message); }
+}
+$('pqIl').onchange = () => pqLoadIlce();
+$('pqIlce').onchange = () => pqLoadMah();
+$('pqGo').onclick = async () => {
+  const mah = $('pqMah').value, ada = $('pqAda').value.trim(), par = $('pqPar').value.trim();
+  if (!mah) { pqErr('İl, ilçe ve mahalle / köy seçin.'); return; }
+  if (!par) { pqErr('Parsel numarasını yazın (ada yoksa 0 yazın).'); return; }
+  store.set('pq', { il: $('pqIl').value, ilce: $('pqIlce').value, mah, ada, par });
+  pqErr(''); $('pqGo').disabled = true; $('pqGo').textContent = 'Sorgulanıyor…';
+  try {
+    const r = await httpJson(TK + '/parsel/' + mah + '/' + encodeURIComponent(ada || '0') + '/' + encodeURIComponent(par));
+    const d = r.json, low = r.text.toLowerCase();
+    if (r.status === 403 || low.includes('limit')) throw new Error('TKGM günlük sorgu limiti doldu');
+    if (d && (d.Message || d.message)) throw new Error(d.Message || d.message);
+    if (!d || d.type !== 'Feature' || !d.geometry) throw new Error(r.status === 200 || r.status === 404 ? 'Bu ada/parsel bulunamadı' : 'TKGM yanıt vermedi (' + r.status + ')');
+    const c = L.geoJSON(d).getBounds().getCenter();
+    $('pqDlg').hidden = true; drawParcel(d, c.lat, c.lng);
+    toast('Ada ' + (d.properties.adaNo || ada) + ' / Parsel ' + (d.properties.parselNo || par) + ' haritada');
+  } catch (e) { pqErr('Parsel alınamadı: ' + e.message); }
+  finally { $('pqGo').disabled = false; $('pqGo').textContent = 'Haritaya Getir'; }
+};
 $('piClose').onclick = () => { $('pinfo').hidden = true; };
 $('piClear').onclick = () => { if (parcelLayer) parcelLayer.clearLayers(); $('pinfo').hidden = true; lastParcel = null; };
 $('piOpen').onclick = () => openParsel(lastParcel);
@@ -2346,6 +2436,8 @@ $('stkSave').onclick = () => {
 window.__back = () => {
   if (homeOpen()) return '';
   if (!$('sheet').hidden) { closeSheet(); return 'handled'; }
+  if (!$('pqDlg').hidden) { $('pqDlg').hidden = true; return 'handled'; }
+  if (!$('licDlg').hidden) { $('licDlg').hidden = true; return 'handled'; }
   if (!$('wz').hidden) {
     const ST = stepsOf(), k = ST.indexOf(wz.step);
     if (k > 0) { showStep(ST[k - 1]); return 'handled'; }

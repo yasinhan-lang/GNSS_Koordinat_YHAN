@@ -31,6 +31,14 @@ Telefondan ITRF96 ve ED50 koordinatı okuyup iş adı altında kaydeden, NetCAD 
 2. Dosyaya dokunun. "Bilinmeyen uygulamalar" uyarısı çıkarsa **Ayarlar › Bu kaynağa izin ver** deyin.
 3. **Yükle**'ye basın. Play Koruma uyarısı çıkarsa **Yine de yükle** seçin (uygulama Play Store'dan gelmediği için çıkar).
 
+## Sürüm 3.5
+
+- Harita › Parsel: yeni "Parseli Haritaya Getir" penceresi.
+  - Bulunduğum Yerdeki Parsel: konumdaki parseli çizer.
+  - Ada / Parsel ile: İl › İlçe › Mahalle/Köy listelerinden seçip ada ve parsel numarasıyla parseli TKGM'den getirip haritada gösterir; seçimler hatırlanır, listeler telefonda saklanır.
+- Haritada uzun basınca o yerin parseli gelir.
+- Android: parselsorgu.tkgm.gov.tr (il listesi) adresine de izin verildi.
+
 ## Sürüm 3.4
 
 - Aplikasyon: Hedef N.NO kutusu ve TXT/NCN Aç düğmesi alttaki Durdur / Kontrol Kaydet düğmeleriyle aynı boyda, aynı hizada ve yuvarlak.
