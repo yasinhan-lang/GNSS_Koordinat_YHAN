@@ -98,7 +98,14 @@ class MainActivity : AppCompatActivity() {
         ActivityResultContracts.StartActivityForResult()
     ) { r ->
         val cb = fileCb; fileCb = null
-        cb?.onReceiveValue(WebChromeClient.FileChooserParams.parseResult(r.resultCode, r.data))
+        val d = r.data
+        val list = mutableListOf<Uri>()
+        if (r.resultCode == RESULT_OK && d != null) {
+            val cd = d.clipData
+            if (cd != null) for (n in 0 until cd.itemCount) cd.getItemAt(n).uri?.let { list.add(it) }
+            else d.data?.let { list.add(it) }
+        }
+        cb?.onReceiveValue(if (list.isEmpty()) null else list.toTypedArray())
     }
 
     private val settingsLauncher = registerForActivityResult(
@@ -141,9 +148,10 @@ class MainActivity : AppCompatActivity() {
                 val pick = Intent(Intent.ACTION_GET_CONTENT).apply {
                     addCategory(Intent.CATEGORY_OPENABLE)
                     type = "*/*"
+                    if (params.mode == WebChromeClient.FileChooserParams.MODE_OPEN_MULTIPLE) putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
                 }
                 return try {
-                    fileLauncher.launch(Intent.createChooser(pick, "Dosya seç (TXT / NCN / DNS)"))
+                    fileLauncher.launch(Intent.createChooser(pick, "Dosya seç (TXT / NCN / DNS / KML / GeoJSON)"))
                     true
                 } catch (e: Exception) {
                     fileCb = null
@@ -168,9 +176,22 @@ class MainActivity : AppCompatActivity() {
     // ---------- Paylaşılan metin (ör. TKGM Parsel Sorgu'dan "Paylaş") ----------
     private val sharedTexts = mutableListOf<String>()
     private fun takeIntent(i: Intent?) {
-        if (i == null || i.action != Intent.ACTION_SEND) return
+        if (i == null || (i.action != Intent.ACTION_SEND && i.action != Intent.ACTION_SEND_MULTIPLE)) return
         val tx = listOfNotNull(i.getStringExtra(Intent.EXTRA_SUBJECT), i.getCharSequenceExtra(Intent.EXTRA_TEXT)?.toString()).joinToString("\n").trim()
         if (tx.isNotEmpty()) synchronized(sharedTexts) { sharedTexts.add(tx) }
+        // Paylaşılan dosyalar (Parsel Sorgu'dan indirilen KML / GeoJSON vb.)
+        val uris = mutableListOf<Uri>()
+        @Suppress("DEPRECATION")
+        if (i.action == Intent.ACTION_SEND) (i.getParcelableExtra<Uri>(Intent.EXTRA_STREAM))?.let { uris.add(it) }
+        else i.getParcelableArrayListExtra<Uri>(Intent.EXTRA_STREAM)?.let { uris.addAll(it) }
+        i.clipData?.let { cd -> for (n in 0 until cd.itemCount) cd.getItemAt(n).uri?.let { if (!uris.contains(it)) uris.add(it) } }
+        for (u in uris.take(30)) {
+            try {
+                contentResolver.openInputStream(u)?.use { st ->
+                    val b = st.readBytes(); if (b.size < 8_000_000) synchronized(sharedTexts) { sharedTexts.add(String(b, Charsets.UTF_8)) }
+                }
+            } catch (e: Exception) { }
+        }
         js("window.__shared && window.__shared()")
     }
     override fun onNewIntent(intent: Intent) {

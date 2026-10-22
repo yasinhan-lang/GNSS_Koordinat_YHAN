@@ -31,6 +31,16 @@ Telefondan ITRF96 ve ED50 koordinatı okuyup iş adı altında kaydeden, NetCAD 
 2. Dosyaya dokunun. "Bilinmeyen uygulamalar" uyarısı çıkarsa **Ayarlar › Bu kaynağa izin ver** deyin.
 3. **Yükle**'ye basın. Play Koruma uyarısı çıkarsa **Yine de yükle** seçin (uygulama Play Store'dan gelmediği için çıkar).
 
+## Sürüm 4.4
+
+- Harita: Kaydet / Nokta No iki satır, Nokta No çerçevesiz.
+- Parsel: "Favori / İndirilen Parseller · Dosyadan Getir (KML · GeoJSON)" – birden çok dosya seçilebilir, tümü haritada birlikte çizilir (TKGM sorgu hakkı harcamaz).
+- Android: Parsel Sorgu'dan KML / GeoJSON dosyası "Paylaş" ile de alınır (SEND / SEND_MULTIPLE); dosya seçicide çoklu seçim.
+
+## Sürüm 4.3
+
+- Kısıtlı modda (deneme bitince) renk temaları kilitli; yalnız Altın tema kullanılır. Seçilen tema saklanır, lisans girilince geri gelir. Açık/Koyu görünüm serbest.
+
 ## Sürüm 4.2
 
 - Ayarlar › Görünüm · Renk Teması: Altın, Turkuaz, Zümrüt, Yakut, Lavanta, Gece Mavisi, Turuncu, Gümüş.

@@ -343,7 +343,7 @@ nav .dot{position:absolute;top:8px;left:calc(50% + 8px);min-width:16px;height:16
 #mapSave,#mapSave:disabled{background:var(--good);color:#fff;border:1.5px solid #000;opacity:1}
 #mapSave:disabled .sv2{opacity:.85}
 #mapSave .sv1{align-self:stretch;text-align:center;font:700 10px/1.15 var(--f-disp);letter-spacing:.16em;padding-bottom:2px;border-bottom:1px solid currentColor}
-#mapSave .sv2{font:700 10.5px/1.1 var(--f-num);letter-spacing:.02em;text-transform:none;padding:1px 8px;border:1px solid currentColor;border-radius:5px;white-space:nowrap}
+#mapSave .sv2{font:700 11px/1.15 var(--f-num);letter-spacing:.02em;text-transform:none;padding:0 4px;white-space:nowrap}
 .mapauto{display:flex;align-items:center;justify-content:center;gap:5px;padding:2px 3px;border:1px solid var(--line);border-radius:7px;font:600 9.5px/1.1 var(--f-disp);letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
 .mapauto input{width:15px;height:15px;margin:0;accent-color:var(--good)}
 .mapauto.on{border-color:var(--good);box-shadow:inset 0 0 0 1px var(--good)}
@@ -553,6 +553,7 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
 .fgrid.cikti{grid-template-columns:1.9fr 1fr}
 .fgrid.cikti select{font-size:13px;padding-left:4px;padding-right:22px;text-align:center;text-align-last:center;min-width:0;white-space:nowrap;text-overflow:ellipsis}
 .sheetbtn{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:2px}
+#pqFile{font-size:10px;letter-spacing:.05em;padding:8px 4px;line-height:1.25;border-radius:10px;border:1.5px dashed var(--line)}
 .pqtop{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .pqtop .btn{padding:9px 4px;font-size:11.5px;line-height:1.25;letter-spacing:.06em;border-radius:10px}
 .pqtop .btn.go{background:#1f5fa8;color:#fff;border-color:transparent}
@@ -592,6 +593,8 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
 .themes{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
 .themes button{all:unset;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;padding:5px 2px;border:1px solid var(--line);border-radius:8px;background:var(--soft);font:700 9.5px var(--f-disp);letter-spacing:.06em;text-transform:uppercase}
 .themes button i{width:34px;height:18px;border-radius:9px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.25)}
+.themes button.lk{opacity:.45;position:relative}
+.themes button.lk::after{content:"🔒";position:absolute;top:2px;right:4px;font-size:10px}
 .themes button[aria-pressed="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink);background:var(--panel)}
 .modeseg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:7px}
 .modeseg button{all:unset;cursor:pointer;text-align:center;padding:6px 2px;border:1px solid var(--line);border-radius:7px;font:700 10px var(--f-disp);letter-spacing:.08em;text-transform:uppercase;background:var(--soft)}
@@ -914,6 +917,7 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
         <button type="button" data-th="turuncu"><i style="background:linear-gradient(90deg,#1d0f06 50%,#ff8a3d 50%)"></i>Turuncu</button>
         <button type="button" data-th="gumus"><i style="background:linear-gradient(90deg,#151a1f 50%,#c9d3dc 50%)"></i>Gümüş</button>
       </div>
+      <p class="note" id="themeNote" hidden style="text-align:center;margin:6px 0 0">Kısıtlı modda yalnız <b>Altın</b> tema kullanılır; diğer temalar lisansla açılır.</p>
       <div class="modeseg" id="modeSeg" role="group" aria-label="Açık / koyu görünüm">
         <button type="button" data-md="auto">Otomatik</button><button type="button" data-md="light">Açık</button><button type="button" data-md="dark">Koyu</button>
       </div>
@@ -1060,7 +1064,7 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
       <button class="hbtn" id="hMap" type="button"><svg viewBox="0 0 24 24"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14"/></svg><b>Harita</b><small>Uydu görüntüsünde konum</small></button>
       <button class="hbtn tk" id="hPs" type="button"><svg viewBox="0 0 24 24"><path d="M4 20h16M5 20V9l7-5 7 5v11M9 20v-6h6v6"/></svg><b>TKGM Parsel<br>Sorguya Git</b><small>Konumu Parsel Sorgu'da aç</small></button>
     </div>
-    <p class="hver">Sürüm 4.2</p>
+    <p class="hver">Sürüm 4.4</p>
     <p class="hnote">Ana sayfaya dönmek için sol üstteki YH logosuna dokunun. Kurulum bir kez yapılır; izinler telefonda hatırlanır.</p>
   </div>
 </div>
@@ -1133,6 +1137,8 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
   <div class="sheetbox">
     <h2 id="pqH">Parseli Haritaya Getir</h2>
     <div class="pqtop"><button class="btn primary" id="pqHere" type="button">Bulunduğum Yerdeki<br>Parsel</button><button class="btn go" id="pqOpenAll" type="button">Açık Olan Parselleri<br>Getir</button></div>
+    <button class="btn sm" id="pqFile" type="button">Favori / İndirilen Parseller · Dosyadan Getir (KML · GeoJSON)</button>
+    <input type="file" id="pqFileIn" multiple accept=".kml,.geojson,.json,.kmz,application/vnd.google-earth.kml+xml,application/geo+json,application/json,text/xml,*/*" hidden>
     <div class="pqor"><span>veya Ada / Parsel ile</span></div>
     <div class="pqgrid">
       <div><label for="pqIl">İl</label><select id="pqIl"><option value="">Yükleniyor…</option></select></div>
@@ -1162,9 +1168,9 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
     </div>
     <div class="dup" id="licErr" hidden></div>
     <div class="licinfo">
-      <b>Deneme sonrası kısıtlananlar:</b> dışa aktarma (NCN, TXT, KML, paylaş, kopyala), RTK alıcı ve NTRIP, aplikasyon, ortalama ölçüm, otomatik kayıt, parsel sorgu; iş başına en fazla 5 nokta kaydı. Anlık koordinat, harita ve simülasyon açık kalır.
+      <b>Deneme sonrası kısıtlananlar:</b> dışa aktarma (NCN, TXT, KML, paylaş, kopyala), RTK alıcı ve NTRIP, aplikasyon, ortalama ölçüm, otomatik kayıt, parsel sorgu, renk temaları; iş başına en fazla 5 nokta kaydı. Anlık koordinat, harita ve simülasyon açık kalır.
     </div>
-    <div class="licinfo">GNSS BOZOKLUHAN GPS · Sürüm 4.2</div>
+    <div class="licinfo">GNSS BOZOKLUHAN GPS · Sürüm 4.4</div>
     <div class="licinfo">Lisans için cihaz kodunuzu gönderin: <b>Yasin HAN</b> · <span class="sel">0 532 234 18 06</span> · <span class="sel">yasinhan@gmail.com</span></div>
     <div class="sheetbtn">
       <button class="btn" id="licWa" type="button">WhatsApp ile Gönder</button>
@@ -1264,7 +1270,8 @@ function utmZone(lonD) { return Math.floor((lonD + 180) / 6) + 1; }
 // ===== DEPOLAMA VE İŞLER =====
 const $ = id => document.getElementById(id);
 function applyTheme() { let t = {}; try { t = JSON.parse(localStorage.getItem('yhan_gnss_theme') || '{}'); } catch (e) {}
-  const r = document.documentElement; if (t.th && t.th !== 'altin') r.dataset.theme = t.th; else delete r.dataset.theme; if (t.md && t.md !== 'auto') r.dataset.mode = t.md; else delete r.dataset.mode; return t; }
+  const r = document.documentElement, lock = window.LIC && LIC.state === 'expired';
+  if (t.th && t.th !== 'altin' && !lock) r.dataset.theme = t.th; else delete r.dataset.theme; if (t.md && t.md !== 'auto') r.dataset.mode = t.md; else delete r.dataset.mode; return t; }
 applyTheme();
 const store = {
   get(k, d) { try { const v = localStorage.getItem('yhan_gnss_' + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
@@ -1850,6 +1857,7 @@ function licRefresh() {
   const left = Math.max(0, Math.ceil(TRIAL_DAYS - (info.now - info.start) / 864e5));
   LIC = { device: info.device, licensed: !!info.licensed, tamper: !!info.tamper, daysLeft: left,
     state: info.licensed ? 'full' : (info.tamper || left <= 0) ? 'expired' : 'trial' };
+  window.LIC = LIC; applyTheme(); if (typeof themeRender === 'function') themeRender();
   licRender();
 }
 const isPro = () => LIC.state !== 'expired';
@@ -2359,20 +2367,73 @@ async function fetchParcelRef(r) {
   if (!d || d.type !== 'Feature' || !d.geometry) throw new Error((d && (d.Message || d.message)) || 'Parsel bulunamadı');
   return d;
 }
+// ----- KML / GeoJSON parsel dosyaları (Parsel Sorgu › İndir) -----
+function pickAP(o, name) {
+  const keys = Object.keys(o || {}); const f = re => { const k = keys.find(k => re.test(k)); return k ? String(o[k]).trim() : ''; };
+  let ada = f(/^ada(no|_no)?$/i) || f(/ada/i), par = f(/^parsel(no|_no)?$/i) || f(/parsel/i);
+  if ((!ada || !par) && name) { const m = String(name).match(/(\d+)\s*\/\s*(\d+)/) || String(name).match(/(\d+)\s*Ada\s*(\d+)\s*Parsel/i); if (m) { ada = ada || m[1]; par = par || m[2]; } }
+  return { adaNo: ada || '?', parselNo: par || (name || '?'), ilAd: f(/^il(ad|_ad|adi)?$/i), ilceAd: f(/il[çc]e/i), mahalleAd: f(/mahalle|koy|köy/i), alan: f(/^alan/i), nitelik: f(/nitelik/i), pafta: f(/pafta/i) };
+}
+function geoOK(g) { const c = JSON.stringify(g.coordinates || []).match(/-?\d+\.?\d*/g) || []; return c.length && c.every((v, i) => Math.abs(+v) <= (i % 2 ? 90 : 180)); }
+function parseParcelFile(text) {
+  const T = String(text || '').trim(), out = [];
+  if (T[0] === '{' || T[0] === '[') {
+    let j; try { j = JSON.parse(T); } catch (e) { return out; }
+    const F = Array.isArray(j) ? j : j.type === 'FeatureCollection' ? j.features : j.type === 'Feature' ? [j] : [];
+    F.forEach(f => { if (f && f.geometry && /Polygon/.test(f.geometry.type) && geoOK(f.geometry)) out.push({ type: 'Feature', geometry: f.geometry, properties: pickAP(f.properties || {}, (f.properties || {}).name) }); });
+    return out;
+  }
+  if (/<kml|<Placemark/i.test(T)) {
+    const d = new DOMParser().parseFromString(T, 'text/xml');
+    [...d.getElementsByTagName('Placemark')].forEach(pm => {
+      const nm = (pm.getElementsByTagName('name')[0] || {}).textContent || '';
+      const props = {}; [...pm.getElementsByTagName('Data')].forEach(x => { props[x.getAttribute('name')] = (x.getElementsByTagName('value')[0] || {}).textContent || ''; });
+      [...pm.getElementsByTagName('SimpleData')].forEach(x => { props[x.getAttribute('name')] = x.textContent; });
+      const desc = (pm.getElementsByTagName('description')[0] || {}).textContent || '';
+      desc.replace(/<[^>]+>/g, ' ').replace(/(Ada\s*No|Parsel\s*No|Ada|Parsel|İl[çc]e|İl|Mahalle|Alan|Nitelik|Pafta)\s*[:=]\s*([^\n:]+?)(?=\s+(?:Ada|Parsel|İl|Mahalle|Alan|Nitelik|Pafta)\b|$|\n)/gi, (a, k, v) => { props[k] = v.trim(); });
+      const polys = [...pm.getElementsByTagName('Polygon')].map(P => {
+        const ring = el => ((el && el.getElementsByTagName('coordinates')[0] || {}).textContent || '').trim().split(/\s+/).map(c => c.split(',').slice(0, 2).map(Number)).filter(c => c.length === 2 && c.every(isFinite));
+        const outer = ring(P.getElementsByTagName('outerBoundaryIs')[0]), inner = [...P.getElementsByTagName('innerBoundaryIs')].map(ring);
+        return [outer, ...inner].filter(r => r.length > 2);
+      }).filter(p => p.length);
+      if (!polys.length) return;
+      const g = polys.length === 1 ? { type: 'Polygon', coordinates: polys[0] } : { type: 'MultiPolygon', coordinates: polys };
+      if (geoOK(g)) out.push({ type: 'Feature', geometry: g, properties: pickAP(props, nm) });
+    });
+  }
+  return out;
+}
+function drawParcelSet(F) {
+  if (!F.length) return 0; parcelLayer.clearLayers(); let B = null;
+  F.forEach(f => { const c = L.geoJSON(f).getBounds().getCenter(); const b = drawParcel(f, c.lat, c.lng, true); B = B ? B.extend(b) : L.latLngBounds(b.getSouthWest(), b.getNorthEast()); });
+  if (B) { follow = false; map.fitBounds(B, { maxZoom: 20, padding: [40, 40] }); }
+  return F.length;
+}
+$('pqFile').onclick = () => { if (needPro('Parsel sorgu')) return; $('pqFileIn').value = ''; $('pqFileIn').click(); };
+$('pqFileIn').onchange = async () => {
+  const fs = [...($('pqFileIn').files || [])]; if (!fs.length) return;
+  const texts = await Promise.all(fs.map(f => new Promise(r => { const rd = new FileReader(); rd.onload = () => r(decodeText(rd.result)); rd.onerror = () => r(''); rd.readAsArrayBuffer(f); })));
+  const F = [].concat(...texts.map(parseParcelFile));
+  if (!F.length) { pqErr('Dosyalarda parsel geometrisi bulunamadı. Parsel Sorgu › İndir › KML veya GeoJSON dosyası seçin.'); return; }
+  $('pqDlg').hidden = true; const n = drawParcelSet(F); toast(n + ' parsel dosyadan haritaya getirildi');
+};
 let pendingShared = [];
 async function getOpenParcels() {
   if (needPro('Parsel sorgu')) return;
   let texts = pendingShared.splice(0);
   try { if (NATIVE && Android.takeShared) texts = texts.concat(JSON.parse(Android.takeShared() || '[]')); } catch (e) {}
   try { const c = NATIVE && Android.readClip ? Android.readClip() : (navigator.clipboard && navigator.clipboard.readText ? await navigator.clipboard.readText() : ''); if (c) texts.push(c); } catch (e) {}
-  const refs = parseParcelRefs(texts.join('\n\n'));
+  const fileF = [].concat(...texts.filter(t => /^\s*[{[<]/.test(t)).map(parseParcelFile));
+  const refs = parseParcelRefs(texts.filter(t => !/^\s*[{[<]/.test(t)).join('\n\n'));
+  if (!refs.length && fileF.length) { if (!map) { goTab('tabMap'); await new Promise(r => setTimeout(r, 400)); } $('pqDlg').hidden = true; toast(drawParcelSet(fileF) + ' parsel haritaya getirildi'); return; }
   if (!refs.length) {
-    pqErr('Açık parsel yok. TKGM Parsel Sorgu\'da parseli açıp Paylaş › GNSS BOZOKLUHAN GPS seçin veya parsel bağlantısını / bilgisini kopyalayıp bu düğmeye tekrar basın.');
+    pqErr('Açık parsel yok. Parsel Sorgu\'da parseli (veya favorilerinizi) Paylaş › GNSS BOZOKLUHAN GPS ile gönderin, bağlantıyı kopyalayın ya da İndir › KML/GeoJSON dosyasını aşağıdaki "Dosyadan Getir" ile seçin.');
     $('pqDlg').hidden = false; toast('Açık parsel yok'); return;
   }
   if (!map) { goTab('tabMap'); await new Promise(r => setTimeout(r, 400)); }
   $('pqDlg').hidden = true; toast(refs.length + ' parsel getiriliyor…');
   parcelLayer.clearLayers(); let B = null, ok = 0; const errs = [];
+  fileF.forEach(f => { const c = L.geoJSON(f).getBounds().getCenter(); const b = drawParcel(f, c.lat, c.lng, true); B = B ? B.extend(b) : L.latLngBounds(b.getSouthWest(), b.getNorthEast()); ok++; });
   for (const r of refs) {
     try { const f = await fetchParcelRef(r); const c = L.geoJSON(f).getBounds().getCenter(); const b = drawParcel(f, c.lat, c.lng, true); B = B ? B.extend(b) : L.latLngBounds(b.getSouthWest(), b.getNorthEast()); ok++; }
     catch (e) { errs.push(e.message); if (/limit/i.test(e.message)) break; }
@@ -2888,10 +2949,11 @@ $('dnsM').onchange = () => { DNS.method = $('dnsM').value; dnsSolve(); if (!DNS.
 $('dnsD').onchange = () => { DNS.dir = $('dnsD').value; dnsSave(); dnsRender(); render(); };
 $('dnsOn').onchange = () => { DNS.on = $('dnsOn').checked && !!DNS.P; dnsSave(); dnsRender(); render(); toast(DNS.on ? 'DNS dönüşümü etkin' : 'DNS dönüşümü kapalı'); };
 dnsRender();
-function themeRender() { const t = store.get('theme', {});
-  document.querySelectorAll('#themeSeg button').forEach(b => b.setAttribute('aria-pressed', b.dataset.th === (t.th || 'altin')));
+function themeRender() { const t = store.get('theme', {}), lock = !isPro(), cur = lock ? 'altin' : (t.th || 'altin');
+  document.querySelectorAll('#themeSeg button').forEach(b => { b.setAttribute('aria-pressed', b.dataset.th === cur); b.classList.toggle('lk', lock && b.dataset.th !== 'altin'); });
+  $('themeNote').hidden = !lock;
   document.querySelectorAll('#modeSeg button').forEach(b => b.setAttribute('aria-pressed', b.dataset.md === (t.md || 'auto'))); }
-document.querySelectorAll('#themeSeg button').forEach(b => b.onclick = () => { const t = store.get('theme', {}); t.th = b.dataset.th; store.set('theme', t); applyTheme(); themeRender(); try { updateStake(); } catch (e) {} toast('Tema: ' + b.textContent.trim()); });
+document.querySelectorAll('#themeSeg button').forEach(b => b.onclick = () => { if (b.dataset.th !== 'altin' && needPro('Renk temaları')) return; const t = store.get('theme', {}); t.th = b.dataset.th; store.set('theme', t); applyTheme(); themeRender(); try { updateStake(); } catch (e) {} toast('Tema: ' + b.textContent.trim()); });
 document.querySelectorAll('#modeSeg button').forEach(b => b.onclick = () => { const t = store.get('theme', {}); t.md = b.dataset.md; store.set('theme', t); applyTheme(); themeRender(); try { updateStake(); } catch (e) {} toast('Görünüm: ' + b.textContent.trim()); });
 themeRender();
 flag($('flag')); flag($('flag2')); flag($('flag3')); initMap(); render();

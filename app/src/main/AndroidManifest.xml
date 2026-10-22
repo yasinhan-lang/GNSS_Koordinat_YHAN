@@ -44,8 +44,16 @@
             <!-- TKGM Parsel Sorgu vb. uygulamalardan "Paylaş" ile parsel bilgisi alma -->
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
+                <action android:name="android.intent.action.SEND_MULTIPLE" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="text/plain" />
+                <data android:mimeType="text/xml" />
+                <data android:mimeType="application/xml" />
+                <data android:mimeType="application/json" />
+                <data android:mimeType="application/geo+json" />
+                <data android:mimeType="application/vnd.geo+json" />
+                <data android:mimeType="application/vnd.google-earth.kml+xml" />
+                <data android:mimeType="application/octet-stream" />
             </intent-filter>
         </activity>
 
