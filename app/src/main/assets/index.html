@@ -228,10 +228,10 @@ nav .dot{position:absolute;top:8px;left:calc(50% + 8px);min-width:16px;height:16
 .logo-btn:focus-visible{outline:2px solid var(--accent)}
 /* Aplikasyon */
 .stk-file{text-align:center;font:9.5px var(--f-num);color:var(--muted);margin-top:3px;overflow-wrap:anywhere}
-.stk-top{display:grid;grid-template-columns:auto 1fr auto;gap:5px;align-items:center;margin-bottom:4px}
-.stk-top label{font:700 9px var(--f-disp);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.stk-top input{height:28px;min-width:0;padding:2px 4px;text-align:center;font:600 13px var(--f-num);border-color:var(--ink);background:var(--panel)}
-.stk-fbtn{all:unset;cursor:pointer;white-space:nowrap;font:700 9.5px var(--f-disp);letter-spacing:.06em;text-transform:uppercase;padding:6px 9px;border-radius:14px;background:var(--accent);color:var(--accent-ink)}
+.stk-top{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;align-items:center;margin:0 -5px 5px}
+.stk-top label{font:700 9.5px var(--f-disp);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:center}
+.stk-top input{height:26px;box-sizing:border-box;width:100%;min-width:0;padding:0 6px;text-align:center;font:600 12.5px var(--f-num);border:1.5px solid var(--ink);border-radius:16px;background:var(--panel)}
+.stk-fbtn{all:unset;box-sizing:border-box;height:26px;display:flex;align-items:center;justify-content:center;cursor:pointer;white-space:nowrap;font:700 clamp(8px,2.45vw,10px) var(--f-disp);letter-spacing:.02em;padding:0 4px;overflow:hidden;text-transform:uppercase;border:1.5px solid var(--accent);border-radius:16px;background:var(--accent);color:var(--accent-ink);box-shadow:0 1px 3px rgba(11,23,36,.16)}
 .stk-fbtn:focus-visible{outline:2px solid var(--ink)}
 .stk-pick{display:grid;grid-template-columns:26px 1fr 26px;gap:4px;align-items:center}
 .stk-pick button{all:unset;cursor:pointer;text-align:center;font:700 15px/24px var(--f-num);border:1px solid var(--line);border-radius:6px;background:var(--soft)}
@@ -606,9 +606,9 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
       <div class="exhd"><b id="stkJob">—</b><span>Aplikasyon · <span id="stkSys">—</span></span></div>
       <input type="file" id="stkFileIn" accept=".txt,.ncn,.csv,.dat,text/plain" hidden>
       <div class="stk-top">
-        <label for="stkFind">Hedef N.NO</label>
+        <label for="stkFind">Hedef Nokta No</label>
         <input id="stkFind" inputmode="text" autocomplete="off" placeholder="yaz" aria-label="Hedef nokta numarası yazın">
-        <button class="stk-fbtn" id="stkFile" type="button">TXT/NCN Aç</button>
+        <button class="stk-fbtn" id="stkFile" type="button">TXT/NCN Dosyası Aç</button>
       </div>
       <div class="stk-pick">
         <button type="button" id="stkPrev" aria-label="Önceki hedef">‹</button>

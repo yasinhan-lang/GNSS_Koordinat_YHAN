@@ -31,6 +31,10 @@ Telefondan ITRF96 ve ED50 koordinatı okuyup iş adı altında kaydeden, NetCAD 
 2. Dosyaya dokunun. "Bilinmeyen uygulamalar" uyarısı çıkarsa **Ayarlar › Bu kaynağa izin ver** deyin.
 3. **Yükle**'ye basın. Play Koruma uyarısı çıkarsa **Yine de yükle** seçin (uygulama Play Store'dan gelmediği için çıkar).
 
+## Sürüm 3.4
+
+- Aplikasyon: Hedef N.NO kutusu ve TXT/NCN Aç düğmesi alttaki Durdur / Kontrol Kaydet düğmeleriyle aynı boyda, aynı hizada ve yuvarlak.
+
 ## Sürüm 3.3
 
 - Ölçüm: sistem düğmeleri, otomatik kayıt satırı ve kararlılık/uydu satırı daha ince.
