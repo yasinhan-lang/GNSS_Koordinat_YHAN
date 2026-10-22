@@ -31,6 +31,12 @@ Telefondan ITRF96 ve ED50 koordinatı okuyup iş adı altında kaydeden, NetCAD 
 2. Dosyaya dokunun. "Bilinmeyen uygulamalar" uyarısı çıkarsa **Ayarlar › Bu kaynağa izin ver** deyin.
 3. **Yükle**'ye basın. Play Koruma uyarısı çıkarsa **Yine de yükle** seçin (uygulama Play Store'dan gelmediği için çıkar).
 
+## Sürüm 4.2
+
+- Ayarlar › Görünüm · Renk Teması: Altın, Turkuaz, Zümrüt, Yakut, Lavanta, Gece Mavisi, Turuncu, Gümüş.
+- Otomatik / Açık / Koyu görünüm seçimi.
+- Başlık, ana sayfa, düğmeler, pusula ve logo seçilen temaya uyar.
+
 ## Sürüm 4.1
 
 - Parsel penceresinde Ada ve Parsel kutuları her açılışta boş gelir (il/ilçe/mahalle hatırlanır).
