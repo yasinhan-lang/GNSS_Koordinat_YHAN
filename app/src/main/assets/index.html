@@ -337,6 +337,8 @@ nav .dot{position:absolute;top:8px;left:calc(50% + 8px);min-width:16px;height:16
 .mprow{display:grid;grid-template-columns:.85fr .85fr 1.7fr;gap:5px;align-items:stretch}
 .mprow .mapauto{min-height:0;padding:3px 3px}
 .mappanel .btn{padding:3px 6px 4px;border-radius:7px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border:1px solid rgba(0,0,0,.45)}
+#mapSave,#mapSave:disabled{background:var(--good);color:#fff;border:1.5px solid #000;opacity:1}
+#mapSave:disabled .sv2{opacity:.85}
 #mapSave .sv1{align-self:stretch;text-align:center;font:700 10px/1.15 var(--f-disp);letter-spacing:.16em;padding-bottom:2px;border-bottom:1px solid currentColor}
 #mapSave .sv2{font:700 10.5px/1.1 var(--f-num);letter-spacing:.02em;text-transform:none;padding:1px 8px;border:1px solid currentColor;border-radius:5px;white-space:nowrap}
 .mapauto{display:flex;align-items:center;justify-content:center;gap:5px;padding:2px 3px;border:1px solid var(--line);border-radius:7px;font:600 9.5px/1.1 var(--f-disp);letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
@@ -1022,7 +1024,7 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
       <button class="hbtn" id="hMap" type="button"><svg viewBox="0 0 24 24"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14"/></svg><b>Harita</b><small>Uydu görüntüsünde konum</small></button>
       <button class="hbtn tk" id="hPs" type="button"><svg viewBox="0 0 24 24"><path d="M4 20h16M5 20V9l7-5 7 5v11M9 20v-6h6v6"/></svg><b>TKGM Parsel<br>Sorguya Git</b><small>Konumu Parsel Sorgu'da aç</small></button>
     </div>
-    <p class="hver">Sürüm 4.0</p>
+    <p class="hver">Sürüm 4.1</p>
     <p class="hnote">Ana sayfaya dönmek için sol üstteki YH logosuna dokunun. Kurulum bir kez yapılır; izinler telefonda hatırlanır.</p>
   </div>
 </div>
@@ -1100,8 +1102,8 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
       <div><label for="pqIl">İl</label><select id="pqIl"><option value="">Yükleniyor…</option></select></div>
       <div><label for="pqIlce">İlçe</label><select id="pqIlce" disabled><option value="">Önce il</option></select></div>
       <div class="w2"><label for="pqMah">Mahalle / Köy</label><select id="pqMah" disabled><option value="">Önce ilçe</option></select></div>
-      <div><label for="pqAda">Ada</label><input id="pqAda" inputmode="numeric" autocomplete="off" placeholder="105"></div>
-      <div><label for="pqPar">Parsel</label><input id="pqPar" inputmode="numeric" autocomplete="off" placeholder="12"></div>
+      <div><label for="pqAda">Ada</label><input id="pqAda" inputmode="numeric" autocomplete="off" placeholder=""></div>
+      <div><label for="pqPar">Parsel</label><input id="pqPar" inputmode="numeric" autocomplete="off" placeholder=""></div>
     </div>
     <div class="dup" id="pqErr" hidden></div>
     <div class="pqsv"><div class="pqsvh">Kayıtlı Parseller <b id="pqSvN">0</b></div><div id="pqSaved" class="pqlist"></div></div>
@@ -1126,7 +1128,7 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
     <div class="licinfo">
       <b>Deneme sonrası kısıtlananlar:</b> dışa aktarma (NCN, TXT, KML, paylaş, kopyala), RTK alıcı ve NTRIP, aplikasyon, ortalama ölçüm, otomatik kayıt, parsel sorgu; iş başına en fazla 5 nokta kaydı. Anlık koordinat, harita ve simülasyon açık kalır.
     </div>
-    <div class="licinfo">GNSS BOZOKLUHAN GPS · Sürüm 4.0</div>
+    <div class="licinfo">GNSS BOZOKLUHAN GPS · Sürüm 4.1</div>
     <div class="licinfo">Lisans için cihaz kodunuzu gönderin: <b>Yasin HAN</b> · <span class="sel">0 532 234 18 06</span> · <span class="sel">yasinhan@gmail.com</span></div>
     <div class="sheetbtn">
       <button class="btn" id="licWa" type="button">WhatsApp ile Gönder</button>
@@ -2360,7 +2362,7 @@ async function tkList(key, url) {
 }
 function pqErr(m) { $('pqErr').textContent = m; $('pqErr').hidden = !m; }
 async function pqLoadIl() {
-  const sel = store.get('pq', {}); if (sel.ada) $('pqAda').value = sel.ada; if (sel.par) $('pqPar').value = sel.par;
+  const sel = store.get('pq', {}); $('pqAda').value = ''; $('pqPar').value = '';
   if ($('pqIl').options.length > 1) return;
   let L;
   try { L = await tkList('il', 'https://parselsorgu.tkgm.gov.tr/app/modules/administrativeQuery/data/ilListe.json'); }

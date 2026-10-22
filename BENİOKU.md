@@ -31,6 +31,11 @@ Telefondan ITRF96 ve ED50 koordinatı okuyup iş adı altında kaydeden, NetCAD 
 2. Dosyaya dokunun. "Bilinmeyen uygulamalar" uyarısı çıkarsa **Ayarlar › Bu kaynağa izin ver** deyin.
 3. **Yükle**'ye basın. Play Koruma uyarısı çıkarsa **Yine de yükle** seçin (uygulama Play Store'dan gelmediği için çıkar).
 
+## Sürüm 4.1
+
+- Parsel penceresinde Ada ve Parsel kutuları her açılışta boş gelir (il/ilçe/mahalle hatırlanır).
+- Harita: Kaydet · Nokta No düğmesi her durumda yeşil zeminli, siyah çerçeveli.
+
 ## Sürüm 4.0
 
 - Harita: Kaydet düğmesi iki satır (KAYDET / çizgi / çerçeveli Nokta No).
