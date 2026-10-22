@@ -143,7 +143,7 @@ class MainActivity : AppCompatActivity() {
                     type = "*/*"
                 }
                 return try {
-                    fileLauncher.launch(Intent.createChooser(pick, "Koordinat dosyası seç (TXT / NCN)"))
+                    fileLauncher.launch(Intent.createChooser(pick, "Dosya seç (TXT / NCN / DNS)"))
                     true
                 } catch (e: Exception) {
                     fileCb = null

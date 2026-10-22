@@ -31,6 +31,17 @@ Telefondan ITRF96 ve ED50 koordinatı okuyup iş adı altında kaydeden, NetCAD 
 2. Dosyaya dokunun. "Bilinmeyen uygulamalar" uyarısı çıkarsa **Ayarlar › Bu kaynağa izin ver** deyin.
 3. **Yükle**'ye basın. Play Koruma uyarısı çıkarsa **Yine de yükle** seçin (uygulama Play Store'dan gelmediği için çıkar).
 
+## Sürüm 3.8
+
+- Ölçüm: iş adı / DOM / sistem satırı artık hiç kapanmıyor (dar ekranda satırların sıkışma hatası giderildi); uzun iş adı iki satıra iner.
+- Anlık koordinat: Boylam | Enlem (Y | X altında). Aplikasyon: Doğu (ΔY) | Kuzey (ΔX).
+- Harita: kaydet düğmesi "Kaydet · Nokta No: …" sola yaslı. Pusula eklendi (yön sensörüyle gerçek kuzeyi gösterir).
+- Parsel: altın sarısı sınır, lacivert etiket; parsel kaydetme, kayıtlı parseller listesi (Göster / Yol / Sil), Google Haritalar ile yol tarifi; il-ilçe-mahalle kutuları tam görünür.
+- Aplikasyon: Hedef Nokta No kutusu küçük, TXT/NCN DOSYASI AÇ büyük; elle eklemede "Nokta No" etiketleri ortalı.
+- Alt menü: Ölçüm, Harita, Aplikasyon, İşler, Liste, Alıcı, Ayarlar.
+- Ayarlar: NetCAD .dns dönüşüm dosyası (Helmert / Afin, $AMAT ve $NOK) ED50 (TM3) işlerinde kullanılabilir.
+- Sürüm numarası ana sayfada ve lisans penceresinde görünür.
+
 ## Sürüm 3.7
 
 - Üst başlıktan "Yasin HAN · Tasarım ve Geliştirme" yazısı kaldırıldı; YH logosu, uygulama adı ve bayrak kaldı.
