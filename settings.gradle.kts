@@ -12,4 +12,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "BZK_Lisans_Uretici"
+rootProject.name = "GNSS_Koordinat_YHAN"
+include(":app")
