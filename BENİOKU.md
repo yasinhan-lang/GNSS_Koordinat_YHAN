@@ -31,6 +31,11 @@ Telefondan ITRF96 ve ED50 koordinatı okuyup iş adı altında kaydeden, NetCAD 
 2. Dosyaya dokunun. "Bilinmeyen uygulamalar" uyarısı çıkarsa **Ayarlar › Bu kaynağa izin ver** deyin.
 3. **Yükle**'ye basın. Play Koruma uyarısı çıkarsa **Yine de yükle** seçin (uygulama Play Store'dan gelmediği için çıkar).
 
+## Sürüm 4.6
+
+- Yazı boyutları eski haline döndü: uygulama yine telefonun yazı boyutu ayarını izler (4.5'teki sabit ölçek kaldırıldı).
+- Ayarlar › Çıktı: Z değeri ve Ondalık alt alta, tam genişlikte; büyük yazıda da taşmaz.
+
 ## Sürüm 4.5
 
 - Silme işlemlerinde (iş, nokta, hedefler, kayıtlı parsel, DNS) Sil / Vazgeç onay penceresi. İş silinemiyordu (liste her konumda yenilendiği için) – düzeltildi.

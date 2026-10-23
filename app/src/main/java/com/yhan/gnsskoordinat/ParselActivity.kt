@@ -84,7 +84,6 @@ XMLHttpRequest.prototype.send=function(){var x=this;x.addEventListener('load',fu
             domStorageEnabled = true
             @Suppress("DEPRECATION")
             databaseEnabled = true
-            textZoom = 100
             setGeolocationEnabled(true)
         }
         web.addJavascriptInterface(Cap(), "YHCap")

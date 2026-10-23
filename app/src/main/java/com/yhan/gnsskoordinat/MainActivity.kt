@@ -126,7 +126,6 @@ class MainActivity : AppCompatActivity() {
         with(web.settings) {
             javaScriptEnabled = true
             domStorageEnabled = true
-            textZoom = 100
             databaseEnabled = true
             allowFileAccess = false
             mediaPlaybackRequiresUserGesture = false
