@@ -1,16 +1,9 @@
 pluginManagement {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
+    repositories { google(); mavenCentral(); gradlePluginPortal() }
 }
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-    }
+    repositories { google(); mavenCentral() }
 }
-rootProject.name = "GNSS_Koordinat_YHAN"
+rootProject.name = "TKGM_EKRAN_ALINTI_YHAN"
 include(":app")

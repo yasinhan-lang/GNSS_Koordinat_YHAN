@@ -4,33 +4,30 @@ plugins {
 }
 
 android {
-    namespace = "com.yhan.gnsskoordinat"
+    namespace = "com.yhan.tkgmekran"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.yhan.gnsskoordinat"
-        minSdk = 24
+        applicationId = "com.yhan.tkgmekran"
+        minSdk = 30          // Android 11+ (erişilebilirlik ekran görüntüsü API'si)
         targetSdk = 34
-        versionCode = 22
-        versionName = "4.5"
+        versionCode = 1
+        versionName = "1.0"
     }
 
-    // Sabit imza: her derlenen APK bir öncekinin üzerine kurulabilir (veriler korunur).
+    // Sabit imza: her derlemede aynı anahtar → güncellemede kaldırıp yüklemek gerekmez
     signingConfigs {
         create("yhan") {
             storeFile = file("yhan.keystore")
-            storePassword = "yhan2026gnss"
+            storePassword = "yhan2026"
             keyAlias = "yhan"
-            keyPassword = "yhan2026gnss"
+            keyPassword = "yhan2026"
         }
     }
-
     buildTypes {
-        release {
+        getByName("debug") { signingConfig = signingConfigs.getByName("yhan") }
+        getByName("release") {
             isMinifyEnabled = false
-            signingConfig = signingConfigs.getByName("yhan")
-        }
-        debug {
             signingConfig = signingConfigs.getByName("yhan")
         }
     }
@@ -38,19 +35,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = "17"
-    }
-    lint {
-        checkReleaseBuilds = false
-        abortOnError = false
-    }
+    kotlinOptions { jvmTarget = "17" }
 }
 
-dependencies {
-    implementation("androidx.core:core-ktx:1.13.1")
-    implementation("androidx.appcompat:appcompat:1.7.0")
-    implementation("androidx.activity:activity-ktx:1.9.2")
-    implementation("androidx.webkit:webkit:1.11.0")
-    implementation("com.google.android.gms:play-services-location:21.3.0")
-}
+base { archivesName.set("TKGM_EKRAN_ALINTI_YHAN-v1.0") }

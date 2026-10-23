@@ -1,26 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-    <!-- RTK alıcı (Bluetooth) -->
-    <uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="30" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:maxSdkVersion="30" />
-    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
-    <uses-feature android:name="android.hardware.location.gps" android:required="false" />
-    <uses-feature android:name="android.hardware.bluetooth" android:required="false" />
-
-    <!-- Android 11+: yüklü olup olmadığını görebilmek için -->
+    <!-- TKGM uygulamasını başlatabilmek için paket görünürlüğü -->
     <queries>
         <package android:name="com.tkgm.parselsorgu" />
-        <package android:name="com.google.earth" />
-        <intent>
-            <action android:name="android.intent.action.VIEW" />
-            <data android:scheme="https" />
-        </intent>
     </queries>
 
     <application
@@ -28,51 +11,37 @@
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:supportsRtl="false"
-        android:theme="@style/Theme.YHAN">
+        android:theme="@android:style/Theme.Material.Light.NoActionBar">
 
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTask"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:windowSoftInputMode="adjustResize">
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <!-- TKGM Parsel Sorgu vb. uygulamalardan "Paylaş" ile parsel bilgisi alma -->
-            <intent-filter>
-                <action android:name="android.intent.action.SEND" />
-                <action android:name="android.intent.action.SEND_MULTIPLE" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="text/plain" />
-                <data android:mimeType="text/xml" />
-                <data android:mimeType="application/xml" />
-                <data android:mimeType="application/json" />
-                <data android:mimeType="application/geo+json" />
-                <data android:mimeType="application/vnd.geo+json" />
-                <data android:mimeType="application/vnd.google-earth.kml+xml" />
-                <data android:mimeType="application/octet-stream" />
-            </intent-filter>
         </activity>
 
         <activity
-            android:name=".ParselActivity"
+            android:name=".PreviewActivity"
             android:exported="false"
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:windowSoftInputMode="adjustResize" />
+            android:excludeFromRecents="true"
+            android:taskAffinity="com.yhan.tkgmekran.onizleme"
+            android:launchMode="singleTask"
+            android:theme="@android:style/Theme.Material.NoActionBar" />
 
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.files"
+        <service
+            android:name=".CaptureService"
             android:exported="false"
-            android:grantUriPermissions="true">
+            android:label="@string/service_name"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
             <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths" />
-        </provider>
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility_config" />
+        </service>
     </application>
 </manifest>
