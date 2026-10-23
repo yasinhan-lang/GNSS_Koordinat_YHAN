@@ -31,6 +31,17 @@ Telefondan ITRF96 ve ED50 koordinatı okuyup iş adı altında kaydeden, NetCAD 
 2. Dosyaya dokunun. "Bilinmeyen uygulamalar" uyarısı çıkarsa **Ayarlar › Bu kaynağa izin ver** deyin.
 3. **Yükle**'ye basın. Play Koruma uyarısı çıkarsa **Yine de yükle** seçin (uygulama Play Store'dan gelmediği için çıkar).
 
+## Sürüm 4.5
+
+- Silme işlemlerinde (iş, nokta, hedefler, kayıtlı parsel, DNS) Sil / Vazgeç onay penceresi. İş silinemiyordu (liste her konumda yenilendiği için) – düzeltildi.
+- Bayrak da ana sayfaya götürür; ana sayfa İlk Kurulum hizası, Kurulum Tamam ve ana düğmeler daraltıldı.
+- Parsel Sorgu uygulama içinde açılır (yeni ParselActivity): açılan ve Favorilerim'den gösterilen parseller "Haritaya Aktar" ile haritaya ve kayıtlı parsellere gelir; "Haritaya Dön" / geri tuşu ile dönülür.
+- Kayıtlı parseller: tek tek kutu ile, toplu Tümünü Aç / Kapat, Hepsini Göster; çizgiler düz (kesik değil).
+- Google Earth'e veya başka uygulamaya geçince "Haritaya geri dönmek için dokunun" bildirimi (Android 13+: bildirim izni).
+- Aplikasyon: hedef listesi konum güncellemelerinde yeniden çizilmiyor (yanıp sönme giderildi).
+- Ayarlar › Çıktı: kısa etiketler (Elipsoit (h) / Ortometrik (H) / Sıfır (0), 2-3-4 hane); WebView yazı ölçeği sabit (telefonun büyük yazı ayarı kutuları taşırmıyor).
+- Gereksiz pano okuma özelliği kaldırıldı.
+
 ## Sürüm 4.4
 
 - Harita: Kaydet / Nokta No iki satır, Nokta No çerçevesiz.

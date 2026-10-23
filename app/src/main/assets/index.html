@@ -211,17 +211,17 @@ nav .dot{position:absolute;top:8px;left:calc(50% + 8px);min-width:16px;height:16
 .hname span{color:var(--accent)}
 .hsub{font:500 12px/1.4 var(--f-body);color:#c8d6e5;max-width:34ch}
 .setup{display:flex;flex-direction:column;gap:6px}
-.setup h3{text-align:center;margin:0 0 2px}
+.setup h3{text-align:left;margin:0 0 1px;padding-left:44px}
 .srow2{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:center;padding:4px 0;border-top:1px dashed var(--line)}
 .srow2:first-of-type{border-top:none}
 .srow2 .gicon{width:34px;height:34px}
 .srow2 .gicon svg{width:18px;height:18px}
 .srow2 .t{font:700 12.5px var(--f-disp);letter-spacing:.05em;text-transform:uppercase}
 .srow2 .d{font-size:11px;color:var(--muted)}
-.hstart{width:100%;padding:13px 8px!important;font-size:15px!important;letter-spacing:.14em!important;border-radius:10px!important}
+.hstart{width:100%;padding:8px 8px!important;font-size:13.5px!important;letter-spacing:.14em!important;border-radius:10px!important}
 .hstart.done{background:var(--good);color:#fff}
 .hgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.hbtn{all:unset;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:12px 6px;border-radius:10px;background:var(--panel);border:1px solid var(--line);text-align:center;min-height:62px}
+.hbtn{all:unset;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:7px 6px;border-radius:10px;background:var(--panel);border:1px solid var(--line);text-align:center;min-height:48px}
 .hbtn svg{width:24px;height:24px;stroke:var(--ink);fill:none;stroke-width:1.7}
 .hbtn b{font:700 12.5px/1.1 var(--f-disp);letter-spacing:.08em;text-transform:uppercase}
 .hbtn small{font:10.5px var(--f-body);color:var(--muted)}
@@ -550,8 +550,10 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
 #shCode{text-align:center;border-radius:10px;padding:11px 9px!important}
 .sheetbox .fgrid label{text-align:center}
 .dup{color:var(--bad);font-size:12.5px;font-weight:600}
-.fgrid.cikti{grid-template-columns:1.9fr 1fr}
-.fgrid.cikti select{font-size:13px;padding-left:4px;padding-right:22px;text-align:center;text-align-last:center;min-width:0;white-space:nowrap;text-overflow:ellipsis}
+.fgrid.cikti{grid-template-columns:1.4fr 1fr}
+.fgrid.cikti select{height:36px;font-size:12.5px;padding-left:4px;padding-right:20px;text-align:center;text-align-last:center;min-width:0;white-space:nowrap;text-overflow:ellipsis}
+.cftxt{margin:0;text-align:center;font-size:13px;line-height:1.45}
+.cftxt b{color:var(--bad)}
 .sheetbtn{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:2px}
 #pqFile{font-size:10px;letter-spacing:.05em;padding:8px 4px;line-height:1.25;border-radius:10px;border:1.5px dashed var(--line)}
 .pqtop{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -567,8 +569,12 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
 .pqsv{border:1px solid var(--line);border-radius:8px;padding:5px 6px;background:var(--soft)}
 .pqsvh{text-align:center;font:700 10px var(--f-disp);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
 .pqsvh b{color:var(--ink)}
+.pqall{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:5px}
+.pqall button{all:unset;cursor:pointer;text-align:center;padding:5px 2px;border-radius:12px;border:1px solid var(--line);background:var(--panel);font:700 9.5px var(--f-disp);letter-spacing:.06em;text-transform:uppercase}
+.pqrow input[type=checkbox]{width:18px;height:18px;margin:0;accent-color:#26a5b8}
+.pqrow.off{opacity:.55}
 .pqlist{display:flex;flex-direction:column;gap:4px;max-height:150px;overflow-y:auto}
-.pqrow{display:grid;grid-template-columns:1fr auto auto auto;gap:4px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:3px 5px}
+.pqrow{display:grid;grid-template-columns:auto 1fr auto auto auto;gap:4px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:3px 5px}
 .pqrow b{font:700 11.5px var(--f-num)}
 .pqrow small{display:block;font:10px var(--f-body);color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pqrow>div{min-width:0}
@@ -968,8 +974,8 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
     <div class="card">
       <h3>Çıktı</h3>
       <div class="fgrid cikti">
-        <div><label for="zMode">Z değeri</label><select id="zMode"><option value="h">Elipsoit yük. (h)</option><option value="H">Ortometrik (H)</option><option value="0">0 yaz</option></select></div>
-        <div><label for="dec">Ondalık</label><select id="dec"><option>2</option><option selected>3</option><option>4</option></select></div>
+        <div><label for="zMode">Z değeri</label><select id="zMode"><option value="h">Elipsoit (h)</option><option value="H">Ortometrik (H)</option><option value="0">Sıfır (0)</option></select></div>
+        <div><label for="dec">Ondalık</label><select id="dec"><option value="2">2 hane</option><option value="3" selected>3 hane</option><option value="4">4 hane</option></select></div>
       </div>
     </div>
 
@@ -1064,8 +1070,8 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
       <button class="hbtn" id="hMap" type="button"><svg viewBox="0 0 24 24"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14"/></svg><b>Harita</b><small>Uydu görüntüsünde konum</small></button>
       <button class="hbtn tk" id="hPs" type="button"><svg viewBox="0 0 24 24"><path d="M4 20h16M5 20V9l7-5 7 5v11M9 20v-6h6v6"/></svg><b>TKGM Parsel<br>Sorguya Git</b><small>Konumu Parsel Sorgu'da aç</small></button>
     </div>
-    <p class="hver">Sürüm 4.4</p>
-    <p class="hnote">Ana sayfaya dönmek için sol üstteki YH logosuna dokunun. Kurulum bir kez yapılır; izinler telefonda hatırlanır.</p>
+    <p class="hver">Sürüm 4.5</p>
+    <p class="hnote">Ana sayfaya dönmek için sol üstteki logoya veya sağ üstteki bayrağa dokunun. Kurulum bir kez yapılır; izinler telefonda hatırlanır.</p>
   </div>
 </div>
 
@@ -1133,10 +1139,17 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
 </div>
 
 <!-- LİSANS PENCERESİ -->
+<div class="sheet" id="cfDlg" hidden role="dialog" aria-modal="true" aria-labelledby="cfH">
+  <div class="sheetbox">
+    <h2 id="cfH">Silinsin mi?</h2>
+    <p class="cftxt" id="cfT"></p>
+    <div class="sheetbtn"><button class="btn stop" id="cfOk" type="button">Sil</button><button class="btn" id="cfNo" type="button">Vazgeç</button></div>
+  </div>
+</div>
 <div class="sheet" id="pqDlg" hidden role="dialog" aria-modal="true" aria-labelledby="pqH">
   <div class="sheetbox">
     <h2 id="pqH">Parseli Haritaya Getir</h2>
-    <div class="pqtop"><button class="btn primary" id="pqHere" type="button">Bulunduğum Yerdeki<br>Parsel</button><button class="btn go" id="pqOpenAll" type="button">Açık Olan Parselleri<br>Getir</button></div>
+    <div class="pqtop"><button class="btn primary" id="pqHere" type="button">Bulunduğum Yerdeki<br>Parsel</button><button class="btn go" id="pqOpenAll" type="button">Parsel Sorgu'dan Getir<br>(Favoriler · Açıklar)</button></div>
     <button class="btn sm" id="pqFile" type="button">Favori / İndirilen Parseller · Dosyadan Getir (KML · GeoJSON)</button>
     <input type="file" id="pqFileIn" multiple accept=".kml,.geojson,.json,.kmz,application/vnd.google-earth.kml+xml,application/geo+json,application/json,text/xml,*/*" hidden>
     <div class="pqor"><span>veya Ada / Parsel ile</span></div>
@@ -1148,8 +1161,10 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
       <div><label for="pqPar">Parsel</label><input id="pqPar" inputmode="numeric" autocomplete="off" placeholder=""></div>
     </div>
     <div class="dup" id="pqErr" hidden></div>
-    <div class="pqsv"><div class="pqsvh">Kayıtlı Parseller <b id="pqSvN">0</b></div><div id="pqSaved" class="pqlist"></div></div>
-    <p class="pqnote">İpucu: Haritada herhangi bir yere <b>uzun basarak</b> o yerin parselini de getirebilirsiniz. Bilgiler TKGM Parsel Sorgu servisinden alınır (günlük sorgu sınırı vardır).</p>
+    <div class="pqsv"><div class="pqsvh">Kayıtlı Parseller <b id="pqSvN">0</b></div>
+      <div class="pqall"><button type="button" id="pqAllOn">Tümünü Aç</button><button type="button" id="pqAllOff">Tümünü Kapat</button><button type="button" id="pqAllFit">Hepsini Göster</button></div>
+      <div id="pqSaved" class="pqlist"></div></div>
+    <p class="pqnote">İpucu: Haritada herhangi bir yere <b>uzun basarak</b> o yerin parselini de getirebilirsiniz. Parsel Sorgu'dan Getir: uygulama içinde Parsel Sorgu açılır; orada açtığınız ve Favorilerim'den haritada gösterdiğiniz parseller Haritaya Aktar ile buraya gelir ve kayıtlılara eklenir.</p>
     <div class="sheetbtn">
       <button class="btn save" id="pqGo" type="button">Haritaya Getir</button>
       <button class="btn" id="pqClose" type="button">Kapat</button>
@@ -1170,7 +1185,7 @@ input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0}
     <div class="licinfo">
       <b>Deneme sonrası kısıtlananlar:</b> dışa aktarma (NCN, TXT, KML, paylaş, kopyala), RTK alıcı ve NTRIP, aplikasyon, ortalama ölçüm, otomatik kayıt, parsel sorgu, renk temaları; iş başına en fazla 5 nokta kaydı. Anlık koordinat, harita ve simülasyon açık kalır.
     </div>
-    <div class="licinfo">GNSS BOZOKLUHAN GPS · Sürüm 4.4</div>
+    <div class="licinfo">GNSS BOZOKLUHAN GPS · Sürüm 4.5</div>
     <div class="licinfo">Lisans için cihaz kodunuzu gönderin: <b>Yasin HAN</b> · <span class="sel">0 532 234 18 06</span> · <span class="sel">yasinhan@gmail.com</span></div>
     <div class="sheetbtn">
       <button class="btn" id="licWa" type="button">WhatsApp ile Gönder</button>
@@ -1614,13 +1629,13 @@ function renderJobs() {
     const go = document.createElement('button'); go.className = 'btn sm' + (j.id === curId ? ' primary' : ''); go.textContent = j.id === curId ? 'Açık' : 'Aç';
     go.onclick = e => { e.stopPropagation(); selectJob(j.id); };
     const del = document.createElement('button'); del.className = 'btn sm'; del.textContent = 'Sil';
-    del.onclick = e => { e.stopPropagation(); armed(del, () => deleteJob(j.id), 'Emin?'); };
+    del.onclick = e => { e.stopPropagation(); confirmBox('İş silinsin mi?', '“<b>' + escH(j.name) + '</b>” işi ve içindeki <b>' + j.points.length + ' nokta</b> silinecek.<br>Bu işlem geri alınamaz.', 'Sil', () => deleteJob(j.id)); };
     el.onclick = () => selectJob(j.id);
     el.append(info, go, del); box.appendChild(el);
   });
 }
 function renderList() {
-  renderMini(); renderLog(); renderJobs(); renderStakeList();
+  renderMini(); renderLog(); renderJobs(); renderStakeList(true);
   const box = $('plist'), d = +$('dec').value, P = pts(), j = J();
   $('cnt').hidden = !P.length; $('cnt').textContent = P.length; $('empty').hidden = P.length > 0;
   $('ptTitle').textContent = j.name;
@@ -1634,7 +1649,7 @@ function renderList() {
       const p = project(pt), tr = document.createElement('tr'), qn = pt.q != null ? QN[pt.q] : null;
       [pt.name, fmtC(p.Y, p), fmtC(p.X, p), pt.h != null ? fmt(p.Z, 2) : '—'].forEach((v, c) => { const td = document.createElement('td'); td.textContent = v; if (c === 0 && qn) td.className = 'q-' + qn[1]; tr.appendChild(td); });
       const td = document.createElement('td'), b = document.createElement('button'); b.className = 'xdel'; b.type = 'button'; b.textContent = '✕'; b.setAttribute('aria-label', 'Nokta ' + pt.name + ' sil');
-      b.onclick = () => armed(b, () => { P.splice(i, 1); saveJobs(); render(); toast('Nokta silindi'); }, 'Sil?');
+      b.onclick = () => confirmBox('Nokta silinsin mi?', '<b>' + escH(pt.name) + '</b> numaralı nokta silinecek.', 'Sil', () => { P.splice(P.indexOf(pt), 1); saveJobs(); render(); toast('Nokta silindi'); });
       td.appendChild(b); tr.appendChild(td); body.appendChild(tr);
     });
     tb.appendChild(body); box.appendChild(tb);
@@ -1651,16 +1666,18 @@ function _oldPointCards(P, box, d) {
     const q = document.createElement('div'); q.className = 'q';
     q.textContent = (pt.src === 'demo' ? 'DENEME · ' : '') + (pt.q != null ? (QN[pt.q] || ['—'])[0] + ' · ' : '') + '±' + fmtAcc(pt.acc) + ' · ' + (pt.n > 1 ? pt.n + ' okuma ort. · dağılım ' + fmt(pt.sd || 0, 2) + ' m' : 'tek okuma') + (p.cal ? ' · düzeltmeli' : '');
     const b = document.createElement('button'); b.className = 'btn sm del'; b.textContent = 'Sil';
-    b.onclick = () => armed(b, () => { P.splice(i, 1); saveJobs(); render(); toast('Nokta silindi'); });
+    b.onclick = () => confirmBox('Nokta silinsin mi?', '<b>' + escH(pt.name) + '</b> numaralı nokta silinecek.', 'Sil', () => { P.splice(P.indexOf(pt), 1); saveJobs(); render(); toast('Nokta silindi'); });
     el.append(nm, b, yx, q); box.appendChild(el);
   });
   drawPoints();
 }
-function armed(b, fn, txt) {
-  if (b.dataset.armed) { delete b.dataset.armed; fn(); return; }
-  const orig = b.textContent; b.dataset.armed = 1; b.textContent = txt || 'Emin?'; b.classList.add('stop');
-  setTimeout(() => { if (b.isConnected && b.dataset.armed) { delete b.dataset.armed; b.textContent = orig; b.classList.remove('stop'); } }, 3000);
-}
+// Onay penceresi: Sil (veya verilen işlem) / Vazgeç
+let cfFn = null;
+function confirmBox(title, html, ok, fn) { $('cfH').textContent = title; $('cfT').innerHTML = html || 'Bu işlem geri alınamaz.'; $('cfOk').textContent = ok || 'Sil'; cfFn = fn; $('cfDlg').hidden = false; }
+$('cfOk').onclick = () => { const f = cfFn; cfFn = null; $('cfDlg').hidden = true; if (f) f(); };
+$('cfNo').onclick = () => { cfFn = null; $('cfDlg').hidden = true; toast('Vazgeçildi'); };
+$('cfDlg').addEventListener('click', e => { if (e.target === $('cfDlg')) { cfFn = null; $('cfDlg').hidden = true; } });
+const escH = v => String(v).replace(/[<>&"]/g, c => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;' }[c]));
 const zOut = p => { const m = $('zMode').value; return m === '0' ? 0 : m === 'H' && p.H != null ? p.H : p.Z; };
 let toastT;
 function toast(m) { const t = $('toast'); t.textContent = m; t.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('on'), 2400); }
@@ -1940,7 +1957,7 @@ function openParsel(at) {
     u += '#ara/cografi/' + c.lat.toFixed(7) + '/' + c.lon.toFixed(7);
     toast('Parsel Sorgu açılıyor · enlem/boylam panoya kopyalandı: ' + txt);
   } else toast('Parsel Sorgu açılıyor (konum yok)');
-  if (NATIVE && Android.openAppOr) { const r = Android.openAppOr('com.tkgm.parselsorgu', u); if (r === 'app') toast('TKGM Parsel Sorgu uygulaması açılıyor · koordinat panoda; geri tuşu ile dönün'); return; }
+  if (NATIVE && Android.openPS) { Android.openPS(u); return; }   // uygulama içi Parsel Sorgu: geri tuşu / Haritaya Dön ile buraya döner
   if (NATIVE) Android.openUrl(u); else window.open(u, '_blank');
 }
 $('homeStart').onclick = () => { if (setupDone()) { toast('Kurulum zaten tamam'); return; } startSetup(); };
@@ -2307,9 +2324,11 @@ async function queryParcel(lat, lon) {
     drawParcel(d, lat, lon);
   } catch (e) { toast('Parsel alınamadı: ' + e.message); }
 }
+const curKeys = new Set();
 function drawParcel(f, qlat, qlon, keep) {
   const p = f.properties || {}, g = f.geometry;
-  if (!keep) parcelLayer.clearLayers();
+  if (!keep) { parcelLayer.clearLayers(); curKeys.clear(); }
+  curKeys.add(PKEY(p));
   const b = drawParcelGeom(f, parcelLayer, false), c = b.getCenter();
   const n = pts().filter(pt => inGeom(pt.lon, pt.lat, g)).length;
   lastParcel = { lat: qlat, lon: qlon, p, f, c: { lat: c.lat, lon: c.lng } }; drawSavedParcels(); pinfoSavedState();
@@ -2404,7 +2423,7 @@ function parseParcelFile(text) {
   return out;
 }
 function drawParcelSet(F) {
-  if (!F.length) return 0; parcelLayer.clearLayers(); let B = null;
+  if (!F.length) return 0; parcelLayer.clearLayers(); curKeys.clear(); let B = null;
   F.forEach(f => { const c = L.geoJSON(f).getBounds().getCenter(); const b = drawParcel(f, c.lat, c.lng, true); B = B ? B.extend(b) : L.latLngBounds(b.getSouthWest(), b.getNorthEast()); });
   if (B) { follow = false; map.fitBounds(B, { maxZoom: 20, padding: [40, 40] }); }
   return F.length;
@@ -2422,17 +2441,16 @@ async function getOpenParcels() {
   if (needPro('Parsel sorgu')) return;
   let texts = pendingShared.splice(0);
   try { if (NATIVE && Android.takeShared) texts = texts.concat(JSON.parse(Android.takeShared() || '[]')); } catch (e) {}
-  try { const c = NATIVE && Android.readClip ? Android.readClip() : (navigator.clipboard && navigator.clipboard.readText ? await navigator.clipboard.readText() : ''); if (c) texts.push(c); } catch (e) {}
   const fileF = [].concat(...texts.filter(t => /^\s*[{[<]/.test(t)).map(parseParcelFile));
   const refs = parseParcelRefs(texts.filter(t => !/^\s*[{[<]/.test(t)).join('\n\n'));
   if (!refs.length && fileF.length) { if (!map) { goTab('tabMap'); await new Promise(r => setTimeout(r, 400)); } $('pqDlg').hidden = true; toast(drawParcelSet(fileF) + ' parsel haritaya getirildi'); return; }
   if (!refs.length) {
-    pqErr('Açık parsel yok. Parsel Sorgu\'da parseli (veya favorilerinizi) Paylaş › GNSS BOZOKLUHAN GPS ile gönderin, bağlantıyı kopyalayın ya da İndir › KML/GeoJSON dosyasını aşağıdaki "Dosyadan Getir" ile seçin.');
+    pqErr('Açık parsel yok. Parsel Sorgu\'da parseli Paylaş › GNSS BOZOKLUHAN GPS ile gönderin ya da İndir › KML/GeoJSON dosyasını "Dosyadan Getir" ile seçin.');
     $('pqDlg').hidden = false; toast('Açık parsel yok'); return;
   }
   if (!map) { goTab('tabMap'); await new Promise(r => setTimeout(r, 400)); }
   $('pqDlg').hidden = true; toast(refs.length + ' parsel getiriliyor…');
-  parcelLayer.clearLayers(); let B = null, ok = 0; const errs = [];
+  parcelLayer.clearLayers(); curKeys.clear(); let B = null, ok = 0; const errs = [];
   fileF.forEach(f => { const c = L.geoJSON(f).getBounds().getCenter(); const b = drawParcel(f, c.lat, c.lng, true); B = B ? B.extend(b) : L.latLngBounds(b.getSouthWest(), b.getNorthEast()); ok++; });
   for (const r of refs) {
     try { const f = await fetchParcelRef(r); const c = L.geoJSON(f).getBounds().getCenter(); const b = drawParcel(f, c.lat, c.lng, true); B = B ? B.extend(b) : L.latLngBounds(b.getSouthWest(), b.getNorthEast()); ok++; }
@@ -2441,7 +2459,36 @@ async function getOpenParcels() {
   if (B) { follow = false; map.fitBounds(B, { maxZoom: 20, padding: [40, 40] }); }
   toast(ok ? ok + ' parsel haritaya getirildi' + (errs.length ? ' · ' + errs.length + ' parsel alınamadı' : '') : 'Parsel alınamadı: ' + (errs[0] || 'bilinmeyen hata'));
 }
-$('pqOpenAll').onclick = () => { $('pqErr').hidden = true; getOpenParcels(); };
+$('pqOpenAll').onclick = () => {
+  if (needPro('Parsel sorgu')) return; $('pqErr').hidden = true;
+  if (NATIVE && Android.openPS) { $('pqDlg').hidden = true; toast('Parsel Sorgu açılıyor · parselleri / Favorilerim\'i haritada açın, sonra Haritaya Aktar'); Android.openPS('https://parselsorgu.tkgm.gov.tr/'); return; }
+  getOpenParcels();
+};
+// Uygulama içi Parsel Sorgu'dan dönüş: yakalanan parseller + sitenin kayıtlı (favori) verileri
+function scanFeatures(v, out, depth) {
+  if (!v || depth > 6) return;
+  if (typeof v === 'string') { const t = v.trim(); if ((t[0] === '{' || t[0] === '[') && t.length < 5e6) { try { scanFeatures(JSON.parse(t), out, depth + 1); } catch (e) {} } return; }
+  if (Array.isArray(v)) { v.forEach(x => scanFeatures(x, out, depth + 1)); return; }
+  if (typeof v === 'object') {
+    if (v.type === 'Feature' && v.geometry && /Polygon/.test(v.geometry.type) && geoOK(v.geometry)) { out.push({ type: 'Feature', geometry: v.geometry, properties: v.properties && v.properties.parselNo != null ? v.properties : pickAP(v.properties || {}, (v.properties || {}).name) }); return; }
+    Object.keys(v).forEach(k => scanFeatures(v[k], out, depth + 1));
+  }
+}
+window.__psParcels = async raw => {
+  let d = {}; try { d = JSON.parse(raw); } catch (e) {}
+  const F = []; (d.texts || []).forEach(t => scanFeatures(t, F, 0));
+  if (d.storage) { let st = d.storage; try { st = JSON.parse(st); } catch (e) {} scanFeatures(st, F, 0); }
+  const seen = {}, U = F.filter(f => { const k = JSON.stringify(f.geometry.coordinates).slice(0, 200); if (seen[k]) return false; seen[k] = 1; return true; });
+  goTab('tabMap'); await new Promise(r => setTimeout(r, 300));
+  if (!U.length) { toast('Parsel Sorgu\'da açık / favori parsel bulunamadı'); return; }
+  const n = drawParcelSet(U);
+  // kayıtlı parsellere ekle (sonra aç / kapat yapılabilsin)
+  const L0 = parcels(); let add = 0;
+  U.forEach(f => { const p = f.properties || {}, key = PKEY(p); if (L0.some(x => x.key === key)) return; const c = L.geoJSON(f).getBounds().getCenter();
+    L0.push({ key, ada: p.adaNo || '', par: p.parselNo || '', il: p.ilAd || '', ilce: p.ilceAd || '', mah: p.mahalleAd || '', alan: p.alan || '', nit: p.nitelik || '', pafta: p.pafta || '', lat: c.lat, lon: c.lng, geom: f.geometry, t: Date.now(), on: true }); add++; });
+  store.set('parcels', L0); drawSavedParcels();
+  toast(n + ' parsel Parsel Sorgu\'dan haritaya getirildi' + (add ? ' · ' + add + ' yeni parsel kayıtlılara eklendi' : ''));
+};
 window.__shared = () => { try { if (NATIVE && Android.takeShared) pendingShared = pendingShared.concat(JSON.parse(Android.takeShared() || '[]')); } catch (e) {}
   if (!pendingShared.length) return; closeHome(); goTab('tabMap'); setTimeout(getOpenParcels, 500); };
 // --- İl / İlçe / Mahalle listeleri (TKGM idari yapı servisi) ---
@@ -2503,12 +2550,12 @@ $('pqGo').onclick = async () => {
   finally { $('pqGo').disabled = false; $('pqGo').textContent = 'Haritaya Getir'; }
 };
 $('piClose').onclick = () => { $('pinfo').hidden = true; };
-$('piClear').onclick = () => { if (parcelLayer) parcelLayer.clearLayers(); $('pinfo').hidden = true; lastParcel = null; drawSavedParcels(); };
+$('piClear').onclick = () => { if (parcelLayer) parcelLayer.clearLayers(); curKeys.clear(); $('pinfo').hidden = true; lastParcel = null; drawSavedParcels(); };
 // ===== Parsel çizimi, kayıtlı parseller, yol tarifi =====
 function drawParcelGeom(f, layer, saved) {
   const g = { type: 'Feature', geometry: f.geometry, properties: {} };
   L.geoJSON(g, { style: { color: '#0b1724', weight: 6, opacity: .55, fill: false }, interactive: false }).addTo(layer);
-  const lay = L.geoJSON(g, { style: saved ? { color: '#4dd0e1', weight: 2.6, dashArray: '7 5', fillColor: '#4dd0e1', fillOpacity: .06 } : { color: '#ffd54f', weight: 3, fillColor: '#ffd54f', fillOpacity: .10 }, interactive: false }).addTo(layer);
+  const lay = L.geoJSON(g, { style: saved ? { color: '#4dd0e1', weight: 2.6, fillColor: '#4dd0e1', fillOpacity: .07 } : { color: '#ffd54f', weight: 3, fillColor: '#ffd54f', fillOpacity: .10 }, interactive: false }).addTo(layer);
   const p = f.properties || {}, b = lay.getBounds();
   L.marker(b.getCenter(), { icon: L.divIcon({ className: 'pclbl' + (saved ? ' sv' : ''), html: '<span><em>' + String(p.adaNo || '?').replace(/[<>&]/g, '') + '</em><i>/</i><em>' + String(p.parselNo || '?').replace(/[<>&]/g, '') + '</em></span>', iconSize: [0, 0] }), interactive: false, keyboard: false }).addTo(layer);
   return b;
@@ -2517,8 +2564,7 @@ const PKEY = p => [p.ilAd, p.ilceAd, p.mahalleAd, p.adaNo, p.parselNo].join('|')
 const parcels = () => store.get('parcels', []);
 function drawSavedParcels() {
   if (!map) return; if (!savedLayer) savedLayer = L.layerGroup().addTo(map); savedLayer.clearLayers();
-  const cur = lastParcel ? PKEY(lastParcel.p) : null;
-  parcels().forEach(x => { if (x.key === cur) return; try { drawParcelGeom({ geometry: x.geom, properties: { adaNo: x.ada, parselNo: x.par } }, savedLayer, true); } catch (e) {} });
+  parcels().forEach(x => { if (curKeys.has(x.key) || x.on === false) return; try { drawParcelGeom({ geometry: x.geom, properties: { adaNo: x.ada, parselNo: x.par } }, savedLayer, true); } catch (e) {} });
   renderSavedParcels();
 }
 function pinfoSavedState() {
@@ -2542,20 +2588,28 @@ function renderSavedParcels() {
   const box = $('pqSaved'), L0 = parcels(); $('pqSvN').textContent = L0.length; box.innerHTML = '';
   if (!L0.length) { box.innerHTML = '<div class="pqempty">Henüz kayıtlı parsel yok. Parseli haritaya getirip <b>Parseli Kaydet</b>\'e basın.</div>'; return; }
   L0.slice().reverse().forEach(x => {
-    const r = document.createElement('div'); r.className = 'pqrow';
+    const r = document.createElement('div'); r.className = 'pqrow' + (x.on === false ? ' off' : '');
+    const cb = document.createElement('input'); cb.type = 'checkbox'; cb.checked = x.on !== false; cb.title = 'Haritada göster / gizle';
+    cb.onchange = () => { setParcelOn([x.key], cb.checked); };
     const t = document.createElement('div'); const b = document.createElement('b'); b.textContent = 'Ada ' + (x.ada || '—') + ' / Parsel ' + (x.par || '—');
     const sm = document.createElement('small'); sm.textContent = [x.ilce, x.mah].filter(Boolean).join(' / ') + (x.alan ? ' · ' + String(x.alan).replace(/\s*m2?$/i, '') + ' m²' : '') + (x.nit ? ' · ' + x.nit : '');
     t.append(b, sm);
     const g = document.createElement('button'); g.type = 'button'; g.textContent = 'Göster';
-    g.onclick = () => { $('pqDlg').hidden = true; if (parcelLayer) parcelLayer.clearLayers(); const f = { geometry: x.geom, properties: { ilAd: x.il, ilceAd: x.ilce, mahalleAd: x.mah, adaNo: x.ada, parselNo: x.par, alan: x.alan, nitelik: x.nit, pafta: x.pafta } }; drawParcel(f, x.lat, x.lon); };
+    g.onclick = () => { $('pqDlg').hidden = true; if (parcelLayer) parcelLayer.clearLayers(); curKeys.clear(); const f = { geometry: x.geom, properties: { ilAd: x.il, ilceAd: x.ilce, mahalleAd: x.mah, adaNo: x.ada, parselNo: x.par, alan: x.alan, nitelik: x.nit, pafta: x.pafta } }; drawParcel(f, x.lat, x.lon); };
     const n = document.createElement('button'); n.type = 'button'; n.className = 'go'; n.textContent = 'Yol';
     n.onclick = () => navTo(x.lat, x.lon, 'Ada ' + x.ada + ' / Parsel ' + x.par);
     const d = document.createElement('button'); d.type = 'button'; d.textContent = 'Sil';
-    d.onclick = () => armed(d, () => { store.set('parcels', parcels().filter(y => y.key !== x.key)); drawSavedParcels(); pinfoSavedState(); toast('Kayıtlı parsel silindi'); }, 'Emin?');
-    r.append(t, g, n, d); box.appendChild(r);
+    d.onclick = () => confirmBox('Kayıtlı parsel silinsin mi?', 'Ada <b>' + escH(x.ada) + '</b> / Parsel <b>' + escH(x.par) + '</b> kayıtlı parsellerden silinecek.', 'Sil', () => { store.set('parcels', parcels().filter(y => y.key !== x.key)); drawSavedParcels(); pinfoSavedState(); toast('Kayıtlı parsel silindi'); });
+    r.append(cb, t, g, n, d); box.appendChild(r);
   });
 }
 $('piOpen').onclick = () => openParsel(lastParcel);
+function setParcelOn(keys, on) { const L0 = parcels(); L0.forEach(x => { if (!keys || keys.includes(x.key)) x.on = on; }); store.set('parcels', L0); drawSavedParcels(); }
+$('pqAllOn').onclick = () => { if (!parcels().length) { toast('Kayıtlı parsel yok'); return; } setParcelOn(null, true); toast('Tüm kayıtlı parseller açıldı'); };
+$('pqAllOff').onclick = () => { if (!parcels().length) { toast('Kayıtlı parsel yok'); return; } setParcelOn(null, false); toast('Tüm kayıtlı parseller kapatıldı'); };
+$('pqAllFit').onclick = () => { const L0 = parcels().filter(x => x.on !== false); if (!L0.length) { toast('Açık kayıtlı parsel yok'); return; }
+  let B = null; L0.forEach(x => { try { const b = L.geoJSON({ type: 'Feature', geometry: x.geom }).getBounds(); B = B ? B.extend(b) : b; } catch (e) {} });
+  if (B) { $('pqDlg').hidden = true; follow = false; map.fitBounds(B, { maxZoom: 19, padding: [40, 40] }); } };
 
 // ===== BAYRAK =====
 function flag(cv) {
@@ -2714,8 +2768,11 @@ function setTargets(list, add) {
   if (j.tIdx == null || j.tIdx >= j.targets.length) j.tIdx = 0;
   saveJobs(); renderStakeList(); updateStake();
 }
-function renderStakeList() {
+let stkKey = '';
+function renderStakeList(soft) {
   const j = J(), s = $('stkSel'), T = j.targets || [];
+  const key = [curId, j.sys, j.dom, j.tIdx, j.targetFile, T.length, T.length ? T[0].name + T[T.length - 1].name : '', $('dec').value].join('|');
+  if (soft && key === stkKey) return; stkKey = key;
   $('stkJob').textContent = j.name; $('stkSys').textContent = SYSN[j.sys] + (j.sys === 'wgs' ? '' : ' · DOM ' + j.dom);
   const geo = j.sys === 'wgs'; $('stkLY').textContent = geo ? 'Enlem' : 'Y'; $('stkLX').textContent = geo ? 'Boylam' : 'X';
   s.innerHTML = '';
@@ -2835,7 +2892,7 @@ $('stkAdd').onclick = () => {
   $('stkNo').value = nextName(no); $('stkY').value = ''; $('stkX').value = ''; toast('Hedef ' + no + ' eklendi');
 };
 $('stkLoad').onclick = () => { const L = parseTargets($('stkPaste').value); if (!L.length) { toast('Satır okunamadı · biçim: N.NO Y X'); return; } job().targetFile = null; setTargets(L, true); $('stkPaste').value = ''; toast(L.length + ' hedef nokta yüklendi'); };
-$('stkClear').onclick = e => { const j = job(); if (!j || !(j.targets || []).length) { toast('Hedef yok'); return; } armed(e.currentTarget, () => { j.targets = []; j.tIdx = 0; j.targetFile = null; saveJobs(); renderStakeList(); updateStake(); toast('Hedefler silindi'); }, 'Emin misiniz?'); };
+$('stkClear').onclick = e => { const j = job(); if (!j || !(j.targets || []).length) { toast('Hedef yok'); return; } confirmBox('Hedefler silinsin mi?', 'Aplikasyon listesindeki <b>' + j.targets.length + ' hedef</b> silinecek.', 'Sil', () => { j.targets = []; j.tIdx = 0; j.targetFile = null; saveJobs(); renderStakeList(); updateStake(); toast('Hedefler silindi'); }); };
 $('stkFromJob').onclick = () => { const P = pts(); if (!P.length) { toast('Bu işte kayıtlı nokta yok'); return; } job().targetFile = 'Kayıtlı noktalar'; setTargets(P.map(pt => { const p = project(pt); return { name: pt.name, Y: p.Y, X: p.X }; }), false); toast(P.length + ' kayıtlı nokta hedef yapıldı'); };
 $('stkBeep').checked = UI.beep !== false; UI.beep = UI.beep !== false;
 $('stkBeep').onchange = () => { UI.beep = $('stkBeep').checked; store.set('ui', UI); if (UI.beep) { audioOn(); beep(1320, 120); } };
@@ -2852,6 +2909,7 @@ $('stkSave').onclick = () => {
 window.__back = () => {
   if (homeOpen()) return '';
   if (!$('sheet').hidden) { closeSheet(); return 'handled'; }
+  if (!$('cfDlg').hidden) { cfFn = null; $('cfDlg').hidden = true; return 'handled'; }
   if (!$('pqDlg').hidden) { $('pqDlg').hidden = true; return 'handled'; }
   if (!$('licDlg').hidden) { $('licDlg').hidden = true; return 'handled'; }
   if (!$('wz').hidden) {
@@ -2917,7 +2975,7 @@ $('exTxt').onclick = () => needPro('Dışa aktarma') || download(fileBase() + '.
 $('exKml').onclick = () => { if (needPro('Dışa aktarma')) return; if (!pts().length) { toast('Bu işte nokta yok'); return; } const n = fileBase() + '.kml', k = makeKml(); download(n, k, 'application/vnd.google-earth.kml+xml'); if (NATIVE) setTimeout(() => Android.openKml(n, k), 400); };
 [['colZ', 'z'], ['colA', 'acc'], ['colT', 'time']].forEach(([id, k]) => { $(id).checked = COLS[k]; $(id).onchange = () => { COLS[k] = $(id).checked; store.set('cols', COLS); renderList(); }; });
 $('exShare').onclick = () => needPro('Dışa aktarma') || share(); $('exCopy').onclick = () => needPro('Dışa aktarma') || copy();
-$('exClear').onclick = e => { if (!pts().length) { toast('Bu işte nokta yok'); return; } armed(e.currentTarget, () => { job().points = []; job().next = '1'; saveJobs(); render(); toast('Noktalar silindi'); }, 'Emin misiniz?'); };
+$('exClear').onclick = e => { if (!pts().length) { toast('Bu işte nokta yok'); return; } confirmBox('Noktalar silinsin mi?', '“<b>' + escH(J().name) + '</b>” işindeki <b>' + pts().length + ' nokta</b> silinecek.<br>Bu işlem geri alınamaz.', 'Sil', () => { job().points = []; job().next = '1'; saveJobs(); render(); toast('Noktalar silindi'); }); };
 SET_IDS.forEach(id => $(id).addEventListener('change', render));
 function dnsSave() { store.set('dns', { on: DNS.on, method: DNS.method, dir: DNS.dir, name: DNS.name, amat: DNS.amat, pts: DNS.pts }); }
 function dnsRender() {
@@ -2944,7 +3002,7 @@ $('dnsIn').onchange = () => {
   };
   r.onerror = () => toast('Dosya okunamadı'); r.readAsArrayBuffer(f);
 };
-$('dnsDel').onclick = e => armed(e.currentTarget, () => { Object.assign(DNS, { on: false, name: '', amat: null, pts: [], P: null }); dnsSave(); dnsRender(); render(); toast('DNS dönüşümü kaldırıldı'); }, 'Emin misiniz?');
+$('dnsDel').onclick = e => confirmBox('DNS dönüşümü kaldırılsın mı?', 'Yüklü <b>' + escH(DNS.name || '') + '</b> dosyası kaldırılacak.', 'Kaldır', () => { Object.assign(DNS, { on: false, name: '', amat: null, pts: [], P: null }); dnsSave(); dnsRender(); render(); toast('DNS dönüşümü kaldırıldı'); });
 $('dnsM').onchange = () => { DNS.method = $('dnsM').value; dnsSolve(); if (!DNS.P) DNS.on = false; dnsSave(); dnsRender(); render(); };
 $('dnsD').onchange = () => { DNS.dir = $('dnsD').value; dnsSave(); dnsRender(); render(); };
 $('dnsOn').onchange = () => { DNS.on = $('dnsOn').checked && !!DNS.P; dnsSave(); dnsRender(); render(); toast(DNS.on ? 'DNS dönüşümü etkin' : 'DNS dönüşümü kapalı'); };
@@ -2956,7 +3014,8 @@ function themeRender() { const t = store.get('theme', {}), lock = !isPro(), cur 
 document.querySelectorAll('#themeSeg button').forEach(b => b.onclick = () => { if (b.dataset.th !== 'altin' && needPro('Renk temaları')) return; const t = store.get('theme', {}); t.th = b.dataset.th; store.set('theme', t); applyTheme(); themeRender(); try { updateStake(); } catch (e) {} toast('Tema: ' + b.textContent.trim()); });
 document.querySelectorAll('#modeSeg button').forEach(b => b.onclick = () => { const t = store.get('theme', {}); t.md = b.dataset.md; store.set('theme', t); applyTheme(); themeRender(); try { updateStake(); } catch (e) {} toast('Görünüm: ' + b.textContent.trim()); });
 themeRender();
-flag($('flag')); flag($('flag2')); flag($('flag3')); initMap(); render();
+flag($('flag')); flag($('flag2')); flag($('flag3'));
+['flag', 'flag2', 'flag3'].forEach(id => { const f = $(id); if (!f) return; f.style.cursor = 'pointer'; f.setAttribute('role', 'button'); f.setAttribute('aria-label', 'Ana sayfa (Türk bayrağı)'); f.onclick = () => { if (!$('home').hidden) { toast('Zaten ana sayfadasınız'); return; } $('homeBtn').click(); }; }); initMap(); render();
 if (NATIVE) $('permApp').textContent = 'GNSS BOZOKLUHAN GPS';
 
 // Açılış: ana sayfa; izin varsa konum arka planda ısınır

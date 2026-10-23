@@ -126,6 +126,7 @@ class MainActivity : AppCompatActivity() {
         with(web.settings) {
             javaScriptEnabled = true
             domStorageEnabled = true
+            textZoom = 100
             databaseEnabled = true
             allowFileAccess = false
             mediaPlaybackRequiresUserGesture = false
@@ -199,17 +200,12 @@ class MainActivity : AppCompatActivity() {
         setIntent(intent)
         takeIntent(intent)
     }
-    private fun readClipText(): String {
-        val cm = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        val c = cm.primaryClip ?: return ""
-        val sb = StringBuilder()
-        for (n in 0 until c.itemCount) { val s = c.getItemAt(n).coerceToText(this)?.toString(); if (!s.isNullOrBlank()) sb.append(s).append('\n') }
-        return sb.toString()
-    }
 
     override fun onResume() {
         super.onResume()
         web.onResume()
+        try { (getSystemService(Context.NOTIFICATION_SERVICE) as android.app.NotificationManager).cancel(5) } catch (e: Exception) { }
+        PsHolder.data?.let { d -> PsHolder.data = null; js("window.__psParcels && window.__psParcels(" + JSONObject.quote(d) + ")") }
         if (waitingSettings) {
             waitingSettings = false
             report(currentState())
@@ -439,7 +435,30 @@ class MainActivity : AppCompatActivity() {
     }
 
     /** KML dosyasını Google Earth uygulamasında açar; yoksa KML açabilen başka bir uygulama seçtirir. */
+    /** Başka uygulamaya geçerken: "Haritaya dön" bildirimi (geri tuşu çalışmazsa buradan dönülür). */
+    private fun returnNote() {
+        try {
+            if (Build.VERSION.SDK_INT >= 33 && checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(arrayOf(android.Manifest.permission.POST_NOTIFICATIONS), 77); return
+            }
+            val nm = getSystemService(Context.NOTIFICATION_SERVICE) as android.app.NotificationManager
+            if (Build.VERSION.SDK_INT >= 26) nm.createNotificationChannel(android.app.NotificationChannel("geri", "Uygulamaya dönüş", android.app.NotificationManager.IMPORTANCE_HIGH))
+            val pi = android.app.PendingIntent.getActivity(this, 5, Intent(this, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP),
+                android.app.PendingIntent.FLAG_IMMUTABLE or android.app.PendingIntent.FLAG_UPDATE_CURRENT)
+            @Suppress("DEPRECATION")
+            val b = if (Build.VERSION.SDK_INT >= 26) android.app.Notification.Builder(this, "geri") else android.app.Notification.Builder(this)
+            b.setSmallIcon(android.R.drawable.ic_dialog_map).setContentTitle("GNSS BOZOKLUHAN GPS")
+                .setContentText("Haritaya geri dönmek için dokunun").setContentIntent(pi).setAutoCancel(true)
+            nm.notify(5, b.build())
+        } catch (e: Exception) { }
+    }
+
+    private fun openPS(url: String) {
+        try { startActivity(Intent(this, ParselActivity::class.java).putExtra("url", url)) } catch (e: Exception) { openExternal(url) }
+    }
+
     private fun openKml(name: String, text: String) {
+        returnNote()
         try {
             val dir = File(cacheDir, "paylas").apply { mkdirs() }
             val f = File(dir, name)
@@ -533,7 +552,7 @@ class MainActivity : AppCompatActivity() {
     private fun openAppOr(pkg: String, url: String): String {
         return try {
             val li = packageManager.getLaunchIntentForPackage(pkg)
-            if (li != null) { startActivity(li); "app" } else { openExternal(url); "web" }
+            if (li != null) { returnNote(); startActivity(li); "app" } else { openExternal(url); "web" }
         } catch (e: Exception) { openExternal(url); "web" }
     }
 
@@ -831,14 +850,10 @@ class MainActivity : AppCompatActivity() {
         @JavascriptInterface fun saveFile(name: String, text: String, mime: String): String = this@MainActivity.saveFile(name, text, mime)
         @JavascriptInterface fun shareFiles(json: String) { main.post { this@MainActivity.shareFiles(json) } }
         @JavascriptInterface fun openUrl(url: String) { main.post { openExternal(url) } }
+        @JavascriptInterface fun openPS(url: String) { main.post { this@MainActivity.openPS(url) } }
         @JavascriptInterface fun openAppOr(pkg: String, url: String): String { val l = packageManager.getLaunchIntentForPackage(pkg) != null; main.post { this@MainActivity.openAppOr(pkg, url) }; return if (l) "app" else "web" }
         @JavascriptInterface fun openKml(name: String, text: String) { main.post { this@MainActivity.openKml(name, text) } }
         @JavascriptInterface fun takeShared(): String = synchronized(sharedTexts) { val a = JSONArray(sharedTexts); sharedTexts.clear(); a.toString() }
-        @JavascriptInterface fun readClip(): String {
-            val q = java.util.concurrent.LinkedBlockingQueue<String>(1)
-            main.post { q.offer(try { readClipText() } catch (e: Exception) { "" }) }
-            return q.poll(2, java.util.concurrent.TimeUnit.SECONDS) ?: ""
-        }
         @JavascriptInterface fun copy(text: String) {
             main.post {
                 val cm = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
